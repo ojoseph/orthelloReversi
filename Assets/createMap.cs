@@ -65,7 +65,7 @@ public class createMap : MonoBehaviour {
 		
 		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,0,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
-		
+		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,0,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
 		
 	}
