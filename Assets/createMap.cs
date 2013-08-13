@@ -6,13 +6,21 @@ using System.Collections.Generic;
 public class createMap : MonoBehaviour {
 	
 	//We create the main plane
-	//private List<int> theMap = new List<int>();
+	
 	GameObject theTile;
+
+	//Sets the spacing between each tiles
+	public float gridSpacing = 4.2f;
+	
+	
+	//The tokens
 	GameObject whiteToken;
 	GameObject blackToken;
 	
-	//Decides how high does the token stands
+	//Decides how high does the token stands [FIX]
 	private float tokenHeight = 0.45f; 
+	
+	//-----------------------------------------------------------------------------------------------------------------------
 	
 	//public GameObject theTile = new GameObject();
 	
@@ -78,7 +86,7 @@ public class createMap : MonoBehaviour {
 			
 			//We populate the rows
 			for(int incre = 0; incre < 8; incre++){
-				theTile = Instantiate(Resources.Load("tile"),  new Vector3(incre*4.2f, 0, (theRow+3)*4.2f)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
+				theTile = Instantiate(Resources.Load("tile"),  new Vector3(incre*gridSpacing, 0, (theRow+3)*gridSpacing)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 				theTile.name =theTileNames[theRow,incre ];
 				
 				//We print the names for a test.
