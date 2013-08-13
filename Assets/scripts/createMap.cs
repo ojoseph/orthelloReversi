@@ -12,16 +12,6 @@ public class createMap : MonoBehaviour {
 	//Sets the spacing between each tiles
 	public float gridSpacing = 4.2f;
 	
-	
-	//The tokens
-	GameObject whiteToken;
-	GameObject blackToken;
-	
-	enum tokenType{
-		white,
-		black
-	}
-	
 	//Decides how high does the token stands [FIX]
 	private float tokenHeight = 0.45f; 
 	
@@ -70,10 +60,10 @@ public class createMap : MonoBehaviour {
 	void Start () {
 		
 		//We do a soft reset
-			softReset();
+		softReset();
 		
 		
-	 //	theMap[0].Add(0,1,3);
+	 	//theMap[0].Add(0,1,3);
 		print(theField.Length);
 		print(72/8);
 		
@@ -198,7 +188,7 @@ public class createMap : MonoBehaviour {
 	
 	
 	//........................................................................................................................................................................................................................................................................................
-	
+	//TOOLS
 	
 	
 	
