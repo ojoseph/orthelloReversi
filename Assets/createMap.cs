@@ -13,7 +13,7 @@ public class createMap : MonoBehaviour {
 	
 	//public GameObject theTile = new GameObject();
 	
-	// A. 2D array of strings.
+	// A. 2D array of ints.
 	int[,] theField = new int[,]
 	{
 	    {10, 11, 12, 13, 14, 15, 16, 17}, //A
@@ -25,6 +25,24 @@ public class createMap : MonoBehaviour {
 		{70, 71, 72, 73, 74, 75, 76, 77}, //G
 		{80, 81, 82, 83, 84, 85, 86, 87}, //H
 	};
+	
+	
+	
+	// A. 2D array of strings.Where we store the names
+	string[,] theTileNames = new string[,]
+	{
+	    {"A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"}, //A
+		{"B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8"}, //B
+		{"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"}, //C
+		{"D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"}, //D
+		{"E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8"}, //E
+		{"F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8"}, //F
+		{"G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8"}, //G
+		{"H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"}, //H
+	};
+	
+	
+	
 	
 	//We need 3 values
 	// 0 : Empty spots
@@ -52,13 +70,16 @@ public class createMap : MonoBehaviour {
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
 		
+		//We display a MAP
 		//We set the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
 			//We populate the rows
 			for(int incre = 0; incre < 8; incre++){
 				theTile = Instantiate(Resources.Load("tile"),  new Vector3(incre*4.2f, 0, (theRow+3)*4.2f)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-				//print(incre);
+				theTile.name =theTileNames[theRow,incre ];
+				
+				print (theTileNames[theRow,incre ]);
 			}
 			
 		}//End Generating 
@@ -90,6 +111,16 @@ public class createMap : MonoBehaviour {
 		}*/
 		foreach(int elm in theCurrArray){
 			print(elm);
+			
+			switch(elm){
+				case 1:
+					//We place a token 
+				break;
+				
+				case 2:
+					//We place a token 
+				break;
+			}
 		}
 		
 	}
