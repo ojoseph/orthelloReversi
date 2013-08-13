@@ -176,10 +176,10 @@ public class createMap : MonoBehaviour {
 		
 		switch(theTokenType){
 			case 1:
-				loadedToken = "whiteToken";
+				loadedToken = "tokens/whiteToken";
 			break;
 			case 2:
-				loadedToken = "blackToken";
+				loadedToken = "tokens/blackToken";
 			break;
 		}
 		
