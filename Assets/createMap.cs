@@ -17,6 +17,11 @@ public class createMap : MonoBehaviour {
 	GameObject whiteToken;
 	GameObject blackToken;
 	
+	enum tokenType{
+		white,
+		black
+	}
+	
 	//Decides how high does the token stands [FIX]
 	private float tokenHeight = 0.45f; 
 	
@@ -69,12 +74,10 @@ public class createMap : MonoBehaviour {
 		
 		//We set the tokens initial position 
 		theField[3,3] = 1;
-		theField[3,5] = 2;
+		theField[3,4] = 2;
 		
-		
-		theField[4,4] = 2;
 		theField[4,4] = 1;
-		
+		theField[4,3] = 2;
 
 		
 		//Get the number of rows
@@ -97,9 +100,8 @@ public class createMap : MonoBehaviour {
 		
 		
 		
-		//The token
+		//Try to render some demo tokens
 		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-		
 		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
 		
@@ -132,6 +134,7 @@ public class createMap : MonoBehaviour {
 						GameObject targetToken = new GameObject();
 						targetToken = GameObject.Find(theTileNames[theRow,incre]);
 						
+					
 						//We create a token at the location of the target location.
 						whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 						
@@ -140,7 +143,7 @@ public class createMap : MonoBehaviour {
 					case 2:
 						//We place a token 
 						print("WE FOUND TWO " + theTileNames[theRow,incre]);
-						
+						generateTokens(theRow,incre,2);
 					break;
 				}//end Switch
 				
@@ -151,7 +154,32 @@ public class createMap : MonoBehaviour {
 	}//end FCT
 	
 	
-	
+	//////////////////////////////////////
+	// GenerateToken: takes care of generating the token
+	void generateTokens(/*tokenType theType, */int theCurRow, int theCurIncre, int theTokenType /*GameObject theTargeToken, string theTargetNames*/){
+		
+		//We get the location of where we want to put our token
+		GameObject targetToken = new GameObject();
+		targetToken = GameObject.Find(theTileNames[theCurRow,theCurIncre]);
+		
+		//Make a variable that holds the location of the token we want.
+		string loadedToken ="";
+		
+		switch(theTokenType){
+			case 1:
+				loadedToken = "whiteToken";
+			break;
+			case 2:
+				loadedToken = "blackToken";
+			break;
+		}
+		
+		//Will serve for Token Creation
+		GameObject theCreatedToken;
+		
+		//We create a token at the location of the target location.
+		theCreatedToken = Instantiate(Resources.Load(loadedToken),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+	}
 	
 	
 	// Update is called once per frame
