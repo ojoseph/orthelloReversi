@@ -5,8 +5,16 @@ using System.Collections.Generic;
 
 public class createMap : MonoBehaviour {
 	
-	//We create the main plane
 	
+	public enum currentStatus{
+		notDoneYet,
+		taskComplete
+	}
+	
+	//This process progression
+	public currentStatus theCurrentStatus = currentStatus.notDoneYet;
+	
+	//GameObbject for the tiles
 	GameObject theTile;
 
 	//Sets the spacing between each tiles
@@ -57,14 +65,14 @@ public class createMap : MonoBehaviour {
 	
 	
 	// Use this for initialization
-	void Start () {
+	public void initMe () {
 		
 		//We do a soft reset
-		softReset();
+		//softReset();
 		
 		
 	 	//theMap[0].Add(0,1,3);
-		print(theField.Length);
+		//print(theField.Length);
 		print(72/8);
 		
 		//We set the tokens initial position 
@@ -143,6 +151,9 @@ public class createMap : MonoBehaviour {
 			}//End for loop
 			
 		}//End Row For loop
+		
+		//We are done creating the map so we give the greenlight
+		theCurrentStatus = currentStatus.taskComplete;
 		
 	}//end FCT
 	
