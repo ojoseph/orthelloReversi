@@ -56,7 +56,9 @@ public class gameManager : MonoBehaviour {
 			
 			//If we havent created a map yet we make one.
 			theCreatedMap.initMe();
+			
 		}else{
+			
         	//If the process is already done we move on to the next phase
 			theCurrGameState = gameState.playGame;
 		}

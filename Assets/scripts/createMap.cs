@@ -28,7 +28,7 @@ public class createMap : MonoBehaviour {
 	//public GameObject theTile = new GameObject();
 	
 	// A. 2D array of ints.
-	int[,] theField = new int[,]
+	public int[,] theField = new int[,]
 	{
 	    {10, 11, 12, 13, 14, 15, 16, 17}, //A
 		{20, 21, 22, 23, 24, 25, 26, 27}, //B
@@ -43,7 +43,7 @@ public class createMap : MonoBehaviour {
 	
 	
 	// A. 2D array of strings.Where we store the names
-	string[,] theTileNames = new string[,]
+	public string[,] theTileNames = new string[,]
 	{
 	    {"A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8"}, //A
 		{"B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8"}, //B
