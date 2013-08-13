@@ -56,7 +56,7 @@ public class createMap : MonoBehaviour {
 		print(theField.Length);
 		print(72/8);
 		
-		//We set the game 
+		//We set the tokens initial position 
 		theField[3,3] = 1;
 		theField[3,5] = 2;
 		
@@ -64,8 +64,7 @@ public class createMap : MonoBehaviour {
 		theField[4,4] = 2;
 		theField[4,4] = 1;
 		
-		// We create an object and place it.
-		//theTile = Instantiate(Resources.Load("tile"),  transform.localPosition, transform.localRotation) as GameObject;
+
 		
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
@@ -94,13 +93,13 @@ public class createMap : MonoBehaviour {
 		
 		
 		
-		
-		checkWhatIsThere(theField);
+		//We place the tokens
+		placeTokens(theField);
 		
 	}
 	
 	
-	void checkWhatIsThere(int[,] theCurrArray){
+	void placeTokens(int[,] theCurrArray){
 		
 		int theNumRows = (theField.Length/8); 
 		

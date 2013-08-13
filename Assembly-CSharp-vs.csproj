@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\createMap.cs" />
      <Compile Include="Assets\gameManager.cs" />
+     <Compile Include="Assets\theToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
