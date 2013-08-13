@@ -68,6 +68,11 @@ public class createMap : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
+		//We do a soft reset
+			softReset();
+		
+		
 	 //	theMap[0].Add(0,1,3);
 		print(theField.Length);
 		print(72/8);
@@ -78,12 +83,24 @@ public class createMap : MonoBehaviour {
 		
 		theField[4,4] = 1;
 		theField[4,3] = 2;
+		
+		//We display the map for a quick check
+		displayArray();
+		
+		
+		//We put the tiles int place
+		makeField();
+	}
+	
 
+	
+	//////////////////////////////////////
+	// [ STEP1 ]  MAKE FIELD : We make a simple field
+	void makeField(){
 		
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
 		
-		//We display a MAP
 		//We set the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
@@ -99,21 +116,17 @@ public class createMap : MonoBehaviour {
 		}//End Generating 
 		
 		
-		
-		//Try to render some demo tokens
-		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-		
-		
-		
-		//We place the tokens
+		//[ NEXT ] We place the tokens
 		placeTokens(theField);
-		
 	}
 	
 	
+	
+	
+	
+	
 	//////////////////////////////////////
-	// PLACE TOKENS
+	//  [ STEP 2 ]  PLACE TOKENS: We look for the spots where we need to add the token than than we generate the tokens at those positions
 	void placeTokens(int[,] theCurrArray){
 		
 		int theNumRows = (theCurrArray.Length/8); 
@@ -128,22 +141,12 @@ public class createMap : MonoBehaviour {
 					
 					case 1:
 						//We place a token 
-						print("WE FOUND ONE " + theTileNames[theRow,incre]);
-						
-						//We get the location of where we want to put our token
-						GameObject targetToken = new GameObject();
-						targetToken = GameObject.Find(theTileNames[theRow,incre]);
-						
-					
-						//We create a token at the location of the target location.
-						whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-						
+						generateTokens(theRow,incre,theCurrArray[theRow,incre]);
 					break;
 					
 					case 2:
-						//We place a token 
-						print("WE FOUND TWO " + theTileNames[theRow,incre]);
-						generateTokens(theRow,incre,2);
+						//We place a token  
+						generateTokens(theRow,incre,theCurrArray[theRow,incre]);
 					break;
 				}//end Switch
 				
@@ -154,8 +157,13 @@ public class createMap : MonoBehaviour {
 	}//end FCT
 	
 	
+	
+	
+	
+	
+	
 	//////////////////////////////////////
-	// GenerateToken: takes care of generating the token
+	//  [ STEP 2a ] GENERATE TOKENS : takes care of generating the token
 	void generateTokens(/*tokenType theType, */int theCurRow, int theCurIncre, int theTokenType /*GameObject theTargeToken, string theTargetNames*/){
 		
 		//We get the location of where we want to put our token
@@ -180,6 +188,54 @@ public class createMap : MonoBehaviour {
 		//We create a token at the location of the target location.
 		theCreatedToken = Instantiate(Resources.Load(loadedToken),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//........................................................................................................................................................................................................................................................................................
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////
+	// [ TOOL ]  SOFT RESET: Takes care of cleaning the arrays so that we ahve a clean table
+	void softReset(){
+		
+		//Get the number of rows
+		int theNumRows = (theField.Length/8); 
+		
+		//We set the rows
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
+			
+			//We populate the rows
+			for(int incre = 0; incre < 8; incre++){
+			
+				theField[theRow,incre] = 0;	
+				//We print the names for a test.
+				//print (theTileNames[theRow,incre ]);
+			}
+			
+		}//End Generating 
+	}
+	
+	
+	 //////////////////////////////////////
+	// [ TOOL ]  DiSPLAY ARRAY: shows the values in the FIeld Array
+	void displayArray(){
+		foreach(int theValues in theField){
+			print("val: " + theValues);
+		}
+	}
+	
+	
 	
 	
 	// Update is called once per frame

@@ -44,9 +44,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\createMap.cs" />
-     <Compile Include="Assets\gameManager.cs" />
-     <Compile Include="Assets\theToken.cs" />
+     <Compile Include="Assets\scripts\createMap.cs" />
+     <Compile Include="Assets\scripts\gameClear.cs" />
+     <Compile Include="Assets\scripts\gameManager.cs" />
+     <Compile Include="Assets\scripts\playAgain.cs" />
+     <Compile Include="Assets\scripts\theToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
