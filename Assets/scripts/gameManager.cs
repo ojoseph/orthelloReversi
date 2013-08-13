@@ -69,7 +69,23 @@ public class gameManager : MonoBehaviour {
 	//We Start Playing
 	void playGame(){
 		//We have to split this into phases to
-		print("We are playing the game");
+		//print("We are playing the game");
+		//We call the ftc for creating a map and start the mapSetUp process.
+		
+		
+		gameplay thegameplay = GetComponent<gameplay>();
+		
+		//We check if the process is done or not if so we move to the next phase, Else we do not.
+		if(thegameplay.theCurrentStatus == gameplay.currentStatus.notDoneYet){
+			
+			//If we havent created a map yet we make one.
+			thegameplay.initMe();
+			
+		}else{
+			
+        	//If the process is already done we move on to the next phase
+			theCurrGameState = gameState.none;
+		}
 	}
 	
 	

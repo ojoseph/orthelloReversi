@@ -68,12 +68,12 @@ public class createMap : MonoBehaviour {
 	public void initMe () {
 		
 		//We do a soft reset
-		//softReset();
+		softReset();
 		
 		
 	 	//theMap[0].Add(0,1,3);
 		//print(theField.Length);
-		print(72/8);
+		//print(72/8);
 		
 		//We set the tokens initial position 
 		theField[3,3] = 1;
@@ -83,7 +83,7 @@ public class createMap : MonoBehaviour {
 		theField[4,3] = 2;
 		
 		//We display the map for a quick check
-		displayArray();
+		//displayArray();
 		
 		
 		//We put the tiles int place
