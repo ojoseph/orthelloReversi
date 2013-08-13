@@ -57,12 +57,12 @@ public class createMap : MonoBehaviour {
 		print(72/8);
 		
 		//We set the game 
-		theField[3,4] = 1;
+		theField[3,3] = 1;
 		theField[3,5] = 2;
 		
 		
 		theField[4,4] = 2;
-		theField[4,5] = 1;
+		theField[4,4] = 1;
 		
 		// We create an object and place it.
 		//theTile = Instantiate(Resources.Load("tile"),  transform.localPosition, transform.localRotation) as GameObject;
@@ -79,7 +79,8 @@ public class createMap : MonoBehaviour {
 				theTile = Instantiate(Resources.Load("tile"),  new Vector3(incre*4.2f, 0, (theRow+3)*4.2f)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 				theTile.name =theTileNames[theRow,incre ];
 				
-				print (theTileNames[theRow,incre ]);
+				//We print the names for a test.
+				//print (theTileNames[theRow,incre ]);
 			}
 			
 		}//End Generating 
@@ -101,15 +102,38 @@ public class createMap : MonoBehaviour {
 	
 	void checkWhatIsThere(int[,] theCurrArray){
 		
+		int theNumRows = (theField.Length/8); 
+		
 		//Check each Entry in the table and we print it out
-		/*for(int theRow = 0 ; theRow < 8; theRow++){
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
-			for(int incre = 0; incre < theCurrArray.Length; incre++){
-				print(theCurrArray[theRow,incre]);
+			for(int incre = 0; incre < 8; incre++){
+				//print(theCurrArray[theRow,incre]);
+				switch(theCurrArray[theRow,incre]){
+				case 1:
+					//We place a token 
+					print("WE FOUND ONE " + theTileNames[theRow,incre]);
+					
+					//We get the location of where we want to put our token
+					GameObject targetToken = new GameObject();
+					targetToken = GameObject.Find(theTileNames[theRow,incre]);
+					
+					//We create a token at this location
+	
+					whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(targetToken.transform.position.x,0.45f,targetToken.transform.position.z)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
+					
+				break;
+				
+				case 2:
+					//We place a token 
+					print("WE FOUND TWO " + theTileNames[theRow,incre]);
+					
+				break;
+			}
 			}
 			
-		}*/
-		foreach(int elm in theCurrArray){
+		}
+		/*foreach(int elm in theCurrArray){
 			print(elm);
 			
 			switch(elm){
@@ -121,7 +145,7 @@ public class createMap : MonoBehaviour {
 					//We place a token 
 				break;
 			}
-		}
+		}*/
 		
 	}
 	
