@@ -35,6 +35,7 @@ public class gameplay : MonoBehaviour {
 	//set the player color to black
 	int playerSlctColor = 2;
 	
+	int opponentSlctColor = 1;
 	
 	//We set the turns with this.
 	int turns;
@@ -117,9 +118,9 @@ public class gameplay : MonoBehaviour {
 					//CHECK ON LEFT [-1, 0]
 						print("check one before: " + prevOnLeft + "   " + theTileNames[theRow,incre-1]);
 					
-					//if its not the same color as the player then we can guess that it is the opponent's token.
+					//if its the opponent's token, than we check for an  opporunity
 					//We check to see what follows it. +1
-					if(nextOnRight == playerSlctColor){
+					if(nextOnRight == opponentSlctColor){
 						//We raise the scope
 						print("We check the next next: " + theField[theRow,incre+2] + "   " + theTileNames[theRow,incre+2]);
 						
