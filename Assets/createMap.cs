@@ -11,6 +11,9 @@ public class createMap : MonoBehaviour {
 	GameObject whiteToken;
 	GameObject blackToken;
 	
+	//Decides how high does the token stands
+	private float tokenHeight = 0.45f; 
+	
 	//public GameObject theTile = new GameObject();
 	
 	// A. 2D array of ints.
@@ -87,9 +90,9 @@ public class createMap : MonoBehaviour {
 		
 		
 		//The token
-		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,0.45f,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
+		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
-		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,0.45f,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
+		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,tokenHeight,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
 		
 		
@@ -99,54 +102,48 @@ public class createMap : MonoBehaviour {
 	}
 	
 	
+	//////////////////////////////////////
+	// PLACE TOKENS
 	void placeTokens(int[,] theCurrArray){
 		
-		int theNumRows = (theField.Length/8); 
+		int theNumRows = (theCurrArray.Length/8); 
 		
 		//Check each Entry in the table and we print it out
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
 			for(int incre = 0; incre < 8; incre++){
+				
 				//print(theCurrArray[theRow,incre]);
 				switch(theCurrArray[theRow,incre]){
-				case 1:
-					//We place a token 
-					print("WE FOUND ONE " + theTileNames[theRow,incre]);
 					
-					//We get the location of where we want to put our token
-					GameObject targetToken = new GameObject();
-					targetToken = GameObject.Find(theTileNames[theRow,incre]);
+					case 1:
+						//We place a token 
+						print("WE FOUND ONE " + theTileNames[theRow,incre]);
+						
+						//We get the location of where we want to put our token
+						GameObject targetToken = new GameObject();
+						targetToken = GameObject.Find(theTileNames[theRow,incre]);
+						
+						//We create a token at the location of the target location.
+						whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
+						
+					break;
 					
-					//We create a token at this location
-	
-					whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(targetToken.transform.position.x,0.45f,targetToken.transform.position.z)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-					
-				break;
+					case 2:
+						//We place a token 
+						print("WE FOUND TWO " + theTileNames[theRow,incre]);
+						
+					break;
+				}//end Switch
 				
-				case 2:
-					//We place a token 
-					print("WE FOUND TWO " + theTileNames[theRow,incre]);
-					
-				break;
-			}
-			}
+			}//End for loop
 			
-		}
-		/*foreach(int elm in theCurrArray){
-			print(elm);
-			
-			switch(elm){
-				case 1:
-					//We place a token 
-				break;
-				
-				case 2:
-					//We place a token 
-				break;
-			}
-		}*/
+		}//End Row For loop
 		
-	}
+	}//end FCT
+	
+	
+	
 	
 	
 	// Update is called once per frame
