@@ -32,6 +32,9 @@ public class gameplay : MonoBehaviour {
 		white
 	}
 	
+	//set the player color to black
+	int playerSlctColor = 2;
+	
 	
 	//We set the turns with this.
 	int turns;
@@ -39,6 +42,18 @@ public class gameplay : MonoBehaviour {
 	//Counts the number of token for each
 	int numOfTokenBlack;
 	int numOfTokenWhite;
+	
+	
+	
+	//Decides how high does the token stands [FIX]
+	private float tokenHeight = 0.45f; 
+	
+	
+	
+	
+	
+	
+	
 	
 	// Use this for initialization
 	public void initMe () {
@@ -52,7 +67,7 @@ public class gameplay : MonoBehaviour {
 		theField = theCreatedMap.theField;
 		theTileNames = theCreatedMap.theTileNames;
 		
-		
+		//We look for possible positions to move to.
 		startCheckingForPosition();
 	}
 	
@@ -89,19 +104,71 @@ public class gameplay : MonoBehaviour {
 			for(int incre = 0; incre < 8; incre++){
 			
 				print(theField[theRow,incre]);
+				if( theField[theRow,incre] == playerSlctColor){
+					//If there is a match  we start looking for what is around
+					int nextOnRight = theField[theRow,incre+1];
+					
+					int prevOnLeft = theField[theRow,incre-1];
+					
+					
+					//CHECK ON RIGHT [0, +1]
+						print("check one after : " + nextOnRight + "   " + theTileNames[theRow,incre+1]);
+					
+					//CHECK ON LEFT [-1, 0]
+						print("check one before: " + prevOnLeft + "   " + theTileNames[theRow,incre-1]);
+					
+					//if its not the same color as the player then we can guess that it is the opponent's token.
+					//We check to see what follows it. +1
+					if(nextOnRight == playerSlctColor){
+						//We raise the scope
+						print("We check the next next: " + theField[theRow,incre+2] + "   " + theTileNames[theRow,incre+2]);
+						
+						//If its empty we put an indicator
+						if(theField[theRow,incre+2] == 0){
+							
+							//We get the location of where we want to put our token
+							GameObject targetToken = new GameObject();
+							targetToken = GameObject.Find(theTileNames[theRow,incre+2]);
+						
+							
+							//We put a indicator Token
+							
+							//Will serve for the Indicator Token Creation
+							GameObject theIndicatorToken;
+							
+							//We create a token at the location of the target location.
+							theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+							print("We put a indicator here: " + theTileNames[theRow,incre+2]);
+							
+							break;
+						}else{
+							
+							//if not we relaunch the process.
+						}
+					}
+					
+				}//End if
 				
 				//We print the names for a test.
 				//print (theTileNames[theRow,incre ]);
-			}
+				
+				
+			}//End For
 			
-		}//End Generating 
-		
+			
+		//##TASK IS COMPLETE ENDS THIS SCRIPT	
 		//We are done creating the map so we give the greenlight
 		theCurrentStatus = currentStatus.taskComplete;
+			
+			
+			
+		
+		}//End Generating 
+		
+		
 	}
 	
-	
-	
+
 	// Update is called once per frame
 	void Update () {
 	
