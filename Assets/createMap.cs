@@ -63,12 +63,37 @@ public class createMap : MonoBehaviour {
 			
 		}//End Generating 
 		
+		
+		
+		//The token
 		whiteToken = Instantiate(Resources.Load("whiteToken"),  new Vector3(0,0.45f,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
 		whiteToken = Instantiate(Resources.Load("blackToken"),  new Vector3(10,0.45f,0)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
 		
 		
+		
+		
+		checkWhatIsThere(theField);
+		
 	}
+	
+	
+	void checkWhatIsThere(int[,] theCurrArray){
+		
+		//Check each Entry in the table and we print it out
+		/*for(int theRow = 0 ; theRow < 8; theRow++){
+			
+			for(int incre = 0; incre < theCurrArray.Length; incre++){
+				print(theCurrArray[theRow,incre]);
+			}
+			
+		}*/
+		foreach(int elm in theCurrArray){
+			print(elm);
+		}
+		
+	}
+	
 	
 	// Update is called once per frame
 	void Update () {
