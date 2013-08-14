@@ -181,7 +181,7 @@ public class gameplay : MonoBehaviour {
 			
 			
 		
-			//if the token is the opponent's we check too see what follows by raising the scope by one
+			//if the token is the opponent's we check to see what follows by raising the scope by one
 			if( theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 				
 				

@@ -34,7 +34,7 @@ public class replaceToken : MonoBehaviour {
 	public bool currTurnOver = false;
 	int playerSlctColor;
 	
-	
+	//string newTokenLocation = "";
 	
 	//...........................................................................................................
 	
@@ -126,6 +126,9 @@ public class replaceToken : MonoBehaviour {
 					//We remove the indicator tokens
 					gameManagerObj.GetComponent<gameplay>().removeIndicatorToken();
 					
+					//We register the latest token we placed.
+					gameManagerObj.GetComponent<calculateReverse>().newTokenLocation = theTileNames[theRow,incre];
+					//newTokenLocation =  theTileNames[theRow,incre];
 				}
 				
 				//We print the names for a test.
