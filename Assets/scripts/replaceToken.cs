@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class placeToken : MonoBehaviour {
+public class replaceToken : MonoBehaviour {
 	
 	//Let the Game manager know when it is done
 	public enum currentStatus{
@@ -32,51 +32,40 @@ public class placeToken : MonoBehaviour {
 	
 	
 	public bool currTurnOver = false;
-	int playerCurrColor;
+	int playerSlctColor;
 	
 	
 	
 	//...........................................................................................................
 	
-	public GameObject someOther = new GameObject();
+	//GameObject someOther = new GameObject();
 	
 	
 	// Use this for initialization
 	void Start () {
-		
-		//importGameManager =
-		
+	
+		//[IMPORT]		
 		//We get the location of where we want to put our token
 		
-		someOther = GameObject.Find("gameManager");	
+		GameObject getGameMangerObj = GameObject.Find("gameManager");	
 		
 		//We import the data from the created map 
-		createMap theCreatedMap = someOther.GetComponent<createMap>();
+		createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
 		
 		//We reassign them to here with the same name to avoid confusion.
 		theField = theCreatedMap.theField;
 		theTileNames = theCreatedMap.theTileNames;
-		
-		//someOther.GetComponent<createMap>;
-		
-		//..............................................................................
-		
-		//User color
-		playerCurrColor	= 2;
-	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+		//We import the player color from the gameplay script
+		playerSlctColor	= getGameMangerObj.GetComponent<gameplay>().playerSlctColor;
 		
 	}
 	
-
 	
 	void OnMouseDown(){
 		// Just to check if i can access the object properly.
 		//this.renderer.material.color = Color.red;
-		switch(playerCurrColor){
+		switch(playerSlctColor){
 			
 			case 1:
 				this.renderer.material.color = Color.white;
@@ -126,8 +115,9 @@ public class placeToken : MonoBehaviour {
 					
 					
 					//We import the data from the created map 
-					createMap theCreatedMap = someOther.GetComponent<createMap>();
-					theCreatedMap.theField[theRow,incre] = playerCurrColor;
+					GameObject gameManagerObj = GameObject.Find("gameManager");
+					createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
+					theCreatedMap.theField[theRow,incre] = playerSlctColor;
 					theCreatedMap.displayArray();
 				}
 				

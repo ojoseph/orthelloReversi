@@ -11,7 +11,7 @@ public class gameManager : MonoBehaviour {
 		gameOver
 	}
 	
-	public gameState theCurrGameState;
+	public static gameState theCurrGameState;
 	
 	
 	// Use this for initialization

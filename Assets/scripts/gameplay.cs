@@ -33,9 +33,9 @@ public class gameplay : MonoBehaviour {
 	}
 	
 	//set the player color to black
-	int playerSlctColor = 2;
+	public int playerSlctColor = 2;
 	
-	int opponentSlctColor = 1;
+	public int opponentSlctColor = 1;
 	
 	//We set the turns with this.
 	int turns;
@@ -57,7 +57,6 @@ public class gameplay : MonoBehaviour {
 		up,
 		down
 	}
-	
 	
 	//.........................................................................................................................................................................................................................
 	
@@ -204,17 +203,18 @@ public class gameplay : MonoBehaviour {
 				if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 		
 					//We get the location of where we want to put our token
-					GameObject targetToken = new GameObject();
-					targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+					//GameObject targetToken = new GameObject();
+					GameObject targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 					
 									
 					//We create a token at the location of the target location.
-					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-					print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+					/*GameObject*/ 
+					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation)as GameObject;
+					//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 					theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
 					
 					//Will be used when recovering the positions.
-					//theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
+					theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
 					
 				}else{
 					//If it is not empty we raise the scope and check for more info.	
