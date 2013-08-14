@@ -209,9 +209,11 @@ public class gameplay : MonoBehaviour {
 					//We create a token at the location of the target location.
 					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 					print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-									
-					//break;
-		
+					theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
+					
+					//Will be used when recovering the positions.
+					//theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
+					
 				}else{
 					//If it is not empty we raise the scope and check for more info.	
 		
