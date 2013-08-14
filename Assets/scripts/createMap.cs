@@ -106,7 +106,7 @@ public class createMap : MonoBehaviour {
 			//We populate the rows
 			for(int incre = 0; incre < 8; incre++){
 				theTile = Instantiate(Resources.Load("tile"),  new Vector3(incre*gridSpacing, 0, (theRow+3)*gridSpacing)/*transform.localPosition*incre*/, transform.localRotation) as GameObject;
-				theTile.name =theTileNames[theRow,incre ];
+				theTile.name = theTileNames[theRow,incre ];
 				
 				//We print the names for a test.
 				//print (theTileNames[theRow,incre ]);
@@ -189,6 +189,7 @@ public class createMap : MonoBehaviour {
 		
 		//We create a token at the location of the target location.
 		theCreatedToken = Instantiate(Resources.Load(loadedToken),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+		theCreatedToken.name = "token" + theTokenType + theTileNames[theCurRow,theCurIncre];
 	}
 	
 	

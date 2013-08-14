@@ -120,7 +120,8 @@ public class replaceToken : MonoBehaviour {
 					theCreatedMap.displayArray();
 					
 					//We change the name so that the delete function can not find the token and delete it
-					this.name = "newToken" + playerSlctColor;
+					//this.name = "newToken" + playerSlctColor;
+					this.name = "token" + playerSlctColor + theTileNames[theRow,incre];
 					
 					//We remove the indicator tokens
 					gameManagerObj.GetComponent<gameplay>().removeIndicatorToken();
@@ -136,7 +137,7 @@ public class replaceToken : MonoBehaviour {
 		
 		//Try to find a match. √
 		//If we find a match then we print out the information in theField (data) array   √
-		//We hide/Remove the possible positions (remove Indicators)
+		//We hide/Remove the possible positions (remove Indicators) √
 		//We checks which tokens needs to be reversed.
 		//We reverse them in the array, the update the visuals
 		//We calculate the number of tokens per players
