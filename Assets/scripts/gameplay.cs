@@ -50,8 +50,16 @@ public class gameplay : MonoBehaviour {
 	private float tokenHeight = 0.45f; 
 	
 	
+	//used to assign which direction we want to look at
+	enum lookDirection{
+		left,
+		right,
+		up,
+		down
+	}
 	
 	
+	//.........................................................................................................................................................................................................................
 	
 	
 	
@@ -108,8 +116,8 @@ public class gameplay : MonoBehaviour {
 				//We look for a player Token, if there is one we start looking for  possible positions where to put your token.
 				if( theField[theRow,incre] == playerSlctColor){
 					
-					availablePos("right",theField, incre, theRow, opponentSlctColor);	
-					availablePos("left",theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.left, theField, incre, theRow, opponentSlctColor);	
 					
 					
 					
@@ -149,40 +157,41 @@ public class gameplay : MonoBehaviour {
 	
 	
 	
-void availablePos(string theWantedDirection, int[,]  theField, int incre, int theRow,  int opponentSlctColor){
+void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre, int theRow,  int opponentSlctColor){
 
-		int indexCaseCheck = 0;
-			
+		int indexCaseCheckHorizontal = 0;
+		int indexCaseCheckVertical = 0;
+		
 		switch(theWantedDirection){
-			case "right":
+			case lookDirection.right:
 				//int nextCaseCheck  = theField[theRow,incre + 1];
-				indexCaseCheck = +1;
+				indexCaseCheckHorizontal = +1;
 			break;
-			case "left":
+		case lookDirection.left:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
-				indexCaseCheck = -1;
+				indexCaseCheckHorizontal = -1;
 			break;
 		}
 	
 		//if the token is the opponent's we check too see what follows by raising the scope by one
-		if( theField[theRow,incre + indexCaseCheck] == opponentSlctColor){
+		if( theField[theRow + indexCaseCheckVertical,incre + indexCaseCheckHorizontal] == opponentSlctColor){
 			
 			//We raise the scope in what so ever direction it is going.
-			indexCaseCheck += indexCaseCheck;
+			indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 	
 			//We check to see if it is empty, if so we add a indicator Token
-			if(theField[theRow,incre + indexCaseCheck] == 0){
+			if(theField[theRow + indexCaseCheckVertical,incre + indexCaseCheckHorizontal] == 0){
 	
 				//We get the location of where we want to put our token
 				GameObject targetToken = new GameObject();
-				targetToken = GameObject.Find(theTileNames[theRow,incre + indexCaseCheck]);
+				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
 				
 				//Will serve for the Indicator Token Creation
 				GameObject theIndicatorToken;
 								
 				//We create a token at the location of the target location.
 				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-				print("We put a indicator here: " + theTileNames[theRow, incre + indexCaseCheck]);
+				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 				//break;
 	
