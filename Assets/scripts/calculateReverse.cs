@@ -143,18 +143,6 @@ public class calculateReverse : MonoBehaviour {
 							
 							//print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
 							
-							/*	while(theField[theRow +indexCaseCheckVertical , incre + indexCaseCheckHorizontal] != 0){
-									print ("cant break Free");
-									
-									//We raise the scope and check what is beyond that.
-									indexCaseCheckHorizontal += indexCaseCheckHorizontal;
-								
-									indexCaseCheckVertical += indexCaseCheckVertical;
-								
-								
-								}*/
-							
-							
 							//We check until we find an empty space  || Or until we change rows.
 							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
 								
@@ -213,11 +201,11 @@ public class calculateReverse : MonoBehaviour {
 		
 		//We also need to check for patterns like that too:   B W W W B    ->  B B B B B
 		
-		//Actually we need to chek for the first Token in the chain  [B]  W W W W B   until we get an empty space [_] (or  until we moved to the next row?)
-		//Then, we go back one case [B]  W W W W (B)  [_]
-		//Everything within this line becomes [B] :   [B]  B B B B (B)  [_]
+		//Actually we need to check for the first Token in the chain  [B]  W W W W B   until we get an empty space [_] (or  until we moved to the next row?) √
+		//Then, we go back one case [B]  W W W W (B)  [_] √
+		//Everything within this line becomes [B] :   [B]  B B B B (B)  [_] √
 		
-		//Once complete we use the same algorithm for up and down.
+		//Once complete we use the same algorithm for up and down.√
 	}
 	
 	

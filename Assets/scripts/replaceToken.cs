@@ -131,6 +131,16 @@ public class replaceToken : MonoBehaviour {
 					
 					//will need to be moved to the gameState later on
 					gameManagerObj.GetComponent<calculateReverse>().initMe();
+					
+					
+					//[  CHANGE THE  TURN  ]
+					//We Change the turn
+					gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.opponent;
+					
+					//We end the turn
+					
+					
+					
 					//newTokenLocation =  theTileNames[theRow,incre];
 				}
 				

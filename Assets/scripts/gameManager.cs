@@ -14,11 +14,25 @@ public class gameManager : MonoBehaviour {
 	public static gameState theCurrGameState;
 	
 	
+	public enum whoTurns{
+		waiting,
+		player,
+		opponent
+		
+	}
+	
+	public whoTurns theCurrTurn;
+	
+	
+	
+	
 	// Use this for initialization
 	void Start () {
 		
 		//We Init the game
 		theCurrGameState = gameState.initialize;
+		
+		theCurrTurn = whoTurns.player;
 	}
 	
 	
@@ -32,7 +46,23 @@ public class gameManager : MonoBehaviour {
 			break;
 			
 			case gameState.playGame:
-				playGame();
+			
+				switch(theCurrTurn){
+					
+					case  whoTurns.player:
+						print ("playerTurn");
+						playGame();
+						theCurrTurn = whoTurns.waiting;
+					break;
+				
+					case  whoTurns.opponent:
+						print ("opponentTurn");
+						theCurrTurn = whoTurns.waiting;
+					break;
+				
+				}
+			
+				
 			break;
 			
 			case gameState.gameOver:
@@ -67,7 +97,7 @@ public class gameManager : MonoBehaviour {
 	
 	
 	//We Start Playing
-	void playGame(){
+	public void playGame(){
 		//We have to split this into phases to
 		//print("We are playing the game");
 		//We call the ftc for creating a map and start the mapSetUp process.

@@ -5,16 +5,6 @@ public class theToken : MonoBehaviour {
 	
 	/*We create a token class that holds both variables (whiite/black We change the token upon call. )*/
 	
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	void tokenColor(int theColor){
 		switch(theColor){
 			case 1:
