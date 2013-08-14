@@ -118,8 +118,8 @@ public class gameplay : MonoBehaviour {
 					
 					availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.left, theField, incre, theRow, opponentSlctColor);	
-					
-					
+					availablePos(lookDirection.up, theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.down, theField, incre, theRow, opponentSlctColor);	
 					
 					
 				}//End if find user's token
@@ -167,31 +167,41 @@ void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre,
 				//int nextCaseCheck  = theField[theRow,incre + 1];
 				indexCaseCheckHorizontal = +1;
 			break;
-		case lookDirection.left:
+			case lookDirection.left:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
 				indexCaseCheckHorizontal = -1;
 			break;
+			case lookDirection.up:
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheckVertical = +1;
+			break;
+			case lookDirection.down:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = -1;
+			break;
 		}
+		
+		
 	
 		//if the token is the opponent's we check too see what follows by raising the scope by one
-		if( theField[theRow + indexCaseCheckVertical,incre + indexCaseCheckHorizontal] == opponentSlctColor){
+		if( theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 			
 			//We raise the scope in what so ever direction it is going.
 			indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 	
 			//We check to see if it is empty, if so we add a indicator Token
-			if(theField[theRow + indexCaseCheckVertical,incre + indexCaseCheckHorizontal] == 0){
+			if(theField[theRow, incre + indexCaseCheckHorizontal] == 0){
 	
 				//We get the location of where we want to put our token
 				GameObject targetToken = new GameObject();
-				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+				targetToken = GameObject.Find(theTileNames[theRow, incre + indexCaseCheckHorizontal]);
 				
 				//Will serve for the Indicator Token Creation
 				GameObject theIndicatorToken;
 								
 				//We create a token at the location of the target location.
 				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+				print("We put a indicator here: " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
 								
 				//break;
 	
@@ -201,6 +211,42 @@ void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre,
 			}
 	
 		}//End opponentToken
+		
+		
+		/////////////////
+		//UP DOWN
+		//if the token is the opponent's we check too see what follows by raising the scope by one
+		if( theField[theRow +indexCaseCheckVertical, incre] == opponentSlctColor){
+			
+			//We raise the scope in what so ever direction it is going.
+			indexCaseCheckVertical += indexCaseCheckVertical;
+	
+			//We check to see if it is empty, if so we add a indicator Token
+			if(theField[theRow + indexCaseCheckVertical, incre] == 0){
+	
+				//We get the location of where we want to put our token
+				GameObject targetToken = new GameObject();
+				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre]);
+				
+				//Will serve for the Indicator Token Creation
+				GameObject theIndicatorToken;
+								
+				//We create a token at the location of the target location.
+				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre]);
+								
+				//break;
+	
+			}else{
+				//If it is not empty we raise the scope and check for more info.	
+	
+			}
+	
+		}//End opponentToken
+		
+		
+		
+		
 
 
 }
