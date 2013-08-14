@@ -76,27 +76,29 @@ public class gameplay : MonoBehaviour {
 		theField = theCreatedMap.theField;
 		theTileNames = theCreatedMap.theTileNames;
 		
+		//..............................................................................
+		
 		//We look for possible positions to move to.
 		startCheckingForPosition();
 	}
 	
 	//==========WHAT WILL U DO?===================\\
-	//0. By default we will set the player to black
-	//1. Scan the map and see where are the token
-	//2. Get the location where we can put the tokens
+	//0. By default we will set the player to black  √
+	//1. Scan the map and see where are the token   √
+	//2. Get the location where we can put the tokens  √
 		
 	
-		//> CHECK ON THE RIGHT   X _
+		//> CHECK ON THE RIGHT   X _   √
  		
 	
-		//> CHECK ON THE LEFT  _X
+		//> CHECK ON THE LEFT  _X  √
 
 		
 		//>                                         _
-		//> CHECK ON TOP             X
+		//> CHECK ON TOP             X      √
 	
 		
-		//> CHECK ON  BOTTOM     X
+		//> CHECK ON  BOTTOM     X    √
 		//>                                         _
 	
 		//We return the positions available.

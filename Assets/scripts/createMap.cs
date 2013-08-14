@@ -139,12 +139,12 @@ public class createMap : MonoBehaviour {
 				switch(theCurrArray[theRow,incre]){
 					
 					case 1:
-						//We place a token 
+						//We place a white token 
 						generateTokens(theRow,incre,theCurrArray[theRow,incre]);
 					break;
 					
 					case 2:
-						//We place a token  
+						//We place a black token  
 						generateTokens(theRow,incre,theCurrArray[theRow,incre]);
 					break;
 				}//end Switch
@@ -231,10 +231,26 @@ public class createMap : MonoBehaviour {
 	
 	 //////////////////////////////////////
 	// [ TOOL ]  DiSPLAY ARRAY: shows the values in the FIeld Array
-	void displayArray(){
-		foreach(int theValues in theField){
+	public void displayArray(){
+		/*foreach(int theValues in theField){
 			print("val: " + theValues);
-		}
+		}*/
+		
+		//Get the number of rows
+		int theNumRows = (theField.Length/8); 
+		
+		//We set the rows
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
+			
+			//We populate the rows
+			for(int incre = 0; incre < 8; incre++){
+			
+				print ( theTileNames[theRow,incre]  + " " +  theField[theRow,incre ]);
+				//We print the names for a test.
+				//print (theTileNames[theRow,incre ]);
+			}
+			
+		}//End Generating 
 	}
 	
 	
