@@ -184,24 +184,40 @@ void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre,
 		
 	
 		//if the token is the opponent's we check too see what follows by raising the scope by one
-		if( theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+		if( theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 			
-			//We raise the scope in what so ever direction it is going.
-			indexCaseCheckHorizontal += indexCaseCheckHorizontal;
+			
+			
+			//We check which directions we will be using.
+			if(indexCaseCheckHorizontal != 0){
+				
+				//We will be using the horizontal
+				//We raise the scope in what so ever direction it is going.
+				indexCaseCheckHorizontal += indexCaseCheckHorizontal;
+				
+			}else{
+				
+				//We will be using the Vertical
+				//We raise the scope in what so ever direction it is going.
+				indexCaseCheckVertical += indexCaseCheckVertical;
+			}
 	
+			
+			
+			
 			//We check to see if it is empty, if so we add a indicator Token
-			if(theField[theRow, incre + indexCaseCheckHorizontal] == 0){
+			if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 	
 				//We get the location of where we want to put our token
 				GameObject targetToken = new GameObject();
-				targetToken = GameObject.Find(theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 				
 				//Will serve for the Indicator Token Creation
 				GameObject theIndicatorToken;
 								
 				//We create a token at the location of the target location.
 				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-				print("We put a indicator here: " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 				//break;
 	
@@ -213,36 +229,7 @@ void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre,
 		}//End opponentToken
 		
 		
-		/////////////////
-		//UP DOWN
-		//if the token is the opponent's we check too see what follows by raising the scope by one
-		if( theField[theRow +indexCaseCheckVertical, incre] == opponentSlctColor){
-			
-			//We raise the scope in what so ever direction it is going.
-			indexCaseCheckVertical += indexCaseCheckVertical;
-	
-			//We check to see if it is empty, if so we add a indicator Token
-			if(theField[theRow + indexCaseCheckVertical, incre] == 0){
-	
-				//We get the location of where we want to put our token
-				GameObject targetToken = new GameObject();
-				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre]);
-				
-				//Will serve for the Indicator Token Creation
-				GameObject theIndicatorToken;
-								
-				//We create a token at the location of the target location.
-				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre]);
-								
-				//break;
-	
-			}else{
-				//If it is not empty we raise the scope and check for more info.	
-	
-			}
-	
-		}//End opponentToken
+		
 		
 		
 		
