@@ -117,7 +117,7 @@ public class replaceToken : MonoBehaviour {
 					GameObject gameManagerObj = GameObject.Find("gameManager");
 					createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
 					theCreatedMap.theField[theRow,incre] = playerSlctColor;
-					theCreatedMap.displayArray();
+					//theCreatedMap.displayArray();
 					
 					//We change the name so that the delete function can not find the token and delete it
 					//this.name = "newToken" + playerSlctColor;
@@ -128,6 +128,9 @@ public class replaceToken : MonoBehaviour {
 					
 					//We register the latest token we placed.
 					gameManagerObj.GetComponent<calculateReverse>().newTokenLocation = theTileNames[theRow,incre];
+					
+					//will need to be moved to the gameState later on
+					gameManagerObj.GetComponent<calculateReverse>().initMe();
 					//newTokenLocation =  theTileNames[theRow,incre];
 				}
 				

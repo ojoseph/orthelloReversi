@@ -248,7 +248,7 @@ public class gameplay : MonoBehaviour {
 		//Does it make sense?
 		foreach(string tokenName in registerIndicator){
 			Destroy(GameObject.Find(tokenName));
-			print(tokenName);
+			//print(tokenName);
 		}
 		
 		//We clean this after use	

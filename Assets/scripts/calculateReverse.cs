@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class calculateReverse : MonoBehaviour {
 	
@@ -29,17 +31,28 @@ public class calculateReverse : MonoBehaviour {
 	
 	public bool currTurnOver = false;
 	int playerSlctColor;
-	
+	int opponentSlctColor;
 	
 	//Holds the latest token
 	public string newTokenLocation = "";
+	
+	
+	//used to assign which direction we want to look at
+	enum lookDirection{
+		left,
+		right,
+		up,
+		down
+	}
+	
+	List<string> scannedTokensCoord = new List<string>();
 	
 	//...........................................................................................................
 	
 	
 	
 	// Use this for initialization
-	void Start () {
+	public void initMe () {
 		
 		
 		//[IMPORT]		
@@ -56,14 +69,42 @@ public class calculateReverse : MonoBehaviour {
 	
 		//We import the player color from the gameplay script
 		playerSlctColor	= getGameMangerObj.GetComponent<gameplay>().playerSlctColor;
+		opponentSlctColor  = getGameMangerObj.GetComponent<gameplay>().opponentSlctColor;
 		
 		
-		
-		reverseTokens();
-	
+		reverseTokens(lookDirection.right);
+		reverseTokens(lookDirection.left);
 	}
 	
-	void reverseTokens(){
+	void reverseTokens(lookDirection theWantedDirection){
+		
+		
+		
+		// FOR  CALCULATE REVERSE
+		int indexCaseCheckHorizontal = 0;
+		int indexCaseCheckVertical = 0;
+		
+		//lookDirection theWantedDirection = lookDirection.right;
+		
+		switch(theWantedDirection){
+			case lookDirection.right:
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheckHorizontal = +1;
+			break;
+			case lookDirection.left:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = -1;
+			break;
+			case lookDirection.up:
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheckVertical = +1;
+			break;
+			case lookDirection.down:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = -1;
+			break;
+		}
+		
 		
 		
 		
@@ -73,30 +114,86 @@ public class calculateReverse : MonoBehaviour {
 		//We set the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
-			//We populate the rows
+			//We check each entry
 			for(int incre = 0; incre < 8; incre++){
 				
-				//Check for our tokens
-				if( theField[theRow, incre] == playerSlctColor ){
+				//Check for  the location of the newest token
+				if( theTileNames[theRow, incre] == newTokenLocation ){
 					
 					
+					print ("We got the location of the new TOKEN " + newTokenLocation);
 					
-			
-					
+					//We start looking on its right
+					if(theField[theRow, incre + indexCaseCheckHorizontal] == 0){
+						
+						print(" Nothing on the right side!!!!");
+						
+					}else{
+						//If there is something we check what it is
+						print(" There is something: " + theField[theRow, incre + indexCaseCheckHorizontal]  + "  " + theTileNames[theRow, incre +indexCaseCheckHorizontal ] );
+						
+						
+						//If int the position we found  and opponenent token we raise the scope and look for the next position
+						if(theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+						
+							//We raise the scope and check what is beyond that.
+							//indexCaseCheckHorizontal += indexCaseCheckHorizontal;
+							
+							//print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
+							
+							//We check until we find an empty space  || Or until we change rows.
+							while(theField[theRow, incre + indexCaseCheckHorizontal] != 0){
+								
+								print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
+								print ("Before the end: "  +  theField[theRow, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+								
+								
+								//We check in the row we scanned to see if there is tokens that belongs to the oponent
+								if(theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+									print ("++++");	
+									//If there is a match we add them in this table so that we can process them.
+									scannedTokensCoord.Add(theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+									print("We add: " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+								
+								}
+								
+								
+								//We raise the scope and check what is beyond that.
+								indexCaseCheckHorizontal += indexCaseCheckHorizontal;
+								
+									
+								
+							}
+							
+							changeColor(scannedTokensCoord);
+							
+								//If the last token is the same as the user color we change everything in between to this color
+								//if(theField[theRow, incre + indexCaseCheckHorizontal]  ==  playerSlctColor){ changeColor(scannedTokensCoord); }
+							
+							
+						}
+						
+						//Make a while we dont reach 0
+						
+						
+						
+					} 
 					
 					
 				}	
 					
 				//We print the names for a test.
-				print ("So I lived: " + theTileNames[theRow,incre ]);
+				//print ("So I lived: " + theTileNames[theRow,incre ] + "##" + newTokenLocation);
 			}
 			
 		}//End Generating 
 		
 		
 		
-		//We get the position of the latest token placed by the user by accessing the replaceTokenScript
+		//We get the position of the latest token placed by the user by accessing the replaceTokenScript √
 		///We loopthrough each case and check the infront and behind the tokens. √
+		//We check for what is on the right if its empty we check on the left until we find an empty spot
+		
 		//We check for patterns like these:   B W B  and change it for  B B B .
 		
 		//We also need to check for patterns like that too:   B W W W B    ->  B B B B B
@@ -109,11 +206,46 @@ public class calculateReverse : MonoBehaviour {
 	}
 	
 	
-	
-	
-	
 	// Update is called once per frame
-	void Update () {
+	void changeColor ( List<string> scannedTokensCoord){ 
+		//scannedTokensCoord
+			
+		
+		for(int y = 0; y < scannedTokensCoord.Count; y++){
+			
+			print("++++***+++*+++* " + scannedTokensCoord[y]);
+			
+			
+			//Get the number of rows
+			int theNumRows = (theField.Length/8); 
+		
+			//We set the rows
+			for(int theRow = 0 ; theRow < theNumRows; theRow++){
+				
+				//We populate the rows
+				for(int incre = 0; incre < 8; incre++){	
+					
+					if(theTileNames[theRow,incre] == scannedTokensCoord[y]){
+						theField[theRow,incre] = playerSlctColor;
+						
+						//We track dpwn the target.
+						GameObject findTargetToReverse = GameObject.Find("token" + opponentSlctColor + scannedTokensCoord[y]);
+						
+						//We change the color of the item
+						findTargetToReverse.transform.renderer.material.color = Color.black;
+					}
+				}
+				
+			}//For loop  in rows	
 	
-	}
+			
+		}//End For loop  in aray
+		
+		
+		
+		
+		
+		
+	}//End void 
+	
 }
