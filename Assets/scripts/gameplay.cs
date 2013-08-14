@@ -212,11 +212,9 @@ void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre,
 				GameObject targetToken = new GameObject();
 				targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 				
-				//Will serve for the Indicator Token Creation
-				GameObject theIndicatorToken;
 								
 				//We create a token at the location of the target location.
-				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+				GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 				print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 				//break;
