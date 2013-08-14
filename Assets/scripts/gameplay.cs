@@ -98,63 +98,38 @@ public class gameplay : MonoBehaviour {
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
 		
-		//We set the rows
+		//We check the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
-			//We populate the rows
+			//We check each elm in that row
 			for(int incre = 0; incre < 8; incre++){
 			
-				print(theField[theRow,incre]);
+				
+				//We look for a player Token, if there is one we start looking for  possible positions where to put your token.
 				if( theField[theRow,incre] == playerSlctColor){
-					//If there is a match  we start looking for what is around
-					int nextOnRight = theField[theRow,incre+1];
 					
-					int prevOnLeft = theField[theRow,incre-1];
+					availablePos("right",theField, incre, theRow, opponentSlctColor);	
+					availablePos("left",theField, incre, theRow, opponentSlctColor);	
 					
 					
-					//CHECK ON RIGHT [0, +1]
-						print("check one after : " + nextOnRight + "   " + theTileNames[theRow,incre+1]);
 					
-					//CHECK ON LEFT [-1, 0]
-						print("check one before: " + prevOnLeft + "   " + theTileNames[theRow,incre-1]);
 					
-					//if its the opponent's token, than we check for an  opporunity
-					//We check to see what follows it. +1
-					if(nextOnRight == opponentSlctColor){
-						//We raise the scope
-						print("We check the next next: " + theField[theRow,incre+2] + "   " + theTileNames[theRow,incre+2]);
-						
-						//If its empty we put an indicator
-						if(theField[theRow,incre+2] == 0){
-							
-							//We get the location of where we want to put our token
-							GameObject targetToken = new GameObject();
-							targetToken = GameObject.Find(theTileNames[theRow,incre+2]);
-						
-							
-							//We put a indicator Token
-							
-							//Will serve for the Indicator Token Creation
-							GameObject theIndicatorToken;
-							
-							//We create a token at the location of the target location.
-							theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-							print("We put a indicator here: " + theTileNames[theRow,incre+2]);
-							
-							break;
-						}else{
-							
-							//if not we relaunch the process.
-						}
-					}
-					
-				}//End if
+				}//End if find user's token
+				
+				
+				
+				
+				
+				
 				
 				//We print the names for a test.
 				//print (theTileNames[theRow,incre ]);
 				
 				
 			}//End For
+			
+			
+			
 			
 			
 		//##TASK IS COMPLETE ENDS THIS SCRIPT	
@@ -168,6 +143,62 @@ public class gameplay : MonoBehaviour {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+void availablePos(string theWantedDirection, int[,]  theField, int incre, int theRow,  int opponentSlctColor){
+
+		int indexCaseCheck = 0;
+			
+		switch(theWantedDirection){
+			case "right":
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheck = +1;
+			break;
+			case "left":
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheck = -1;
+			break;
+		}
+	
+		//if the token is the opponent's we check too see what follows by raising the scope by one
+		if( theField[theRow,incre + indexCaseCheck] == opponentSlctColor){
+			
+			//We raise the scope in what so ever direction it is going.
+			indexCaseCheck += indexCaseCheck;
+	
+			//We check to see if it is empty, if so we add a indicator Token
+			if(theField[theRow,incre + indexCaseCheck] == 0){
+	
+				//We get the location of where we want to put our token
+				GameObject targetToken = new GameObject();
+				targetToken = GameObject.Find(theTileNames[theRow,incre + indexCaseCheck]);
+				
+				//Will serve for the Indicator Token Creation
+				GameObject theIndicatorToken;
+								
+				//We create a token at the location of the target location.
+				theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken"),  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+				print("We put a indicator here: " + theTileNames[theRow, incre + indexCaseCheck]);
+								
+				//break;
+	
+			}else{
+				//If it is not empty we raise the scope and check for more info.	
+	
+			}
+	
+		}//End opponentToken
+
+
+}
+	
+	
+	
+	
 	
 
 	// Update is called once per frame
