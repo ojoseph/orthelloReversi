@@ -79,11 +79,11 @@ public class placeToken : MonoBehaviour {
 		switch(playerCurrColor){
 			
 			case 1:
-				this.renderer.material.color = Color.black;
+				this.renderer.material.color = Color.white;
 			break;
 			
 			case 2:
-				this.renderer.material.color = Color.white;
+				this.renderer.material.color = Color.black;
 			break;
 			
 		}
