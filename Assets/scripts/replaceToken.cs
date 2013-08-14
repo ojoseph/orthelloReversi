@@ -77,17 +77,17 @@ public class replaceToken : MonoBehaviour {
 			
 		}
 		
-		
+		//We update the information in the arrays 
 		updateGrid(theField, theTileNames);
 		
 		
 		
 		
-		
+		//We end its turn.
 		//If the user touch the token his turn is over, unless he cant do anything.
 		currTurnOver = true;
 		
-		//We end its turn.
+		
 	}
 	
 	
@@ -96,7 +96,7 @@ public class replaceToken : MonoBehaviour {
 		//We fetch the name of this token.
 		
 		//Strip down the name and keep the coordinates that was attached to its name
-		print ( "OOOOOO: " + this.name.Replace("indicator", ""));
+		//print ( "OOOOOO: " + this.name.Replace("indicator", ""));
 		string theCoordianate = this.name.Replace("indicator", "");
 		
 		//We go through the array that contains the coordinates
@@ -111,14 +111,20 @@ public class replaceToken : MonoBehaviour {
 			for(int incre = 0; incre < 8; incre++){
 				
 				if(theTileNames[theRow,incre ] == theCoordianate){
-					print("WE HAVE SOME MATCH");
+					//print("WE HAVE SOME MATCH");
 					
-					
-					//We import the data from the created map 
+					//We get access the the field array and write the data in it
 					GameObject gameManagerObj = GameObject.Find("gameManager");
 					createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
 					theCreatedMap.theField[theRow,incre] = playerSlctColor;
 					theCreatedMap.displayArray();
+					
+					//We change the name so that the delete function can not find the token and delete it
+					this.name = "newToken" + playerSlctColor;
+					
+					//We remove the indicator tokens
+					gameManagerObj.GetComponent<gameplay>().removeIndicatorToken();
+					
 				}
 				
 				//We print the names for a test.
@@ -128,8 +134,8 @@ public class replaceToken : MonoBehaviour {
 		}//End Generating 
 		
 		
-		//Try to find a match. 
-		//If we find a match then we print out the information in theField (data) array
+		//Try to find a match. √
+		//If we find a match then we print out the information in theField (data) array   √
 		//We hide/Remove the possible positions (remove Indicators)
 		//We checks which tokens needs to be reversed.
 		//We reverse them in the array, the update the visuals

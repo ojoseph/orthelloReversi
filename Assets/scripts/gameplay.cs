@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class gameplay : MonoBehaviour {
 	
@@ -57,6 +58,9 @@ public class gameplay : MonoBehaviour {
 		up,
 		down
 	}
+	
+	//Will hold the Indicator tokens that we pulled put
+	List<string> registerIndicator = new List<string>();
 	
 	//.........................................................................................................................................................................................................................
 	
@@ -152,7 +156,7 @@ public class gameplay : MonoBehaviour {
 	//////////////////////////////////////
 	//  [ STEP 1a ] GENERATE INDICATORS : takes care of generating indicators where the user can place his tokens.
 	void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre, int theRow,  int opponentSlctColor){
-	
+			
 			int indexCaseCheckHorizontal = 0;
 			int indexCaseCheckVertical = 0;
 			
@@ -212,9 +216,21 @@ public class gameplay : MonoBehaviour {
 					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation)as GameObject;
 					//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 					theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
+				
+				
+				
 					
+				
+					//We  register the indicators  we placed on the map
+					registerIndicator.Add(theIndicatorToken.name);
+					
+				
+				
+				
+				
+				
 					//Will be used when recovering the positions.
-					theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
+					//theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
 					
 				}else{
 					//If it is not empty we raise the scope and check for more info.	
@@ -228,7 +244,17 @@ public class gameplay : MonoBehaviour {
 	
 	
 	
-	
+	public void removeIndicatorToken(){
+		//Does it make sense?
+		foreach(string tokenName in registerIndicator){
+			Destroy(GameObject.Find(tokenName));
+			print(tokenName);
+		}
+		
+		//We clean this after use	
+		registerIndicator.Clear();
+		
+	}
 	
 
 	// Update is called once per frame
