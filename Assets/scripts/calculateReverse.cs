@@ -74,6 +74,8 @@ public class calculateReverse : MonoBehaviour {
 		
 		reverseTokens(lookDirection.right);
 		reverseTokens(lookDirection.left);
+		reverseTokens(lookDirection.up);
+		reverseTokens(lookDirection.down);
 	}
 	
 	void reverseTokens(lookDirection theWantedDirection){
@@ -124,51 +126,64 @@ public class calculateReverse : MonoBehaviour {
 					print ("We got the location of the new TOKEN " + newTokenLocation);
 					
 					//We start looking on its right
-					if(theField[theRow, incre + indexCaseCheckHorizontal] == 0){
+					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 						
 						print(" Nothing on the right side!!!!");
 						
 					}else{
 						//If there is something we check what it is
-						print(" There is something: " + theField[theRow, incre + indexCaseCheckHorizontal]  + "  " + theTileNames[theRow, incre +indexCaseCheckHorizontal ] );
+						print(" There is something: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  + "  " + theTileNames[theRow + indexCaseCheckVertical, incre +indexCaseCheckHorizontal ] );
 						
 						
 						//If int the position we found  and opponenent token we raise the scope and look for the next position
-						if(theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+						if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 						
 							//We raise the scope and check what is beyond that.
 							//indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 							
 							//print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
 							
+							/*	while(theField[theRow +indexCaseCheckVertical , incre + indexCaseCheckHorizontal] != 0){
+									print ("cant break Free");
+									
+									//We raise the scope and check what is beyond that.
+									indexCaseCheckHorizontal += indexCaseCheckHorizontal;
+								
+									indexCaseCheckVertical += indexCaseCheckVertical;
+								
+								
+								}*/
+							
+							
 							//We check until we find an empty space  || Or until we change rows.
-							while(theField[theRow, incre + indexCaseCheckHorizontal] != 0){
+							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
+								
+								
 								
 								print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
-								print ("Before the end: "  +  theField[theRow, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+								print ("Before the end: "  +  theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 								
 								//We check in the row we scanned to see if there is tokens that belongs to the oponent
-								if(theField[theRow, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+								if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 									print ("++++");	
 									//If there is a match we add them in this table so that we can process them.
-									scannedTokensCoord.Add(theTileNames[theRow, incre + indexCaseCheckHorizontal]);
-									print("We add: " + theTileNames[theRow, incre + indexCaseCheckHorizontal]);
+									scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+									print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 								}
 								
 								
 								//We raise the scope and check what is beyond that.
 								indexCaseCheckHorizontal += indexCaseCheckHorizontal;
-								
+								indexCaseCheckVertical += indexCaseCheckVertical;
 									
 								
-							}
+							}//END While Loop
+							
+							print ("#######" + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 							
 							changeColor(scannedTokensCoord);
-							
-								//If the last token is the same as the user color we change everything in between to this color
-								//if(theField[theRow, incre + indexCaseCheckHorizontal]  ==  playerSlctColor){ changeColor(scannedTokensCoord); }
 							
 							
 						}
@@ -177,7 +192,7 @@ public class calculateReverse : MonoBehaviour {
 						
 						
 						
-					} 
+					}//END ELSE 
 					
 					
 				}	
