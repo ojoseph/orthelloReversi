@@ -57,6 +57,7 @@ public class gameManager : MonoBehaviour {
 				
 					case  whoTurns.opponent:
 						print ("opponentTurn");
+						opponentTurn();
 						theCurrTurn = whoTurns.waiting;
 					break;
 				
@@ -118,6 +119,39 @@ public class gameManager : MonoBehaviour {
 		}
 	}
 	
+	
+	
+	//We Start Playing
+	public void opponentTurn(){
+		//We have to split this into phases to
+		print("Its the opponent's TURN!!");
+		//We call the ftc for creating a map and start the mapSetUp process.
+		
+		
+		gameplay thegameplay = GetComponent<gameplay>();
+		
+		thegameplay.theCurrentStatus = gameplay.currentStatus.notDoneYet;
+		
+		//We check if the process is done or not if so we move to the next phase, Else we do not.
+		if(thegameplay.theCurrentStatus == gameplay.currentStatus.notDoneYet){
+			
+			print ("###TEST");
+			
+			//playerSlctColor
+			thegameplay.playerSlctColor = 1;
+			thegameplay.opponentSlctColor = 2;
+			
+			
+			//If we havent created a map yet we make one.
+			//thegameplay.initMe();
+			thegameplay.startCheckingForPosition();
+			
+		}else{
+			print ("###TEST ELSE");
+        	//If the process is already done we move on to the next phase
+			theCurrGameState = gameState.none;
+		}
+	}
 	
 	
 	IEnumerator loadGameOver(){

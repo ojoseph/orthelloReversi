@@ -109,8 +109,8 @@ public class gameplay : MonoBehaviour {
 	
 	//////////////////////////////////////
 	//  [ STEP 1 ] CHECK FOR  AVAILABLE POSITIONS : checks if there is some available positions, then place token to the available places,
-	void startCheckingForPosition(){
-		
+	public void startCheckingForPosition(){
+		print ("CALLED ME player : " + playerSlctColor);
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
 		
