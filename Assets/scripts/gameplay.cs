@@ -251,10 +251,18 @@ public class gameplay : MonoBehaviour {
 					/*GameObject*/ 
 					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 					//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-					theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
+					
+					//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
+					string futureTokenName ="indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];
 				
-				
-				
+					if(GameObject.Find(futureTokenName) == null){
+						//If it does not exist we assign it to the token
+						theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
+					}else{
+						//if it exist we destroy the token
+						Destroy(GameObject.Find(futureTokenName));
+					}
+					
 					
 				
 					//We  register the indicators  we placed on the map
