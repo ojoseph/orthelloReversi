@@ -56,7 +56,7 @@ public class calculateTokenNumber : MonoBehaviour {
 		
 		GUI.Label (new Rect (25, 45, 300, 30), "Black Tokens: " + numBlackTokens);
 		
-		GUI.Label (new Rect (25, 45, 300, 30), "Total Tokens: " + numTotalTokens);
+		GUI.Label (new Rect (25, 65, 300, 30), "Total Tokens: " + numTotalTokens);
 		
 		
 	}
