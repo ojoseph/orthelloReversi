@@ -165,6 +165,8 @@ public class gameplay : MonoBehaviour {
 			int indexCaseCheckHorizontal = 0;
 			int indexCaseCheckVertical = 0;
 			
+			int sega = 0;
+		
 			switch(theWantedDirection){
 				case lookDirection.right:
 					//int nextCaseCheck  = theField[theRow,incre + 1];
@@ -222,27 +224,43 @@ public class gameplay : MonoBehaviour {
 			
 		
 			//if the token is the opponent's we check to see what follows by raising the scope by one
-			if( theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+			if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 				
+				/*print("**************************************************************************************************");
+				print(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal ] );
+				print("H:    " + (indexCaseCheckHorizontal + indexCaseCheckHorizontal + indexCaseCheckHorizontal));	
+				print("V:    " + (indexCaseCheckVertical + indexCaseCheckVertical + indexCaseCheckVertical));	
+				print(theTileNames[theRow + (indexCaseCheckVertical + indexCaseCheckVertical + indexCaseCheckVertical), incre + (indexCaseCheckHorizontal + indexCaseCheckHorizontal + indexCaseCheckHorizontal) ] );
+				print("**************************************************************************************************");
 				
+			
+				print("++++++++++++++++++++++++++++++");
+				print ("AAAA" + indexCaseCheckHorizontal + "  BBBBB" +indexCaseCheckVertical);
+				print("++++++++++++++++++++++++++++++");*/
+			
+				/*indexCaseCheckHorizontal = indexCaseCheckHorizontal + indexCaseCheckHorizontal; 
+				indexCaseCheckVertical = indexCaseCheckVertical + indexCaseCheckVertical;*/
+			
+			
 				
-				//We check which directions we will be using.
-				if(indexCaseCheckHorizontal != 0){
+				/*while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
+					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+						indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
+						indexCaseCheckVertical +=indexCaseCheckVertical;
+					}	
+				}*/
 					
-					//We will be using the horizontal
-					//We raise the scope in what so ever direction it is going.
-					indexCaseCheckHorizontal += indexCaseCheckHorizontal;
-					indexCaseCheckVertical += indexCaseCheckVertical;
-				}else{
-					
-					//We will be using the Vertical
-					//We raise the scope in what so ever direction it is going.
-					indexCaseCheckVertical += indexCaseCheckVertical;
+				indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
+				indexCaseCheckVertical +=indexCaseCheckVertical;
+				
+				while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
+						sega += 1;
+						print("sEGA: " + sega);
+						indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
+						indexCaseCheckVertical +=indexCaseCheckVertical;
 				}
-		
-				
-				
-				
+			
+			
 				//We check to see if it is empty, if so we add a indicator Token
 				if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 		
@@ -285,9 +303,11 @@ public class gameplay : MonoBehaviour {
 					//theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
 					
 				}else{
-					//If it is not empty we raise the scope and check for more info.	
-		
+					
+			
 				}
+				
+				
 		
 			}//End opponentToken
 			
