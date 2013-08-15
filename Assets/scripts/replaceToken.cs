@@ -135,7 +135,24 @@ public class replaceToken : MonoBehaviour {
 					
 					//[  CHANGE THE  TURN  ]
 					//We Change the turn
-					gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.opponent;
+					print ("CURRENTLY IT IS@@@:  " + gameManager.theCurrTurn);
+					
+					if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
+						gameManager.theCurrTurn = gameManager.whoTurns.player;
+					}else{
+						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
+					}
+					//gameManager.theCurrTurn = gameManager.whoTurns.opponent;
+					
+					
+					/*if(gameManager.theCurrTurn == gameManager.whoTurns.player){ 
+						print ("We switch");
+						//gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.opponent;
+						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
+					}else{
+						//gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.player;
+						gameManager.theCurrTurn = gameManager.whoTurns.player;
+					}*/
 					
 					//We end the turn
 					

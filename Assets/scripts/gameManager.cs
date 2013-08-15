@@ -15,13 +15,14 @@ public class gameManager : MonoBehaviour {
 	
 	
 	public enum whoTurns{
-		waiting,
+		waitingPlayer,
+		waitingOpponent,
 		player,
 		opponent
 		
 	}
 	
-	public whoTurns theCurrTurn;
+	public static whoTurns theCurrTurn;
 	
 	
 	
@@ -52,13 +53,13 @@ public class gameManager : MonoBehaviour {
 					case  whoTurns.player:
 						print ("playerTurn");
 						playGame();
-						theCurrTurn = whoTurns.waiting;
+						theCurrTurn = whoTurns.waitingPlayer;
 					break;
 				
 					case  whoTurns.opponent:
 						print ("opponentTurn");
 						opponentTurn();
-						theCurrTurn = whoTurns.waiting;
+						theCurrTurn = whoTurns.waitingOpponent;
 					break;
 				
 				}
@@ -106,8 +107,15 @@ public class gameManager : MonoBehaviour {
 		
 		gameplay thegameplay = GetComponent<gameplay>();
 		
+			thegameplay.theCurrentStatus = gameplay.currentStatus.notDoneYet;
+		
 		//We check if the process is done or not if so we move to the next phase, Else we do not.
 		if(thegameplay.theCurrentStatus == gameplay.currentStatus.notDoneYet){
+			
+			//playerSlctColor
+			thegameplay.playerSlctColor = 2;
+			thegameplay.opponentSlctColor = 1;
+			
 			
 			//If we havent created a map yet we make one.
 			thegameplay.initMe();
@@ -143,8 +151,8 @@ public class gameManager : MonoBehaviour {
 			
 			
 			//If we havent created a map yet we make one.
-			//thegameplay.initMe();
-			thegameplay.startCheckingForPosition();
+			thegameplay.initMe();
+			//thegameplay.startCheckingForPosition();
 			
 		}else{
 			print ("###TEST ELSE");

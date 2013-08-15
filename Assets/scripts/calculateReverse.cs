@@ -243,13 +243,13 @@ public class calculateReverse : MonoBehaviour {
 						
 						
 						//We change the color of the item
-						//findTargetToReverse.transform.renderer.material.color = Color.black;
 						switch(playerSlctColor){
 						case 1:
 							findTargetToReverse.transform.renderer.material.color = Color.white;
 								break;
 						case 2:
 							findTargetToReverse.transform.renderer.material.color = Color.black;
+						//	findTargetToReverse.name;
 								break;	
 							
 						}
