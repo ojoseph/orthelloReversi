@@ -50,11 +50,11 @@ public class replaceToken : MonoBehaviour {
 		GameObject getGameMangerObj = GameObject.Find("gameManager");	
 		
 		//We import the data from the created map 
-		createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
+		//createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
 		
 		//We reassign them to here with the same name to avoid confusion.
-		theField = theCreatedMap.theField;
-		theTileNames = theCreatedMap.theTileNames;
+		theField = createMap.theField;
+		theTileNames = createMap.theTileNames;
 	
 		//We import the player color from the gameplay script
 		playerSlctColor	= getGameMangerObj.GetComponent<gameplay>().playerSlctColor;
@@ -115,8 +115,8 @@ public class replaceToken : MonoBehaviour {
 					
 					//We get access the the field array and write the data in it
 					GameObject gameManagerObj = GameObject.Find("gameManager");
-					createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
-					theCreatedMap.theField[theRow,incre] = playerSlctColor;
+					//createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
+					createMap.theField[theRow,incre] = playerSlctColor;
 					//theCreatedMap.displayArray();
 					
 					//We change the name so that the delete function can not find the token and delete it

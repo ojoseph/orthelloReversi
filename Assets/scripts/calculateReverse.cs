@@ -61,11 +61,11 @@ public class calculateReverse : MonoBehaviour {
 		GameObject getGameMangerObj = GameObject.Find("gameManager");	
 		
 		//We import the data from the created map 
-		createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
+		//createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
 		
 		//We reassign them to here with the same name to avoid confusion.
-		theField = theCreatedMap.theField;
-		theTileNames = theCreatedMap.theTileNames;
+		int[,] theField = createMap.theField;
+		string[,]  theTileNames = createMap.theTileNames;
 	
 		//We import the player color from the gameplay script
 		playerSlctColor	= getGameMangerObj.GetComponent<gameplay>().playerSlctColor;

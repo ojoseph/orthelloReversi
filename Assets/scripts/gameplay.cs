@@ -73,11 +73,11 @@ public class gameplay : MonoBehaviour {
 	//void Start () {	
 		//[ IMPORT ]
 		//We import the data from the created map 
-		createMap theCreatedMap = GetComponent<createMap>();
+		//createMap theCreatedMap = GetComponent<createMap>();
 		
 		//We reassign them to here with the same name to avoid confusion.
-		theField = theCreatedMap.theField;
-		theTileNames = theCreatedMap.theTileNames;
+		theField = createMap.theField;
+		theTileNames = createMap.theTileNames;
 		
 		//..............................................................................
 		

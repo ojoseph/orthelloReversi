@@ -12,23 +12,29 @@ public class calculateTokenNumber : MonoBehaviour {
 	
 	// Use this for initialization
 	public static void initMe () {
-	
+		
+		
+		//Reset them before use
+		numWhiteTokens = 0;
+		numBlackTokens = 0;
+		numTotalTokens = 0;
+		
 		//We access createMap
 		GameObject gameManagerObj = GameObject.Find("gameManager");
-		createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
+		//createMap theCreatedMap = gameManagerObj.GetComponent<createMap>();
 		
 		
 		
 		//Get the number of rows
-		int theNumRows = (theCreatedMap.theField.Length/8); 
+		int theNumRows = (createMap.theField.Length/8); 
 		
 		//We set the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
 			//We check each entry
 			for(int incre = 0; incre < 8; incre++){
-				print ("start " + theCreatedMap.theField[theRow,incre]);
-				switch(theCreatedMap.theField[theRow,incre]){
+				//print ("start " + createMap.theField[theRow,incre]);
+				switch(createMap.theField[theRow,incre]){
 					case 1:
 						
 						numWhiteTokens +=1;
