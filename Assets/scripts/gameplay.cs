@@ -49,7 +49,11 @@ public class gameplay : MonoBehaviour {
 		left,
 		right,
 		up,
-		down
+		down,
+		diagUpLeft,
+		diagUpRight,
+		diagDownLeft,
+		diagDownRight
 	}
 	
 	//Will hold the Indicator tokens that we pulled put
@@ -121,7 +125,15 @@ public class gameplay : MonoBehaviour {
 					availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.left, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.up, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.down, theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.down, theField, incre, theRow, opponentSlctColor);
+					
+					
+					
+					
+					//availablePos(lookDirection.diagUpRight, theField, incre, theRow, opponentSlctColor);	
+					//availablePos(lookDirection.diagUpLeft, theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.diagDownRight, theField, incre, theRow, opponentSlctColor);	
+					//availablePos(lookDirection.diagDownLeft, theField, incre, theRow, opponentSlctColor);
 					
 					
 				}//End if find user's token
@@ -170,6 +182,37 @@ public class gameplay : MonoBehaviour {
 					//int nextCaseCheck  = theField[theRow,incre - 1];
 					indexCaseCheckVertical = -1;
 				break;
+				
+				//Diagonal
+				case lookDirection.diagUpRight:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckVertical = +1;
+					indexCaseCheckHorizontal = +1;
+				break;
+				case lookDirection.diagUpLeft:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckVertical = +1;
+					indexCaseCheckHorizontal = -1;
+				break;
+				case lookDirection.diagDownRight:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckVertical = -2;
+					indexCaseCheckHorizontal = +1;
+				break;
+				case lookDirection.diagDownLeft:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckVertical = -1;
+					indexCaseCheckHorizontal = -1;
+				break;
+				
+			
+				/*
+					diagUpLeft,
+					diagUpRight,
+					diagDownLeft,
+					diagDownRight
+				*/
+				
 			}
 			
 			
@@ -206,7 +249,7 @@ public class gameplay : MonoBehaviour {
 									
 					//We create a token at the location of the target location.
 					/*GameObject*/ 
-					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation)as GameObject;
+					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 					//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 					theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
 				
