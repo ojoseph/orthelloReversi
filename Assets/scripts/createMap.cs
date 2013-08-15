@@ -232,7 +232,7 @@ public class createMap : MonoBehaviour {
 	
 	 //////////////////////////////////////
 	// [ TOOL ]  DiSPLAY ARRAY: shows the values in the FIeld Array
-	public void displayArray(){
+	public static void displayArray(){
 		/*foreach(int theValues in theField){
 			print("val: " + theValues);
 		}*/
@@ -255,10 +255,4 @@ public class createMap : MonoBehaviour {
 	}
 	
 	
-	
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

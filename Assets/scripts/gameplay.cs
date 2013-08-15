@@ -27,12 +27,6 @@ public class gameplay : MonoBehaviour {
 	};
 	
 	
-	//The player's color
-	enum playerColor{
-		black,
-		white
-	}
-	
 	//set the player color to black
 	public int playerSlctColor = 2;
 	
