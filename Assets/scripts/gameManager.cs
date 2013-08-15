@@ -54,12 +54,18 @@ public class gameManager : MonoBehaviour {
 						print ("playerTurn");
 						playGame();
 						theCurrTurn = whoTurns.waitingPlayer;
+				
+						//We Count the number of tokens
+						calculateTokenNumber.initMe();
 					break;
 				
 					case  whoTurns.opponent:
 						print ("opponentTurn");
 						opponentTurn();
 						theCurrTurn = whoTurns.waitingOpponent;
+				
+						//We Count the number of tokens
+						calculateTokenNumber.initMe();
 					break;
 				
 				}

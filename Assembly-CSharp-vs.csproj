@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\calculateReverse.cs" />
+     <Compile Include="Assets\scripts\calculateTokenNumber.cs" />
      <Compile Include="Assets\scripts\createMap.cs" />
      <Compile Include="Assets\scripts\gameClear.cs" />
      <Compile Include="Assets\scripts\gameManager.cs" />

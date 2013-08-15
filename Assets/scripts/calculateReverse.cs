@@ -229,30 +229,39 @@ public class calculateReverse : MonoBehaviour {
 				for(int incre = 0; incre < 8; incre++){	
 					
 					if(theTileNames[theRow,incre] == scannedTokensCoord[y]){
+						
+						//We write the data i think into the array. ?
 						theField[theRow,incre] = playerSlctColor;
 						
-						print ("PASSED DOWN TARGET INFO: " + opponentSlctColor + "   "  + scannedTokensCoord[y]);
+						//print ("PASSED DOWN TARGET INFO: " + opponentSlctColor + "   "  + scannedTokensCoord[y]);
 						
 						//We track dpwn the target.
 						GameObject findTargetToReverse = GameObject.Find("token" + opponentSlctColor + scannedTokensCoord[y]);
 						
-						print ("BEFORE TARGet: " + findTargetToReverse); 
+						/*print ("BEFORE TARGet: " + findTargetToReverse); 
 						
 						print ("$$$ OpponentColor: " + opponentSlctColor + "   " + scannedTokensCoord[y]);
 						print ("Target to Reverse: " + findTargetToReverse);
+						print ("Location: " + theTileNames[theRow,incre] + "  What does it contain?" + theField[theRow,incre] );*/
+						//We need to write the data in the array and change the name as well.
 						
 						
 						//We change the color of the item
 						switch(playerSlctColor){
-						case 1:
-							findTargetToReverse.transform.renderer.material.color = Color.white;
-								break;
-						case 2:
-							findTargetToReverse.transform.renderer.material.color = Color.black;
-						//	findTargetToReverse.name;
-								break;	
+							case 1:
+								findTargetToReverse.transform.renderer.material.color = Color.white;
+								//	findTargetToReverse.name = "token" + playerSlctColor + theTileNames[theRow,incre] ;
+							break;
+							case 2:
+								findTargetToReverse.transform.renderer.material.color = Color.black;
+							  //	findTargetToReverse.name = "token" + playerSlctColor + theTileNames[theRow,incre] ;
+							break;	
 							
 						}
+						
+						//We rename the token
+						findTargetToReverse.name = "token" + playerSlctColor + theTileNames[theRow,incre] ;
+						
 						
 					}
 				}

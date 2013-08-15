@@ -134,31 +134,13 @@ public class replaceToken : MonoBehaviour {
 					
 					
 					//[  CHANGE THE  TURN  ]
-					//We Change the turn
-					print ("CURRENTLY IT IS@@@:  " + gameManager.theCurrTurn);
-					
+					//We Change the turn, we check who is currently playing than we swtich turn based upon this.
 					if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
 						gameManager.theCurrTurn = gameManager.whoTurns.player;
 					}else{
 						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
 					}
-					//gameManager.theCurrTurn = gameManager.whoTurns.opponent;
 					
-					
-					/*if(gameManager.theCurrTurn == gameManager.whoTurns.player){ 
-						print ("We switch");
-						//gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.opponent;
-						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
-					}else{
-						//gameManagerObj.GetComponent<gameManager>().theCurrTurn = gameManager.whoTurns.player;
-						gameManager.theCurrTurn = gameManager.whoTurns.player;
-					}*/
-					
-					//We end the turn
-					
-					
-					
-					//newTokenLocation =  theTileNames[theRow,incre];
 				}
 				
 				//We print the names for a test.
@@ -171,8 +153,8 @@ public class replaceToken : MonoBehaviour {
 		//Try to find a match. √
 		//If we find a match then we print out the information in theField (data) array   √
 		//We hide/Remove the possible positions (remove Indicators) √
-		//We checks which tokens needs to be reversed.
-		//We reverse them in the array, the update the visuals
+		//We checks which tokens needs to be reversed.√
+		//We reverse them in the array, the update the visuals√
 		//We calculate the number of tokens per players
 		//We update that info on the screen.
 		//We end the turn
