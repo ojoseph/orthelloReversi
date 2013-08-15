@@ -149,7 +149,7 @@ public class gameManager : MonoBehaviour {
 		//We check if the process is done or not if so we move to the next phase, Else we do not.
 		if(thegameplay.theCurrentStatus == gameplay.currentStatus.notDoneYet){
 			
-			print ("###TEST");
+			//print ("###TEST");
 			
 			//playerSlctColor
 			thegameplay.playerSlctColor = 1;

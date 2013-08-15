@@ -82,10 +82,10 @@ public class calculateReverse : MonoBehaviour {
 		reverseTokens(lookDirection.down);
 		
 		
-		reverseTokens(lookDirection.diagUpRight);
-		reverseTokens(lookDirection.diagUpLeft);
-		reverseTokens(lookDirection.diagDownRight);
-		reverseTokens(lookDirection.diagDownLeft);
+		//reverseTokens(lookDirection.diagUpRight);
+			//reverseTokens(lookDirection.diagUpLeft);
+		//reverseTokens(lookDirection.diagDownRight);
+		//reverseTokens(lookDirection.diagDownLeft);
 	}
 	
 	void reverseTokens(lookDirection theWantedDirection){
@@ -179,30 +179,70 @@ public class calculateReverse : MonoBehaviour {
 							//We check until we find an empty space  || Or until we change rows.
 							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
 								
+								//***********
+								//	We  need to check the last token
+								//	If the last token is the same color as the player than in that case we apply the token change.
+								//***********
+								/*int tempVertical = indexCaseCheckVertical + indexCaseCheckVertical;
+								int tempHorizontal = indexCaseCheckHorizontal + indexCaseCheckHorizontal;
+								
+								if( theField[theRow + tempVertical, incre + tempHorizontal] == opponentSlctColor){
+									print ("####### Look FURTHER");
+								}else{
+									print ("******* DO not LOOK FURTHER!!!!!");
+								}*/
 								
 								
-								print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
+								
+								
+								print ("INSVESTIGATE MORE!!!  SCOPE: H:"  +  indexCaseCheckHorizontal + ", V:"+ indexCaseCheckVertical);
 								print ("Before the end: "  +  theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+								
+								//We check the last Token
+								/*if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
+									print ("THE LAST TOKEN IS THE ENNEMY'S" + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] );
+								}else{
+									//Its the same color as us so we dont do much
+									//print ("UUUUUUUUUUUUU "  + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] );
+								}*/
 								
 								
 								//We check in the row we scanned to see if there is tokens that belongs to the oponent
 								if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
-									print ("++++");	
+									//print ("++++");	
+									
+									//We check if the token that follows the opponent's token is empty, if so we do nothing, else we take it.
+									int tempVertical =  indexCaseCheckVertical + indexCaseCheckVertical;
+									int tempHorizontal = indexCaseCheckHorizontal + indexCaseCheckHorizontal;
+									print ("SCOPE SIGHT: H" + tempHorizontal + "   V" + tempVertical);
+									print ("FUTURE SCOPE: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
+									
+									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0){
+										print("<!> We found that the Future position is empty");
+										print ("FUTURE POS: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
+									}else{
+										
+										scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+										print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+								
+									}
+									
+									
 									//If there is a match we add them in this table so that we can process them.
-									scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-									print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+									//scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+									//print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 								}
-								
 								
 								//We raise the scope and check what is beyond that.
 								indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 								indexCaseCheckVertical += indexCaseCheckVertical;
 									
+									
 								
 							}//END While Loop
 							
-							print ("#######" + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] + "  " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+							print ("####### LAST COORD: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] + "  " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 							
 							changeColor(scannedTokensCoord);
 							
@@ -249,7 +289,7 @@ public class calculateReverse : MonoBehaviour {
 		
 		for(int y = 0; y < scannedTokensCoord.Count; y++){
 			
-			print("++++***+++*+++* " + scannedTokensCoord[y]);
+			//print("++++***+++*+++* " + scannedTokensCoord[y]);
 			
 			
 			//Get the number of rows
