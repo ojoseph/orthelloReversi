@@ -19,13 +19,13 @@ public class calculateReverse : MonoBehaviour {
 	
 	
 	// A. 2D array of ints that will be replaced by what Created Map has done
-	public int[,] theField = new int[,]
+	 int[,] theField = new int[,]
 	{
 	    {0}, //A
 	};
 	
 	// A. 2D array of strings that will be replaced by what Created Map has done
-	public string[,] theTileNames = new string[,]{
+	 string[,] theTileNames = new string[,]{
 	    {""}, //A
 	};
 	
@@ -64,8 +64,8 @@ public class calculateReverse : MonoBehaviour {
 		//createMap theCreatedMap = getGameMangerObj.GetComponent<createMap>();
 		
 		//We reassign them to here with the same name to avoid confusion.
-		int[,] theField = createMap.theField;
-		string[,]  theTileNames = createMap.theTileNames;
+		theField = createMap.theField;
+		theTileNames = createMap.theTileNames;
 	
 		//We import the player color from the gameplay script
 		playerSlctColor	= getGameMangerObj.GetComponent<gameplay>().playerSlctColor;
