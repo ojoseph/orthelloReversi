@@ -84,6 +84,7 @@ public class calculateReverse : MonoBehaviour {
 		
 		//reverseTokens(lookDirection.diagUpRight);
 		reverseTokens(lookDirection.diagUpLeft);
+		
 		//reverseTokens(lookDirection.diagDownRight);
 		//reverseTokens(lookDirection.diagDownLeft);
 	}
@@ -119,23 +120,27 @@ public class calculateReverse : MonoBehaviour {
 			//Diagonal
 			case lookDirection.diagUpRight:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
-				indexCaseCheckVertical = +1;
 				indexCaseCheckHorizontal = +1;
+				indexCaseCheckVertical = +1;
+				
 			break;
 			case lookDirection.diagUpLeft:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
-				indexCaseCheckVertical = +1;
 				indexCaseCheckHorizontal = -1;
+				indexCaseCheckVertical = +1;
+				
 			break;
 			case lookDirection.diagDownRight:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
-				indexCaseCheckVertical = -2;
 				indexCaseCheckHorizontal = +1;
+				indexCaseCheckVertical = -1;
+			
 			break;
 			case lookDirection.diagDownLeft:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
-				indexCaseCheckVertical = -1;
 				indexCaseCheckHorizontal = -1;
+				indexCaseCheckVertical = -1;
+				
 			break;
 				
 		}
@@ -161,7 +166,7 @@ public class calculateReverse : MonoBehaviour {
 					//We start looking on its right
 					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 						
-						print(" Nothing on the right side!!!!");
+						print(" Nothing on the " + theWantedDirection+"  side!!!!");
 						
 					}else{
 						//If there is something we check what it is
@@ -217,7 +222,7 @@ public class calculateReverse : MonoBehaviour {
 									print ("SCOPE SIGHT: H" + tempHorizontal + "   V" + tempVertical);
 									print ("FUTURE SCOPE: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									
-									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0){
+									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0 ){
 										print("<!> We found that the Future position is empty");
 										print ("FUTURE POS: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									}else{
@@ -242,7 +247,7 @@ public class calculateReverse : MonoBehaviour {
 								
 							}//END While Loop
 							
-							print ("####### LAST COORD: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] + "  " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+							//print ("####### LAST COORD: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] + "  " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 							
 							changeColor(scannedTokensCoord);
 							

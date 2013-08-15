@@ -107,7 +107,7 @@ public class gameplay : MonoBehaviour {
 	//////////////////////////////////////
 	//  [ STEP 1 ] CHECK FOR  AVAILABLE POSITIONS : checks if there is some available positions, then place token to the available places,
 	public void startCheckingForPosition(){
-		print ("CALLED ME player : " + playerSlctColor);
+		//print ("CALLED ME player : " + playerSlctColor);
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
 		
@@ -131,7 +131,7 @@ public class gameplay : MonoBehaviour {
 					
 					
 					//availablePos(lookDirection.diagUpRight, theField, incre, theRow, opponentSlctColor);	
-					//availablePos(lookDirection.diagUpLeft, theField, incre, theRow, opponentSlctColor);	
+					availablePos(lookDirection.diagUpLeft, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.diagDownRight, theField, incre, theRow, opponentSlctColor);	
 					//availablePos(lookDirection.diagDownLeft, theField, incre, theRow, opponentSlctColor);
 					
@@ -186,23 +186,27 @@ public class gameplay : MonoBehaviour {
 				//Diagonal
 				case lookDirection.diagUpRight:
 					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckVertical = +1;
 					indexCaseCheckHorizontal = +1;
+					indexCaseCheckVertical = +1;
+					
 				break;
 				case lookDirection.diagUpLeft:
 					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckVertical = +1;
 					indexCaseCheckHorizontal = -1;
+					indexCaseCheckVertical = +1;
+					
 				break;
 				case lookDirection.diagDownRight:
 					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckVertical = -2;
 					indexCaseCheckHorizontal = +1;
+					indexCaseCheckVertical = -1;
+					
 				break;
 				case lookDirection.diagDownLeft:
 					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckVertical = -1;
 					indexCaseCheckHorizontal = -1;
+					indexCaseCheckVertical = -1;
+					
 				break;
 				
 			
@@ -228,7 +232,7 @@ public class gameplay : MonoBehaviour {
 					//We will be using the horizontal
 					//We raise the scope in what so ever direction it is going.
 					indexCaseCheckHorizontal += indexCaseCheckHorizontal;
-					
+					indexCaseCheckVertical += indexCaseCheckVertical;
 				}else{
 					
 					//We will be using the Vertical
