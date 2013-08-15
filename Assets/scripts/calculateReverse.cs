@@ -250,6 +250,10 @@ public class calculateReverse : MonoBehaviour {
 						switch(playerSlctColor){
 							case 1:
 								findTargetToReverse.transform.renderer.material.color = Color.white;
+								//Destroy(); 
+								//Destroy("replaceToken");
+							//Component.Destroy("replaceToken");
+							//findTargetToReverse.GetComponent<replaceToken>().enabled = false;
 								//	findTargetToReverse.name = "token" + playerSlctColor + theTileNames[theRow,incre] ;
 							break;
 							case 2:

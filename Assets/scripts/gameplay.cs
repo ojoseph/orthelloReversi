@@ -29,7 +29,6 @@ public class gameplay : MonoBehaviour {
 	
 	//set the player color to black
 	public int playerSlctColor = 2;
-	
 	public int opponentSlctColor = 1;
 	
 	//We set the turns with this.

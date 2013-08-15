@@ -141,11 +141,16 @@ public class replaceToken : MonoBehaviour {
 						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
 					}
 					
+				
 				}
 				
 				//We print the names for a test.
 				//print (theTileNames[theRow,incre ]);
 			}
+			
+			
+			//Once the token is place we disable the script.
+			this.GetComponent<replaceToken>().enabled = false;
 			
 		}//End Generating 
 		
