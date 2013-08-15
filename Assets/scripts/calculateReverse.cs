@@ -169,7 +169,7 @@ public class calculateReverse : MonoBehaviour {
 								
 							}//END While Loop
 							
-							print ("#######" + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+							print ("#######" + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] + "  " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 							
 							changeColor(scannedTokensCoord);
 							
@@ -231,11 +231,29 @@ public class calculateReverse : MonoBehaviour {
 					if(theTileNames[theRow,incre] == scannedTokensCoord[y]){
 						theField[theRow,incre] = playerSlctColor;
 						
+						print ("PASSED DOWN TARGET INFO: " + opponentSlctColor + "   "  + scannedTokensCoord[y]);
+						
 						//We track dpwn the target.
 						GameObject findTargetToReverse = GameObject.Find("token" + opponentSlctColor + scannedTokensCoord[y]);
 						
+						print ("BEFORE TARGet: " + findTargetToReverse); 
+						
+						print ("$$$ OpponentColor: " + opponentSlctColor + "   " + scannedTokensCoord[y]);
+						print ("Target to Reverse: " + findTargetToReverse);
+						
+						
 						//We change the color of the item
-						findTargetToReverse.transform.renderer.material.color = Color.black;
+						//findTargetToReverse.transform.renderer.material.color = Color.black;
+						switch(playerSlctColor){
+						case 1:
+							findTargetToReverse.transform.renderer.material.color = Color.white;
+								break;
+						case 2:
+							findTargetToReverse.transform.renderer.material.color = Color.black;
+								break;	
+							
+						}
+						
 					}
 				}
 				
@@ -247,7 +265,7 @@ public class calculateReverse : MonoBehaviour {
 		
 		
 		
-		
+		scannedTokensCoord.Clear();
 		
 	}//End void 
 	
