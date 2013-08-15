@@ -254,13 +254,17 @@ public class gameplay : MonoBehaviour {
 					
 					//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
 					string futureTokenName ="indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];
-				
+					
 					if(GameObject.Find(futureTokenName) == null){
 						//If it does not exist we assign it to the token
-						theIndicatorToken.name = "indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];	
+						theIndicatorToken.name = futureTokenName;	
 					}else{
-						//if it exist we destroy the token
+					
+						//if it exist we destroy the  instance token
 						Destroy(GameObject.Find(futureTokenName));
+					
+						//We rename the new token with the proper name
+						theIndicatorToken.name = futureTokenName;	
 					}
 					
 					
