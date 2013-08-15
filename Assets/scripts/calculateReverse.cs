@@ -42,7 +42,11 @@ public class calculateReverse : MonoBehaviour {
 		left,
 		right,
 		up,
-		down
+		down,
+		diagUpLeft,
+		diagUpRight,
+		diagDownLeft,
+		diagDownRight
 	}
 	
 	List<string> scannedTokensCoord = new List<string>();
@@ -76,6 +80,12 @@ public class calculateReverse : MonoBehaviour {
 		reverseTokens(lookDirection.left);
 		reverseTokens(lookDirection.up);
 		reverseTokens(lookDirection.down);
+		
+		
+		reverseTokens(lookDirection.diagUpRight);
+		reverseTokens(lookDirection.diagUpLeft);
+		reverseTokens(lookDirection.diagDownRight);
+		reverseTokens(lookDirection.diagDownLeft);
 	}
 	
 	void reverseTokens(lookDirection theWantedDirection){
@@ -105,6 +115,29 @@ public class calculateReverse : MonoBehaviour {
 				//int nextCaseCheck  = theField[theRow,incre - 1];
 				indexCaseCheckVertical = -1;
 			break;
+			
+			//Diagonal
+			case lookDirection.diagUpRight:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = +1;
+				indexCaseCheckHorizontal = +1;
+			break;
+			case lookDirection.diagUpLeft:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = +1;
+				indexCaseCheckHorizontal = -1;
+			break;
+			case lookDirection.diagDownRight:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = -2;
+				indexCaseCheckHorizontal = +1;
+			break;
+			case lookDirection.diagDownLeft:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = -1;
+				indexCaseCheckHorizontal = -1;
+			break;
+				
 		}
 		
 		
