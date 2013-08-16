@@ -160,7 +160,27 @@ public class calculateReverse : MonoBehaviour {
 				//Check for  the location of the newest token
 				if(theTileNames[theRow, incre] == newTokenLocation){
 					
-					//print ("We got the location of the new TOKEN " + newTokenLocation);
+					print ("We got the location of the new TOKEN " + newTokenLocation);
+					
+					///SAFETY
+					//###Safety check
+					print ("WANTED DIRECTION " + theWantedDirection);
+					print ("### V: "+ (theRow + indexCaseCheckVertical) +" ### H: "+ (incre + indexCaseCheckHorizontal));
+					
+					
+					print ("ARRAY LENGTH: " +  ((theTileNames.Length/8)-1));
+					if((theRow + indexCaseCheckVertical) > ((theTileNames.Length/8)-1) || (incre + indexCaseCheckHorizontal) > ((theTileNames.Length/8)-1)){
+						print("<!!!> POSITION DOES NOT EXIST");
+						indexCaseCheckVertical = 0;	
+						indexCaseCheckHorizontal = 0;
+					}else{
+						
+						print("<!!!> POSITION EXIST");
+					}
+					
+					
+					
+					
 					
 					//We start looking on its right
 					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
@@ -214,12 +234,12 @@ public class calculateReverse : MonoBehaviour {
 							//We raise the scope and check what is beyond that.
 							//indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 							
-							print ("INSVESTIGATE MORE!!!  SCOPE: "  +  indexCaseCheckHorizontal);
+							print ("INSVESTIGATE MORE!!!  SCOPE: "  +  (theRow + indexCaseCheckVertical)   + "  " + (incre + indexCaseCheckHorizontal)  + "  "  + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] );
 							
 							//We check until we find an empty space  || Or until we change rows.
 							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
 								
-									while(theField[theRow + secPullTempVertical, incre + secPullTempHorizontal] == opponentSlctColor){
+									/*while(theField[theRow + secPullTempVertical, incre + secPullTempHorizontal] == opponentSlctColor){
 									
 										//We pull out the last Token info until none is left
 										print ("<R> Loop: " + theField[theRow + secPullTempVertical, incre + secPullTempHorizontal]  + "  " + theTileNames[theRow + secPullTempVertical, incre +secPullTempHorizontal ]);
@@ -229,7 +249,7 @@ public class calculateReverse : MonoBehaviour {
 										secPullTempVertical += indexCaseCheckHorizontal;
 										secPullTempHorizontal += indexCaseCheckVertical;
 									}
-							
+							*/
 								
 								
 								
