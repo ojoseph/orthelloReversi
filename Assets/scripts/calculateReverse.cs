@@ -161,16 +161,16 @@ public class calculateReverse : MonoBehaviour {
 				if( theTileNames[theRow, incre] == newTokenLocation ){
 					
 					
-					print ("We got the location of the new TOKEN " + newTokenLocation);
+				//	print ("We got the location of the new TOKEN " + newTokenLocation);
 					
 					//We start looking on its right
 					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
 						
-						print(" Nothing on the " + theWantedDirection+"  side!!!!");
+						//print(" Nothing on the " + theWantedDirection+"  side!!!!");
 						
 					}else{
 						//If there is something we check what it is
-						print(" There is something: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  + "  " + theTileNames[theRow + indexCaseCheckVertical, incre +indexCaseCheckHorizontal ] );
+						//print(" There is something: " + theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  + "  " + theTileNames[theRow + indexCaseCheckVertical, incre +indexCaseCheckHorizontal ] );
 						
 						
 						//If int the position we found  and opponenent token we raise the scope and look for the next position
@@ -200,8 +200,8 @@ public class calculateReverse : MonoBehaviour {
 								
 								
 								
-								print ("INSVESTIGATE MORE!!!  SCOPE: H:"  +  indexCaseCheckHorizontal + ", V:"+ indexCaseCheckVertical);
-								print ("Before the end: "  +  theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+								//print ("INSVESTIGATE MORE!!!  SCOPE: H:"  +  indexCaseCheckHorizontal + ", V:"+ indexCaseCheckVertical);
+								//print ("Before the end: "  +  theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]  +  "    " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 								//We check the last Token
 								/*if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
@@ -219,16 +219,16 @@ public class calculateReverse : MonoBehaviour {
 									//We check if the token that follows the opponent's token is empty, if so we do nothing, else we take it.
 									int tempVertical =  indexCaseCheckVertical + indexCaseCheckVertical;
 									int tempHorizontal = indexCaseCheckHorizontal + indexCaseCheckHorizontal;
-									print ("SCOPE SIGHT: H" + tempHorizontal + "   V" + tempVertical);
-									print ("FUTURE SCOPE: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
+								//	print ("SCOPE SIGHT: H" + tempHorizontal + "   V" + tempVertical);
+								//	print ("FUTURE SCOPE: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									
 									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0 ){
-										print("<!> We found that the Future position is empty");
-										print ("FUTURE POS: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
+									//	print("<!> We found that the Future position is empty");
+									//	print ("FUTURE POS: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									}else{
 										
 										scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-										print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+									//	print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 								
 									}
 									

@@ -57,7 +57,8 @@ public class createMap : MonoBehaviour {
 	
 	
 	
-	
+		
+		
 	//We need 3 values
 	// 0 : Empty spots
 	// 1 : White 
@@ -256,6 +257,38 @@ public class createMap : MonoBehaviour {
 			
 		}//End Generating 
 	}
+	
+	
+	
+	
+	string compile;
+	
+	
+	
+	void Update(){
+		compile = "";
+		int theNumRows = (theField.Length/8); 
+		
+		//Check each Entry in the table and we print it out
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
+			
+			for(int incre = 0; incre < 8; incre++){
+					
+				compile += theTileNames[theRow, incre] + " " + theField[theRow, incre].ToString() + "     ";
+			
+			}
+			
+			compile += "\n";
+		}	
+		
+	}
+	
+	
+	
+	void OnGUI(){	
+		GUI.Label (new Rect (25, 95, 3000, 300), "Array:\n" + compile);
+	}
+	
 	
 	
 }

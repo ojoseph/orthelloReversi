@@ -227,18 +227,62 @@ public class gameplay : MonoBehaviour {
 				break;
 			
 			}
+				
 			
-		print("we are looking at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] + "  " + theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] );
+			int backTempVertical =  indexCaseCheckVertical;
+			int backTempHorizontal = indexCaseCheckHorizontal;
+		
+			//OK we found a token first we need to check what is behind this token, with a while loop
+			while( theField[theRow + backTempVertical ,incre + backTempHorizontal] != 0 ){
+				
+			if(theField[theRow + backTempVertical ,incre + backTempHorizontal] == playerSlctColor){
+					break;
+				}/*	else{*/
+					
+					
+					
+					
+					
+			//	}
+			
+				//We loop backward to see what is there.
+				backTempVertical +=  indexCaseCheckVertical;
+				backTempHorizontal += indexCaseCheckHorizontal;
+				//Si c'est autre ke soit afiche moi ca.
+			
+				if(	theField[theRow + backTempVertical ,incre + backTempHorizontal] != 0){
+				
+				}else{
+					print("We loop backward: " +  theTileNames[theRow + backTempVertical ,incre + backTempHorizontal] + " " + theField[theRow + backTempVertical ,incre + backTempHorizontal]);
+					createToken(theTileNames[theRow + backTempVertical ,incre + backTempHorizontal]);
+				}
+			}
+		//print("<!>Place Here: " +  theTileNames[theRow + backTempVertical ,incre + backTempHorizontal] + " " + theField[theRow + backTempVertical ,incre + backTempHorizontal]);
+		///print("<!>Place Here: " +  theTileNames[theRow + backTempVertical + indexCaseCheckHorizontal ,incre + backTempHorizontal + indexCaseCheckHorizontal] + " " + theField[theRow + backTempVertical + indexCaseCheckHorizontal ,incre + backTempHorizontal + indexCaseCheckHorizontal]);
+				
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//			print("we are looking at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] + "  " + theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] );
 			
 			//If the spot is empty we place a token
 			if(theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] == 0){
 				//We place a token
-				print("<Empty at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+				//print("<Empty at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
 				
 			}else{
 				//If it is not empty we raise the scope until it is empty
-				print ("IT WAS NOT EMPTY SO WE LOOK FUTHER");
-			
+				//print ("IT WAS NOT EMPTY SO WE LOOK FUTHER");
+			/*
 				int tempVertical =  indexCaseCheckVertical;
 				int tempHorizontal = indexCaseCheckHorizontal;
 					
@@ -253,7 +297,7 @@ public class gameplay : MonoBehaviour {
 					print("we are now looking at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal] + "  " + theField[theRow + tempVertical ,incre + tempHorizontal] );
 
 				}//End While
-			
+			*/
 			
 				if(theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] == playerSlctColor ){
 				
@@ -269,24 +313,22 @@ public class gameplay : MonoBehaviour {
 					
 					}*/
 				
-					
 					int someTempVertical =  indexCaseCheckVertical;
 					int someTempHorizontal = indexCaseCheckHorizontal;
 				
 					while(theField[theRow + someTempVertical ,incre + someTempHorizontal] != 0){
-						
-					
 						someTempVertical +=  indexCaseCheckVertical;
 						someTempHorizontal += indexCaseCheckHorizontal;
-					
-					
-					
 					}
+					//print ("GO ABCK A CASE " + theTileNames[theRow + someTempVertical - indexCaseCheckVertical - indexCaseCheckVertical ,incre + someTempHorizontal - indexCaseCheckVertical - indexCaseCheckVertical] +"   " +theField[theRow + someTempVertical -indexCaseCheckVertical  ,incre + someTempHorizontal -indexCaseCheckVertical]);
+					//We ignore it if its a player token
+					if(theField[theRow + someTempVertical - indexCaseCheckVertical  ,incre + someTempHorizontal -indexCaseCheckVertical] == playerSlctColor){
 					
-				
-					print("<!> We place a token at: " + theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
-					createToken(theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
-					
+					}else{
+						
+						//print("<!> We place a token at: " + theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
+						//createToken(theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
+					}
 					
 				}//End if same token as player.
 				
@@ -333,6 +375,28 @@ public class gameplay : MonoBehaviour {
 		registerIndicator.Add(theIndicatorToken.name);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
