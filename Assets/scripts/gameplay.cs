@@ -123,7 +123,7 @@ public class gameplay : MonoBehaviour {
 					
 					int firstTkenLocation = theField[theRow,incre]; 
 					
-					print("Found Token at: " + theTileNames[theRow,incre] + "  " + theField[theRow,incre] );
+					//print("Found Token at: " + theTileNames[theRow,incre] + "  " + theField[theRow,incre] );
 					
 					//we are jsut looking on the right right now
 					lookForAvailable(lookDirection.right ,theRow,incre, firstTkenLocation);
@@ -229,31 +229,28 @@ public class gameplay : MonoBehaviour {
 			}
 				
 			
-			int backTempVertical =  indexCaseCheckVertical;
-			int backTempHorizontal = indexCaseCheckHorizontal;
+			int posTempVertical =  indexCaseCheckVertical;
+			int posTempHorizontal = indexCaseCheckHorizontal;
 		
 			//OK we found a token first we need to check what is behind this token, with a while loop
-			while( theField[theRow + backTempVertical ,incre + backTempHorizontal] != 0 ){
+			while( theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0 ){
 				
-				if(theField[theRow + backTempVertical ,incre + backTempHorizontal] == playerSlctColor){
+				if(theField[theRow + posTempVertical ,incre + posTempHorizontal] == playerSlctColor){
 					break;
 				}
 			
 				//We loop backward to see what is there.
-				backTempVertical +=  indexCaseCheckVertical;
-				backTempHorizontal += indexCaseCheckHorizontal;
+				posTempVertical +=  indexCaseCheckVertical;
+				posTempHorizontal += indexCaseCheckHorizontal;
 			
 				//If the spot is  not empty we leav it as it is.			
-				if(	theField[theRow + backTempVertical ,incre + backTempHorizontal] != 0){
+				if(	theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0){
 				
 				}else{
-					print("We loop backward: " +  theTileNames[theRow + backTempVertical ,incre + backTempHorizontal] + " " + theField[theRow + backTempVertical ,incre + backTempHorizontal]);
-					createToken(theTileNames[theRow + backTempVertical ,incre + backTempHorizontal]);
+					//print("<!>Potential Pos: " +  theTileNames[theRow + posTempVertical ,incre + posTempHorizontal] + " " + theField[theRow + posTempVertical ,incre + posTempHorizontal]);
+					createToken(theTileNames[theRow + posTempVertical ,incre + posTempHorizontal]);
 				}
-			}
-		//print("<!>Place Here: " +  theTileNames[theRow + backTempVertical ,incre + backTempHorizontal] + " " + theField[theRow + backTempVertical ,incre + backTempHorizontal]);
-		///print("<!>Place Here: " +  theTileNames[theRow + backTempVertical + indexCaseCheckHorizontal ,incre + backTempHorizontal + indexCaseCheckHorizontal] + " " + theField[theRow + backTempVertical + indexCaseCheckHorizontal ,incre + backTempHorizontal + indexCaseCheckHorizontal]);
-
+			}//End While
 		
 	}
 	

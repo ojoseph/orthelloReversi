@@ -51,7 +51,7 @@ public class gameManager : MonoBehaviour {
 				switch(theCurrTurn){
 					
 					case  whoTurns.player:
-						print ("playerTurn");
+						print ("<!> PlayerTurn <!>");
 						playGame();
 						theCurrTurn = whoTurns.waitingPlayer;
 				
@@ -60,7 +60,7 @@ public class gameManager : MonoBehaviour {
 					break;
 				
 					case  whoTurns.opponent:
-						print ("opponentTurn");
+						print ("<!> OpponentTurn <!>");
 						opponentTurn();
 						theCurrTurn = whoTurns.waitingOpponent;
 				
