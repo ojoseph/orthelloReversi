@@ -248,22 +248,10 @@ public class gameplay : MonoBehaviour {
 					tempVertical +=  indexCaseCheckVertical;
 					tempHorizontal += indexCaseCheckHorizontal;
 				
-				
-					//if the spot next to player contains an opponent token we look futher
-					if( theField[theRow + tempVertical ,incre + tempHorizontal] == opponentSlctColor){
-					
-							/*indexCaseCheckVertical += indexCaseCheckVertical;
-							indexCaseCheckHorizontal += indexCaseCheckHorizontal;*/
-							print ("the new values for vertical: " + tempVertical);
-							print ("the new values for horizontal: " + tempHorizontal);
-							print("we are now looking at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal] + "  " + theField[theRow + tempVertical ,incre + tempHorizontal] );
-					
-					}else{
-						
-					//	break;
-					}
-				
-					
+					print ("the new values for vertical: " + tempVertical);
+					print ("the new values for horizontal: " + tempHorizontal);
+					print("we are now looking at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal] + "  " + theField[theRow + tempVertical ,incre + tempHorizontal] );
+
 				}//End While
 			
 			
@@ -271,15 +259,36 @@ public class gameplay : MonoBehaviour {
 				
 				}else{
 					//We  move back a bit to see if its empty is so we can place a token else we do not
-					if(theField[theRow + indexCaseCheckVertical + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal + indexCaseCheckHorizontal] == 0){
+					/*if(theField[theRow + indexCaseCheckVertical + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal + indexCaseCheckHorizontal] == 0){
 						print("<!> We place a token at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal]);
 			
-					//<!> We create a token at that location
-					//createToken(theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
-					createToken(theTileNames[theRow + tempVertical ,incre + tempHorizontal]);
+						//<!> We create a token at that location
+						//createToken(theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+						createToken(theTileNames[theRow + tempVertical ,incre + tempHorizontal]);
+					}else{
+					
+					}*/
+				
+					
+					int someTempVertical =  indexCaseCheckVertical;
+					int someTempHorizontal = indexCaseCheckHorizontal;
+				
+					while(theField[theRow + someTempVertical ,incre + someTempHorizontal] != 0){
+						
+					
+						someTempVertical +=  indexCaseCheckVertical;
+						someTempHorizontal += indexCaseCheckHorizontal;
+					
+					
+					
 					}
 					
-				}
+				
+					print("<!> We place a token at: " + theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
+					createToken(theTileNames[theRow + someTempVertical ,incre + someTempHorizontal]);
+					
+					
+				}//End if same token as player.
 				
 
 			}

@@ -82,11 +82,11 @@ public class calculateReverse : MonoBehaviour {
 		reverseTokens(lookDirection.down);
 		
 		
-		//reverseTokens(lookDirection.diagUpRight);
+		reverseTokens(lookDirection.diagUpRight);
 		reverseTokens(lookDirection.diagUpLeft);
 		
 		reverseTokens(lookDirection.diagDownRight);
-		//reverseTokens(lookDirection.diagDownLeft);
+		reverseTokens(lookDirection.diagDownLeft);
 	}
 	
 	void reverseTokens(lookDirection theWantedDirection){
