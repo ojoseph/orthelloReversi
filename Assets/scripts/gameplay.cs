@@ -121,8 +121,30 @@ public class gameplay : MonoBehaviour {
 				//We look for a player Token, if there is one we start looking for  possible positions where to put your token.
 				if( theField[theRow,incre] == playerSlctColor){
 					
+					int firstTkenLocation = theField[theRow,incre]; 
+					
+					print("Found Token at: " + theTileNames[theRow,incre] + "  " + theField[theRow,incre] );
+					
+					//we are jsut looking on the right right now
+					lookForAvailable(lookDirection.right ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.left ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.up ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.down ,theRow,incre, firstTkenLocation);
+					
+					
+					lookForAvailable(lookDirection.diagUpRight ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.diagUpLeft ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.diagDownRight ,theRow,incre, firstTkenLocation);
+					lookForAvailable(lookDirection.diagDownLeft ,theRow,incre, firstTkenLocation);
+					
+					
+					
+					
+					
+					
+					
 					//  [ STEP 1a ]
-					availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
+				/*	availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.left, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.up, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.down, theField, incre, theRow, opponentSlctColor);
@@ -134,7 +156,7 @@ public class gameplay : MonoBehaviour {
 					availablePos(lookDirection.diagUpLeft, theField, incre, theRow, opponentSlctColor);	
 					availablePos(lookDirection.diagDownRight, theField, incre, theRow, opponentSlctColor);	
 					//availablePos(lookDirection.diagDownLeft, theField, incre, theRow, opponentSlctColor);
-					
+					*/
 					
 				}//End if find user's token
 				
@@ -153,6 +175,183 @@ public class gameplay : MonoBehaviour {
 		
 		
 	}//End StartChecking
+	
+	
+	void lookForAvailable(lookDirection theWantedDirection ,int theRow, int incre, int firstTkenLocation){
+		
+			int indexCaseCheckHorizontal = 0;
+			int indexCaseCheckVertical = 0;
+		
+			switch(theWantedDirection){
+				case lookDirection.right:
+					//int nextCaseCheck  = theField[theRow,incre + 1];
+					indexCaseCheckHorizontal = +1;
+				break;
+				case lookDirection.left:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckHorizontal = -1;
+				break;
+				case lookDirection.up:
+					//int nextCaseCheck  = theField[theRow,incre + 1];
+					indexCaseCheckVertical = +1;
+				break;
+				case lookDirection.down:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckVertical = -1;
+				break;
+				
+				//Diagonal
+				case lookDirection.diagUpRight:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckHorizontal = +1;
+					indexCaseCheckVertical = +1;
+					
+				break;
+				case lookDirection.diagUpLeft:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckHorizontal = -1;
+					indexCaseCheckVertical = +1;
+					
+				break;
+				case lookDirection.diagDownRight:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckHorizontal = +1;
+					indexCaseCheckVertical = -1;
+					
+				break;
+				case lookDirection.diagDownLeft:
+					//int nextCaseCheck  = theField[theRow,incre - 1];
+					indexCaseCheckHorizontal = -1;
+					indexCaseCheckVertical = -1;
+					
+				break;
+			
+			}
+			
+		print("we are looking at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] + "  " + theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] );
+			
+			//If the spot is empty we place a token
+			if(theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] == 0){
+				//We place a token
+				print("<Empty at: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+				
+			}else{
+				//If it is not empty we raise the scope until it is empty
+				print ("IT WAS NOT EMPTY SO WE LOOK FUTHER");
+			
+				int tempVertical =  indexCaseCheckVertical;
+				int tempHorizontal = indexCaseCheckHorizontal;
+					
+				//We keep on looking until we find an empty space to place the token
+				while(theField[theRow + tempVertical ,incre + tempHorizontal] != 0){
+			
+					tempVertical +=  indexCaseCheckVertical;
+					tempHorizontal += indexCaseCheckHorizontal;
+				
+				
+					//if the spot next to player contains an opponent token we look futher
+					if( theField[theRow + tempVertical ,incre + tempHorizontal] == opponentSlctColor){
+					
+							/*indexCaseCheckVertical += indexCaseCheckVertical;
+							indexCaseCheckHorizontal += indexCaseCheckHorizontal;*/
+							print ("the new values for vertical: " + tempVertical);
+							print ("the new values for horizontal: " + tempHorizontal);
+							print("we are now looking at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal] + "  " + theField[theRow + tempVertical ,incre + tempHorizontal] );
+					
+					}else{
+						
+					//	break;
+					}
+				
+					
+				}//End While
+			
+			
+				if(theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] == playerSlctColor ){
+				
+				}else{
+					//We  move back a bit to see if its empty is so we can place a token else we do not
+					if(theField[theRow + indexCaseCheckVertical + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal + indexCaseCheckHorizontal] == 0){
+						print("<!> We place a token at: " + theTileNames[theRow + tempVertical ,incre + tempHorizontal]);
+			
+					//<!> We create a token at that location
+					//createToken(theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+					createToken(theTileNames[theRow + tempVertical ,incre + tempHorizontal]);
+					}
+					
+				}
+				
+
+			}
+
+				
+				
+		
+		
+	}
+	
+	
+	//////////////////////////////////////
+	//Creates the token at a target location
+	void createToken(string targetLocName){
+		
+		
+		//We get the location of where we want to put our token
+		GameObject targetToken = GameObject.Find(targetLocName);
+					
+		//We create a token at the location of the target location.
+		GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+		//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
+		
+		//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
+		string futureTokenName ="indicator" + targetLocName;
+		
+		if(GameObject.Find(futureTokenName) == null){
+			//If it does not exist we assign it to the token
+			theIndicatorToken.name = futureTokenName;	
+		}else{
+		
+			//if it exist we destroy the  instance token
+			Destroy(GameObject.Find(futureTokenName));
+		
+			//We rename the new token with the proper name
+			theIndicatorToken.name = futureTokenName;	
+		}
+		
+		
+		
+		//We  register the indicators  we placed on the map
+		registerIndicator.Add(theIndicatorToken.name);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

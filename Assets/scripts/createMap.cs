@@ -77,11 +77,14 @@ public class createMap : MonoBehaviour {
 		
 		//We set the tokens initial position 
 		theField[3,3] = 2;
-		theField[3,4] = 1;
-
+		theField[3,4] = 1; //d5
+		//theField[3,5] = 1; //d6
+		//theField[3,6] = 1; //d7
+		
 		
 		theField[4,4] = 2;
-		theField[4,3] = 1;
+		theField[4,3] = 1; 
+		
 		
 		//We display the map for a quick check
 		//displayArray();
