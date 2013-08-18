@@ -231,6 +231,14 @@ public class gameplay : MonoBehaviour {
 			
 			int posTempVertical =  indexCaseCheckVertical;
 			int posTempHorizontal = indexCaseCheckHorizontal;
+			if((theRow + posTempVertical)>7 || (incre + posTempHorizontal)>7){
+					//posTempVertical = 0;
+					//break;
+			}else{
+		
+			
+			
+		
 		
 			//OK we found a token first we need to check what is behind this token, with a while loop
 			while( theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0 ){
@@ -242,16 +250,31 @@ public class gameplay : MonoBehaviour {
 				//We loop backward to see what is there.
 				posTempVertical +=  indexCaseCheckVertical;
 				posTempHorizontal += indexCaseCheckHorizontal;
+				
+				//DEBUG
+//				print ("DEBUG: " + 		theTileNames[theRow + posTempVertical ,incre + posTempHorizontal] + "  " +theField[theRow + posTempVertical ,incre + posTempHorizontal]);
+				
+				//Safety
+				if((theRow + posTempVertical)>7){
+					posTempVertical = 0;
+					break;
+				}
+			
+				if((incre + posTempHorizontal)>7){
+					posTempVertical = 0;
+					break;
+				}
+			
 			
 				//If the spot is  not empty we leav it as it is.			
-				if(	theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0){
+				if(	theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0 || (incre + posTempHorizontal)>7 || (theRow + posTempVertical)>7){
 				
 				}else{
 					//print("<!>Potential Pos: " +  theTileNames[theRow + posTempVertical ,incre + posTempHorizontal] + " " + theField[theRow + posTempVertical ,incre + posTempHorizontal]);
 					createToken(theTileNames[theRow + posTempVertical ,incre + posTempHorizontal]);
 				}
 			}//End While
-		
+			}
 	}
 	
 	

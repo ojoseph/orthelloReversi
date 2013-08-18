@@ -160,6 +160,18 @@ public class calculateReverse : MonoBehaviour {
 				//Check for  the location of the newest token
 				if(theTileNames[theRow, incre] == newTokenLocation){
 					
+					
+					//SAFETY?
+					if(theRow + indexCaseCheckVertical > 7){
+						indexCaseCheckVertical = 0;
+					}
+					
+					
+					if(incre + indexCaseCheckHorizontal > 7){
+						indexCaseCheckHorizontal = 0;
+					}
+					
+					
 					print ("We got the location of the new TOKEN " + newTokenLocation);
 					
 					///SAFETY
@@ -179,7 +191,40 @@ public class calculateReverse : MonoBehaviour {
 					}
 					
 					
+					//TRY TO DEBUG
+					print ("<W>  H+: " + (incre + indexCaseCheckHorizontal) +  "  V:" + (theRow + indexCaseCheckVertical) );
+					if(theRow + indexCaseCheckVertical == -1){
+						//Some times the V reaches -1 this is when it does not exist and break the system. so we switch to 1 in order a cancel this.
+						indexCaseCheckVertical = 1;
+					}
 					
+					if(theRow + indexCaseCheckHorizontal == -1){
+						//Some times the V reaches -1 this is when it does not exist and break the system. so we switch to 1 in order a cancel this.
+						indexCaseCheckHorizontal = 1;
+					}
+					
+					
+					
+					
+					//DEBUG
+					print ("ROW: " + theRow + "  "+  "ROWADD: " + indexCaseCheckVertical + "  "+  "ENSEMBLE: " + theRow +indexCaseCheckVertical );
+					print ("INCRE: " + incre + "  "+  "INCREADD: " + indexCaseCheckHorizontal + "  "+  "INCREADD: " +(incre+ indexCaseCheckHorizontal));
+//					print ("TitlesNames: " + theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+					//print ("DEBUG: " + 		theTileNames[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal] + "  " +theField[theRow + indexCaseCheckVertical ,incre + indexCaseCheckHorizontal]);
+					
+					if((theRow + indexCaseCheckVertical) > 7 /*|| (theRow + indexCaseCheckHorizontal) < 0*/){
+						//Some times the V reaches -1 this is when it does not exist and break the system. so we switch to 1 in order a cancel this.
+						indexCaseCheckVertical = 0;
+						print ("OVERLIMIT");
+					}
+					
+					if((incre + indexCaseCheckHorizontal) > 7 /*|| (theRow + indexCaseCheckVertical) < 0*/){
+						//Some times the V reaches -1 this is when it does not exist and break the system. so we switch to 1 in order a cancel this.
+						indexCaseCheckHorizontal = 0;
+					}
+					
+					print ("DEDESASDA####: " + incre + "  "+  "INCREADD: " + indexCaseCheckHorizontal + "  "+  "INCREADD: " +(incre+ indexCaseCheckHorizontal));
+
 					
 					
 					//We start looking on its right
@@ -237,7 +282,7 @@ public class calculateReverse : MonoBehaviour {
 							print ("INSVESTIGATE MORE!!!  SCOPE: "  +  (theRow + indexCaseCheckVertical)   + "  " + (incre + indexCaseCheckHorizontal)  + "  "  + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] );
 							
 							//We check until we find an empty space  || Or until we change rows.
-							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
+							while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0 && (theRow + indexCaseCheckVertical) < 8 && (incre + indexCaseCheckHorizontal) <8 ){
 								
 									/*while(theField[theRow + secPullTempVertical, incre + secPullTempHorizontal] == opponentSlctColor){
 									
