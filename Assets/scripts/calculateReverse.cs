@@ -157,6 +157,13 @@ public class calculateReverse : MonoBehaviour {
 			//We check each entry
 			for(int incre = 0; incre < 8; incre++){
 				
+				
+				
+				
+				//print ("&&: " + theTileNames[theRow, incre]);
+				
+				
+				
 				//Check for  the location of the newest token
 				if(theTileNames[theRow, incre] == newTokenLocation){
 					
@@ -164,23 +171,27 @@ public class calculateReverse : MonoBehaviour {
 					
 					///SAFETY
 					//###Safety check
-					print ("WANTED DIRECTION " + theWantedDirection);
-					print ("### V: "+ (theRow + indexCaseCheckVertical) +" ### H: "+ (incre + indexCaseCheckHorizontal));
+					print (theWantedDirection +"  ### V: "+ (theRow + indexCaseCheckVertical) +" ### H: "+ (incre + indexCaseCheckHorizontal));
 					
+					//////////////////////////
+					//<!> Safety
+					//////////////////////////
+					//Its a good patch
+					if((theRow + indexCaseCheckVertical) < 0 || (theRow + indexCaseCheckVertical) > 7){
+						indexCaseCheckVertical = 0;
+						print ("ROW UNDER 0 ");
+					}
 					
-					print ("ARRAY LENGTH: " +  ((theTileNames.Length/8)-1));
-					if((theRow + indexCaseCheckVertical) > ((theTileNames.Length/8)-1) || (incre + indexCaseCheckHorizontal) > ((theTileNames.Length/8)-1)){
-						print("<!!!> POSITION DOES NOT EXIST");
-						indexCaseCheckVertical = 0;	
+					if((incre + indexCaseCheckHorizontal) < 0 || (incre + indexCaseCheckHorizontal) >7){
 						indexCaseCheckHorizontal = 0;
-					}else{
-						
-						print("<!!!> POSITION EXIST");
+						print ("INCRE UNDER 0 ");
 					}
 					
 					
-					
-					
+					print ("AFTERPATCH:  "  + theWantedDirection +"  ### V: "+ (theRow + indexCaseCheckVertical) +" ### H: "+ (incre + indexCaseCheckHorizontal));
+					//////////////////////////
+					//Its a good patch
+					//////////////////////////
 					
 					//We start looking on its right
 					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
@@ -224,6 +235,32 @@ public class calculateReverse : MonoBehaviour {
 								//We raise the scope and check what is beyond that.
 								pullTempHorizontal += indexCaseCheckHorizontal;
 								pullTempVertical += indexCaseCheckVertical;
+								
+								
+								
+								//////////////////////////
+								//<!> Safety
+								//////////////////////////
+								//print ();
+								if((incre + pullTempHorizontal) > 7 || (incre + pullTempHorizontal) < 0){
+									
+									break;
+									print ("H BIGGER THAN 8");
+									pullTempHorizontal = 0;
+								}
+								
+								if((theRow + pullTempVertical) > 7 || (theRow + pullTempVertical) < 0){
+									
+									break;
+									print ("V BIGGER THAN 8");
+									pullTempVertical = 0;
+								}	
+								
+								//////////////////////////
+								//Its a good patch
+								//////////////////////////
+								
+								
 							}
 							
 							
@@ -251,14 +288,6 @@ public class calculateReverse : MonoBehaviour {
 									}
 							*/
 								
-								
-								
-								
-								
-								
-								
-								
-								
 								//We check in the row we scanned to see if there is tokens that belongs to the oponent
 								if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
 								
@@ -270,29 +299,43 @@ public class calculateReverse : MonoBehaviour {
 									//print ("SCOPE SIGHT: H" + tempHorizontal + "   V" + tempVertical);
 									//print ("FUTURE SCOPE: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									
-									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0 || theField[theRow + tempVertical, incre + tempHorizontal] != playerSlctColor ){
+									if(theField[theRow + tempVertical, incre + tempHorizontal] == 0 || theField[theRow + tempVertical, incre + tempHorizontal] != playerSlctColor){
 										//	print("<!> We found that the Future position is empty");
 										//	print ("FUTURE POS: " + theField[theRow + tempVertical, incre + tempHorizontal]  +  "    " + theTileNames[theRow + tempVertical, incre + tempHorizontal]);
 									}else{
-										
-										
-										
 										
 										//print("We add: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 										scannedTokensCoord.Add(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
 										
 									}
-									
-								
 								
 								}
+								
+								
 								
 								
 								//We raise the scope and check what is beyond that.
 								indexCaseCheckHorizontal += indexCaseCheckHorizontal;
 								indexCaseCheckVertical += indexCaseCheckVertical;
-									
-									
+								
+								//////////////////////////
+								//<!> Safety
+								//////////////////////////
+								//print ();
+								if((incre + indexCaseCheckHorizontal) > 7){
+									indexCaseCheckHorizontal = 0;
+									break;
+								}
+								
+								if((theRow + indexCaseCheckVertical) > 7){
+									indexCaseCheckVertical = 0;
+									break;
+								}	
+								
+								//////////////////////////
+								//Its a good patch
+								//////////////////////////
+								
 								
 							}//END While Loop
 							

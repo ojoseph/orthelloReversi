@@ -232,6 +232,37 @@ public class gameplay : MonoBehaviour {
 			int posTempVertical =  indexCaseCheckVertical;
 			int posTempHorizontal = indexCaseCheckHorizontal;
 		
+			print ("VEC: " + (theRow + posTempVertical));
+			print ("HOR: " + (incre + posTempHorizontal));
+				
+		
+		
+			//////////////////////////
+			//<!> Safety
+			//////////////////////////
+			//print ();
+			if((incre + posTempHorizontal) > 7 || (incre + posTempHorizontal) < 0){
+				
+				
+				print ("H BIGGER THAN 8");
+				posTempHorizontal = 0;
+			}
+			
+			if((theRow + posTempVertical) > 7 || (theRow + posTempVertical) < 0){
+				
+				print ("V BIGGER THAN 8");
+				posTempVertical = 0;
+			}	
+			
+			//////////////////////////
+			//Its a good patch
+			//////////////////////////
+		
+		
+		
+		
+		
+		
 			//OK we found a token first we need to check what is behind this token, with a while loop
 			while( theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0 ){
 				
@@ -242,6 +273,33 @@ public class gameplay : MonoBehaviour {
 				//We loop backward to see what is there.
 				posTempVertical +=  indexCaseCheckVertical;
 				posTempHorizontal += indexCaseCheckHorizontal;
+				
+				print ("<!> posVertical" + (theRow + posTempVertical));
+				print ("<!> posHorizontal" + (incre + posTempHorizontal));			
+				
+				
+				//////////////////////////
+				//<!> Safety
+				//////////////////////////
+				//print ();
+				if((incre + posTempHorizontal) > 7 || (incre + posTempHorizontal) < 0){
+					
+					break;
+					print ("H BIGGER THAN 8");
+					posTempHorizontal = 0;
+				}
+				
+				if((theRow + posTempVertical) > 7 || (theRow + posTempVertical) < 0){
+					
+					break;
+					print ("V BIGGER THAN 8");
+					posTempVertical = 0;
+				}	
+				
+				//////////////////////////
+				//Its a good patch
+				//////////////////////////
+			
 			
 				//If the spot is  not empty we leav it as it is.			
 				if(	theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0){
@@ -250,6 +308,16 @@ public class gameplay : MonoBehaviour {
 					//print("<!>Potential Pos: " +  theTileNames[theRow + posTempVertical ,incre + posTempHorizontal] + " " + theField[theRow + posTempVertical ,incre + posTempHorizontal]);
 					createToken(theTileNames[theRow + posTempVertical ,incre + posTempHorizontal]);
 				}
+			
+			
+			
+
+			
+			
+			
+			
+			
+			
 			}//End While
 		
 	}
