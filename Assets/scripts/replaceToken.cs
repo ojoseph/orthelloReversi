@@ -133,14 +133,14 @@ public class replaceToken : MonoBehaviour {
 					gameManagerObj.GetComponent<calculateReverse>().initMe();
 					
 					
-					//[  CHANGE THE  TURN  ]
-					//We Change the turn, we check who is currently playing than we swtich turn based upon this.
-					if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
-						gameManager.theCurrTurn = gameManager.whoTurns.player;
-					}else{
-						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
-					}
 					
+					//[  CHANGE THE  TURN  ]
+						//We Change the turn, we check who is currently playing than we swtich turn based upon this.
+						if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
+							gameManager.theCurrTurn = gameManager.whoTurns.player;
+						}else{
+							gameManager.theCurrTurn = gameManager.whoTurns.opponent;
+						}
 				
 				}
 				

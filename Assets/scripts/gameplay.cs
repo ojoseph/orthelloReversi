@@ -232,8 +232,8 @@ public class gameplay : MonoBehaviour {
 			int posTempVertical =  indexCaseCheckVertical;
 			int posTempHorizontal = indexCaseCheckHorizontal;
 		
-			print ("VEC: " + (theRow + posTempVertical));
-			print ("HOR: " + (incre + posTempHorizontal));
+			/*print ("VEC: " + (theRow + posTempVertical));
+			print ("HOR: " + (incre + posTempHorizontal));*/
 				
 		
 		
@@ -244,13 +244,13 @@ public class gameplay : MonoBehaviour {
 			if((incre + posTempHorizontal) > 7 || (incre + posTempHorizontal) < 0){
 				
 				
-				print ("H BIGGER THAN 8");
+				//print ("H BIGGER THAN 8");
 				posTempHorizontal = 0;
 			}
 			
 			if((theRow + posTempVertical) > 7 || (theRow + posTempVertical) < 0){
 				
-				print ("V BIGGER THAN 8");
+				//print ("V BIGGER THAN 8");
 				posTempVertical = 0;
 			}	
 			
@@ -274,8 +274,8 @@ public class gameplay : MonoBehaviour {
 				posTempVertical +=  indexCaseCheckVertical;
 				posTempHorizontal += indexCaseCheckHorizontal;
 				
-				print ("<!> posVertical" + (theRow + posTempVertical));
-				print ("<!> posHorizontal" + (incre + posTempHorizontal));			
+				/*print ("<!> posVertical" + (theRow + posTempVertical));
+				print ("<!> posHorizontal" + (incre + posTempHorizontal));	*/		
 				
 				
 				//////////////////////////
