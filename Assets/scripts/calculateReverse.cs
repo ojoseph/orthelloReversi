@@ -247,7 +247,7 @@ public class calculateReverse : MonoBehaviour {
 								if(theField[theRow + pullTempVertical, incre + pullTempHorizontal]  == playerSlctColor){
 									
 									//We pull out the last Token info until none is left
-									print ("<X> pull me out: " + theField[theRow + pullTempVertical, incre + pullTempHorizontal]  + "  " + theTileNames[theRow + pullTempVertical, incre +pullTempHorizontal ]);
+									//print ("<X> pull me out: " + theField[theRow + pullTempVertical, incre + pullTempHorizontal]  + "  " + theTileNames[theRow + pullTempVertical, incre +pullTempHorizontal ]);
 			
 								}
 								
@@ -263,14 +263,14 @@ public class calculateReverse : MonoBehaviour {
 								//print ();
 								if((incre + pullTempHorizontal) > 7 || (incre + pullTempHorizontal) < 0){
 									pullTempHorizontal = 0;
-									print ("H BIGGER THAN 8");
+									//print ("H BIGGER THAN 8");
 									break;
 									
 								}
 								
 								if((theRow + pullTempVertical) > 7 || (theRow + pullTempVertical) < 0){
 									pullTempVertical = 0;
-									print ("V BIGGER THAN 8");
+									//print ("V BIGGER THAN 8");
 									break;
 							
 								}	
@@ -306,14 +306,14 @@ public class calculateReverse : MonoBehaviour {
 							while(theField[theRow + anotherVertical, incre + anotherHorizontal] != 0 ){
 							
 								
-								print ("entry: " + theTileNames[theRow + anotherVertical, incre + anotherHorizontal] + "    " + theField[theRow + anotherVertical, incre + anotherHorizontal]);
+								//print ("entry: " + theTileNames[theRow + anotherVertical, incre + anotherHorizontal] + "    " + theField[theRow + anotherVertical, incre + anotherHorizontal]);
 								
 								scannedTokensCoord.Add(theTileNames[theRow + anotherVertical, incre + anotherHorizontal]);
 								scannedTokenValue.Add(theField[theRow + anotherVertical, incre + anotherHorizontal]);
 								
 								
 								if(theField[theRow + anotherVertical, incre + anotherHorizontal] == playerSlctColor){
-									print("WE stop at " + theTileNames[theRow + anotherVertical, incre + anotherHorizontal]);
+									//print("WE stop at " + theTileNames[theRow + anotherVertical, incre + anotherHorizontal]);
 									//We remove the last entry
 									scannedTokensCoord.Remove(theTileNames[theRow + anotherVertical, incre + anotherHorizontal]);
 									
@@ -325,7 +325,7 @@ public class calculateReverse : MonoBehaviour {
 									
 									//DIsplay to confirm
 									foreach( string itemsHeld in scannedTokensCoord){
-										print ("WE HELD: " + itemsHeld );	
+										//print ("WE HELD: " + itemsHeld );	
 									}
 									changeColor(scannedTokensCoord);
 									break;
@@ -501,11 +501,11 @@ public class calculateReverse : MonoBehaviour {
 						//We change the color of the item
 						switch(playerSlctColor){
 							case 1:
-								print("<!>1 trying to find: " + findTargetToReverse.name);
+								//print("<!>1 trying to find: " + findTargetToReverse.name);
 								findTargetToReverse.transform.renderer.material.color = Color.white;
 							break;
 							case 2:
-								print("<!>2 trying to find: " + findTargetToReverse.name);
+								//print("<!>2 trying to find: " + findTargetToReverse.name);
 								findTargetToReverse.transform.renderer.material.color = Color.black;
 							break;	
 							
