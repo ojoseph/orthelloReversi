@@ -137,27 +137,6 @@ public class gameplay : MonoBehaviour {
 					lookForAvailable(lookDirection.diagDownRight ,theRow,incre, firstTkenLocation);
 					lookForAvailable(lookDirection.diagDownLeft ,theRow,incre, firstTkenLocation);
 					
-					
-					
-					
-					
-					
-					
-					//  [ STEP 1a ]
-				/*	availablePos(lookDirection.right, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.left, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.up, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.down, theField, incre, theRow, opponentSlctColor);
-					
-					
-					
-					
-					//availablePos(lookDirection.diagUpRight, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.diagUpLeft, theField, incre, theRow, opponentSlctColor);	
-					availablePos(lookDirection.diagDownRight, theField, incre, theRow, opponentSlctColor);	
-					//availablePos(lookDirection.diagDownLeft, theField, incre, theRow, opponentSlctColor);
-					*/
-					
 				}//End if find user's token
 				
 			}//End For
@@ -324,19 +303,26 @@ public class gameplay : MonoBehaviour {
 		//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
 		string futureTokenName = "indicator" + targetLocName;
 		
-		//We get the location of where we want to put our token
-		GameObject targetToken = GameObject.Find(targetLocName);
 		
-		print ("Going to Register: " + futureTokenName);
+		
+		print ("Going to Register: " + futureTokenName  );
 		
 		
 		if (GameObject.Find(futureTokenName) != null){
 			
-			print("it exist");
-			
-		}else{
-			
 			print("does NOT exist");
+			bool locationFound = false;
+			foreach(string tiems in registerIndicator){
+				if(tiems == futureTokenName){
+					locationFound = true;
+				}
+			}
+			
+			if(locationFound == true){
+				
+			}else{
+				//We get the location of where we want to put our token
+			GameObject targetToken = GameObject.Find(targetLocName);
 			
 			//We create it
 			GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
@@ -344,143 +330,27 @@ public class gameplay : MonoBehaviour {
 		
 			//We register the entry
 			registerIndicator.Add(futureTokenName);
+				
+			}
+		}else{
 			
-		}
-				 
-		
-		
-		
-		
-		/*
-		
-
-		GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-		theIndicatorToken.name = futureTokenName;
-		
-		//We register the entry
-		registerIndicator.Add(futureTokenName);*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*if(GameObject.Find(futureTokenName) == null){
-			//We create a token at the location of the target location.
+			print("does NOT exist");
+			
+			//We get the location of where we want to put our token
+			GameObject targetToken = GameObject.Find(targetLocName);
+			
+			//We create it
 			GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
 			theIndicatorToken.name = futureTokenName;
-		}else{
 		
-			//if it exist we destroy the  instance token
-			Destroy(GameObject.Find(futureTokenName));
-				
-			//We create a token at the location of the target location.
-			GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-			theIndicatorToken.name = futureTokenName;	
-		}*/
-		
-		//print ("<Indicator> " + futureTokenName);
-		//print ("TAB" + registerIndicator.Count);
-		
-		//print ("------------------------------");
-	
-		//
-	
-		/*for(int h = 0; h < registerIndicator.Count; h++){
-			
-			if( registerIndicator[h] == futureTokenName){
-				
-				print ("<!E!> Already registered: " + futureTokenName  + "<!E!>");
-				registerIndicator.RemoveAt(h);
-				Destroy(GameObject.Find(futureTokenName));
-				break;
-			}else{
-					
-			}
-			
-		//	print("**** " + registerIndicator[h] + " ****");
-		}*/
-		
-		//print ("------------------------------");
-		
-		
-		
-		
+			//We register the entry
+			registerIndicator.Add(futureTokenName);
+			print ( "  registered: " + registerIndicator.Count);
+		}
 
-		
-		
-		
-		
-		/*if(GameObject.Find(futureTokenName) == null){
-			//If it does not exist we assign it to the token
-			theIndicatorToken.name = futureTokenName;	
-		}else{
-		
-			//if it exist we destroy the  instance token
-			Destroy(GameObject.Find(futureTokenName));
-			registerIndicator.Remove(futureTokenName);
-			//We rename the new token with the proper name
-			theIndicatorToken.name = futureTokenName;	
-		}*/
-		
-		//We  check if there is some data in the array.
-		/*if(registerIndicator.Count > 0 ){
-			
-			//We loop through each Item
-			foreach( string entry in registerIndicator){
-				
-				if(entry == theIndicatorToken.name){
-					
-					registerIndicator.Remove(theIndicatorToken.name);
-					//If the item is already registered we delete one.
-					print ("<remove> The entry: " + entry + "  " +theIndicatorToken.name);
-					
-				} 
-				
-				//If the item is already registered we delete one.
-				print ("<indicator> The entry: " + entry + "  " +theIndicatorToken.name);
-			}
-			
-		}*/
-		
-		
-		//We  register the indicators  we placed on the map
-		//registerIndicator.Add(theIndicatorToken.name);
-	
 		
 	}
 	
-	/*void generateToken(List<string> registerIndicator){
-		
-		
-		
-		foreach(string itemzName in registerIndicator){
-			print ("%%% " + itemzName);
-			
-			
-			
-			//We get the location of where we want to put our token
-			GameObject targetToken = GameObject.Find(itemzName.Replace("indicator", ""));
-			
-			GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-			theIndicatorToken.name = itemzName;
-			
-		}	
-		
-	}*/
 	
 	
 	
@@ -494,194 +364,7 @@ public class gameplay : MonoBehaviour {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//////////////////////////////////////
-	//  [ STEP 1a ] GENERATE INDICATORS : takes care of generating indicators where the user can place his tokens.
-	void availablePos(lookDirection theWantedDirection, int[,]  theField, int incre, int theRow,  int opponentSlctColor){
-			
-			int indexCaseCheckHorizontal = 0;
-			int indexCaseCheckVertical = 0;
-			
-			int sega = 0;
-		
-			switch(theWantedDirection){
-				case lookDirection.right:
-					//int nextCaseCheck  = theField[theRow,incre + 1];
-					indexCaseCheckHorizontal = +1;
-				break;
-				case lookDirection.left:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckHorizontal = -1;
-				break;
-				case lookDirection.up:
-					//int nextCaseCheck  = theField[theRow,incre + 1];
-					indexCaseCheckVertical = +1;
-				break;
-				case lookDirection.down:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckVertical = -1;
-				break;
-				
-				//Diagonal
-				case lookDirection.diagUpRight:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckHorizontal = +1;
-					indexCaseCheckVertical = +1;
-					
-				break;
-				case lookDirection.diagUpLeft:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckHorizontal = -1;
-					indexCaseCheckVertical = +1;
-					
-				break;
-				case lookDirection.diagDownRight:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckHorizontal = +1;
-					indexCaseCheckVertical = -1;
-					
-				break;
-				case lookDirection.diagDownLeft:
-					//int nextCaseCheck  = theField[theRow,incre - 1];
-					indexCaseCheckHorizontal = -1;
-					indexCaseCheckVertical = -1;
-					
-				break;
-				
-			}
-			
-			
-		
-			//if the token is the opponent's we check to see what follows by raising the scope by one
-			if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
-				
-				/*print("**************************************************************************************************");
-				print(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal ] );
-				print("H:    " + (indexCaseCheckHorizontal + indexCaseCheckHorizontal + indexCaseCheckHorizontal));	
-				print("V:    " + (indexCaseCheckVertical + indexCaseCheckVertical + indexCaseCheckVertical));	
-				print(theTileNames[theRow + (indexCaseCheckVertical + indexCaseCheckVertical + indexCaseCheckVertical), incre + (indexCaseCheckHorizontal + indexCaseCheckHorizontal + indexCaseCheckHorizontal) ] );
-				print("**************************************************************************************************");
-				
-			
-				print("++++++++++++++++++++++++++++++");
-				print ("AAAA" + indexCaseCheckHorizontal + "  BBBBB" +indexCaseCheckVertical);
-				print("++++++++++++++++++++++++++++++");*/
-			
-				/*indexCaseCheckHorizontal = indexCaseCheckHorizontal + indexCaseCheckHorizontal; 
-				indexCaseCheckVertical = indexCaseCheckVertical + indexCaseCheckVertical;*/
-			
-			
-				
-				/*while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
-					if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == opponentSlctColor){
-						indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
-						indexCaseCheckVertical +=indexCaseCheckVertical;
-					}	
-				}*/
-					
-				indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
-				indexCaseCheckVertical +=indexCaseCheckVertical;
-				
-				while(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] != 0){
-						sega += 1;
-						print("sEGA: " + sega);
-						indexCaseCheckHorizontal += indexCaseCheckHorizontal; 
-						indexCaseCheckVertical +=indexCaseCheckVertical;
-				}
-			
-			
-				//We check to see if it is empty, if so we add a indicator Token
-				if(theField[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal] == 0){
-		
-					//We get the location of where we want to put our token
-					//GameObject targetToken = new GameObject();
-					GameObject targetToken = GameObject.Find(theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-					
-									
-					//We create a token at the location of the target location.
-					/*GameObject*/ 
-					GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-					//print("We put a indicator here: " + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal]);
-					
-					//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
-					string futureTokenName ="indicator" + theTileNames[theRow + indexCaseCheckVertical, incre + indexCaseCheckHorizontal];
-					
-					if(GameObject.Find(futureTokenName) == null){
-						//If it does not exist we assign it to the token
-						theIndicatorToken.name = futureTokenName;	
-					}else{
-					
-						//if it exist we destroy the  instance token
-						Destroy(GameObject.Find(futureTokenName));
-					
-						//We rename the new token with the proper name
-						theIndicatorToken.name = futureTokenName;	
-					}
-					
-					
-				
-					//We  register the indicators  we placed on the map
-					registerIndicator.Add(theIndicatorToken.name);
-					
-				
-				
-				
-				
-				
-					//Will be used when recovering the positions.
-					//theIndicatorToken.name = theIndicatorToken.name.Replace("indicator", "");
-					
-				}else{
-					
-			
-				}
-				
-				
-		
-			}//End opponentToken
-			
-	
-	}//End  ftc available position
-	
+	 
 	
 	
 	public void removeIndicatorToken(){
@@ -692,18 +375,19 @@ public class gameplay : MonoBehaviour {
 		
 		//Does it make sense?
 		foreach(string tokenName in registerIndicator){
-			smallInte += 1;
+			//smallInte += 1;
 			Destroy(GameObject.Find(tokenName));
 			print("WE DELETE: " +tokenName + "  " + smallInte);
-			if(smallInte ==  registerIndicator.Count){
+			
+			/*if(smallInte ==  registerIndicator.Count){
 				registerIndicator.Clear();
 				break;
-			}
+			}*/
 		}
 		
 		
 		//We clean this after use	
-		//registerIndicator.Clear();
+		registerIndicator.Clear();
 	}
 	
 

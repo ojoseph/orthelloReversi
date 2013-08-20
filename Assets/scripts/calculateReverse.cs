@@ -378,18 +378,7 @@ public class calculateReverse : MonoBehaviour {
 							*/
 							
 							
-							
-							
-							//Si la derniere piece est celle du joueur ont fait ce que lon doit faire.
-							if(theField[theRow + anotherVertical - indexCaseCheckVertical, incre + anotherHorizontal - indexCaseCheckHorizontal] == playerSlctColor){
-								
-								//changeColor(scannedTokensCoord);
-								
-							}
-							
-							
-							
-							
+						 
 							
 							
 							/*
