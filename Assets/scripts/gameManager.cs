@@ -224,16 +224,16 @@ public class gameManager : MonoBehaviour {
 		
  		print("GO WITH: " + someName);
 		
-		
+			yield return new WaitForSeconds(0.5f);
 		if(someName != ""){
 			print("I COLOr: " + someName);
 			GameObject.Find(someName).renderer.material.color = Color.red;
-			GameObject.F
+		 
 		}else{
 			print ("CANT COLOR IT");
 		}
 		
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(2.0f);
 		print("OK WE GO WITH: " + someName);
 		
 		if(someName != ""){
