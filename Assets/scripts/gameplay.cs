@@ -57,7 +57,7 @@ public class gameplay : MonoBehaviour {
 	}
 	
 	//Will hold the Indicator tokens that we pulled put
-	List<string> registerIndicator = new List<string>();
+	public static List<string> registerIndicator = new List<string>();
 	
 	//.........................................................................................................................................................................................................................
 	
@@ -266,6 +266,7 @@ public class gameplay : MonoBehaviour {
 					break;
 					print ("H BIGGER THAN 8");
 					posTempHorizontal = 0;
+				
 				}
 				
 				if((theRow + posTempVertical) > 7 || (theRow + posTempVertical) < 0){
@@ -273,6 +274,7 @@ public class gameplay : MonoBehaviour {
 					break;
 					print ("V BIGGER THAN 8");
 					posTempVertical = 0;
+				
 				}	
 				
 				//////////////////////////
@@ -305,12 +307,12 @@ public class gameplay : MonoBehaviour {
 		
 		
 		
-		print ("Going to Register: " + futureTokenName  );
+//		print ("Going to Register: " + futureTokenName  );
 		
 		
 		if (GameObject.Find(futureTokenName) != null){
 			
-			print("does NOT exist");
+//			print("does NOT exist");
 			bool locationFound = false;
 			foreach(string tiems in registerIndicator){
 				if(tiems == futureTokenName){
@@ -321,7 +323,8 @@ public class gameplay : MonoBehaviour {
 			if(locationFound == true){
 				
 			}else{
-				//We get the location of where we want to put our token
+				
+			//We get the location of where we want to put our token
 			GameObject targetToken = GameObject.Find(targetLocName);
 			
 			//We create it
@@ -334,7 +337,7 @@ public class gameplay : MonoBehaviour {
 			}
 		}else{
 			
-			print("does NOT exist");
+//			print("does NOT exist");
 			
 			//We get the location of where we want to put our token
 			GameObject targetToken = GameObject.Find(targetLocName);
@@ -345,7 +348,7 @@ public class gameplay : MonoBehaviour {
 		
 			//We register the entry
 			registerIndicator.Add(futureTokenName);
-			print ( "  registered: " + registerIndicator.Count);
+//			print ( "  registered: " + registerIndicator.Count);
 		}
 
 		
@@ -369,20 +372,13 @@ public class gameplay : MonoBehaviour {
 	
 	public void removeIndicatorToken(){
 		
-		int smallInte = 0;
-		
-		print("+++++ " + registerIndicator.Count);
-		
+		 
 		//Does it make sense?
 		foreach(string tokenName in registerIndicator){
-			//smallInte += 1;
+			 
 			Destroy(GameObject.Find(tokenName));
-			print("WE DELETE: " +tokenName + "  " + smallInte);
+//			print("WE DELETE: " +tokenName);
 			
-			/*if(smallInte ==  registerIndicator.Count){
-				registerIndicator.Clear();
-				break;
-			}*/
 		}
 		
 		

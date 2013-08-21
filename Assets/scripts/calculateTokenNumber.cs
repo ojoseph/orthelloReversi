@@ -33,6 +33,7 @@ public class calculateTokenNumber : MonoBehaviour {
 			
 			//We check each entry
 			for(int incre = 0; incre < 8; incre++){
+				
 				//print ("start " + createMap.theField[theRow,incre]);
 				switch(createMap.theField[theRow,incre]){
 					case 1:
@@ -45,7 +46,13 @@ public class calculateTokenNumber : MonoBehaviour {
 				}
 				
 				numTotalTokens =  numWhiteTokens + numBlackTokens;
-			
+				
+				//We end the game and declare a player
+				if(numTotalTokens == 64){
+					
+					gameManager.theCurrGameState = gameManager.gameState.gameOver;
+
+				}
 			}
 		}	
 		//We loop and check the number of tokens

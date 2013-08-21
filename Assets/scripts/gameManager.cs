@@ -24,6 +24,9 @@ public class gameManager : MonoBehaviour {
 	
 	public static whoTurns theCurrTurn;
 	
+	//####   AI    ####
+	string aiPosSlct;
+	GameObject tempGameObj;
 	
 	
 	
@@ -61,8 +64,12 @@ public class gameManager : MonoBehaviour {
 				
 					case  whoTurns.opponent:
 						print ("<!> OpponentTurn <!>");
-						opponentTurn();
+				
+						//We change the status before
 						theCurrTurn = whoTurns.waitingOpponent;
+				
+						opponentTurn();
+						
 				
 						//We Count the number of tokens
 						calculateTokenNumber.initMe();
@@ -158,6 +165,41 @@ public class gameManager : MonoBehaviour {
 			
 			//If we havent created a map yet we make one.
 			thegameplay.initMe();
+			
+		
+				
+			//#################
+			///#####    AI     #####
+			//We look for available positions
+			print ("Getting the available positions");
+			foreach(string items in gameplay.registerIndicator){
+				//gameplay.registerIndicator
+				print("got: " + items);
+			}
+			
+			//AI selects a position
+			//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
+			aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count)];
+			
+			print(aiPosSlct);
+			//It finds that position
+			tempGameObj = GameObject.Find(aiPosSlct);
+			tempGameObj.renderer.material.color = Color.red;
+			
+			
+			//It activates the script. It  place  a token at that location
+			//tempGameObj.GetComponent<replaceToken>().Start();
+			tempGameObj.GetComponent<replaceToken>().OnMouseDown();
+			
+			
+			//We calculate for the best position
+			//We add a token at that location.
+			
+			
+			
+			
+			
+			
 			//thegameplay.startCheckingForPosition();
 			
 		}else{
