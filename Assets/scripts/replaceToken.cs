@@ -63,11 +63,9 @@ public class replaceToken : MonoBehaviour {
 	
 	
 	public void OnMouseDown(){
-		print("CLICK!!!!!");
-		print("PLAYER COLOR" + playerSlctColor);
-		print("CURRENT TURN" + gameManager.theCurrTurn);
+ 
+		
 		// Just to check if i can access the object properly.
-		//this.renderer.material.color = Color.red;
 		switch(playerSlctColor){
 			
 			case 1:
@@ -80,12 +78,12 @@ public class replaceToken : MonoBehaviour {
 			
 		}
 		
-		print("calling");
+//		print("calling");
 		
 		//We update the information in the arrays 
 		updateGrid(theField, theTileNames);
 		
-		 print("did update");
+//		 print("did update");
 		
 		
 		//We end its turn.
@@ -101,7 +99,7 @@ public class replaceToken : MonoBehaviour {
 	
 	void updateGrid(int[,] theField,string[,] theTileNames){
 		
-		print ("WE ENTER HERE TOO");
+//		print ("WE ENTER HERE TOO");
 		
 		
 		//We fetch the name of this token.
@@ -110,7 +108,7 @@ public class replaceToken : MonoBehaviour {
 		//print ( "OOOOOO: " + this.name.Replace("indicator", ""));
 		string theCoordianate = this.name.Replace("indicator", "");
 		
-		print ("2 WE ENTER HERE TOO: "  + theCoordianate);
+//		print ("2 WE ENTER HERE TOO: "  + theCoordianate);
 		
 		
 		//We go through the array that contains the coordinates
@@ -127,7 +125,7 @@ public class replaceToken : MonoBehaviour {
 				if(theTileNames[theRow,incre ] == theCoordianate){
 					//print("WE HAVE SOME MATCH");
 					
-					print ("3 WE ENTER HERE TOO");
+//					print ("3 WE ENTER HERE TOO");
 					
 					//We get access the the field array and write the data in it
 					GameObject gameManagerObj = GameObject.Find("gameManager");
@@ -148,15 +146,15 @@ public class replaceToken : MonoBehaviour {
 					//will need to be moved to the gameState later on
 					gameManagerObj.GetComponent<calculateReverse>().initMe();
 					
-					print("We change turn");
+//					print("We change turn");
 					
-					print("CURRENT TURN" + gameManager.theCurrTurn);
+//					print("CURRENT TURN" + gameManager.theCurrTurn);
 					
 					//[  CHANGE THE  TURN  ]
 						//We Change the turn, we check who is currently playing than we swtich turn based upon this.
 						if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
 							gameManager.theCurrTurn = gameManager.whoTurns.player;
-							print("We change for player");
+//							print("We change for player");
 						}else{
 							gameManager.theCurrTurn = gameManager.whoTurns.opponent;
 						

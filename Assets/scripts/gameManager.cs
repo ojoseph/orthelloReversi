@@ -55,8 +55,9 @@ public class gameManager : MonoBehaviour {
 					
 					case  whoTurns.player:
 						print ("<!> PlayerTurn <!>");
-						playGame();
 						theCurrTurn = whoTurns.waitingPlayer;
+						playGame();
+						
 				
 						//We Count the number of tokens
 						calculateTokenNumber.initMe();
@@ -170,32 +171,41 @@ public class gameManager : MonoBehaviour {
 				
 			//#################
 			///#####    AI     #####
-			//We look for available positions
-			print ("Getting the available positions");
-			foreach(string items in gameplay.registerIndicator){
-				//gameplay.registerIndicator
-				print("got: " + items);
-			}
 			
-			//AI selects a position
-			//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
-			aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count)];
+				//We look for available positions
 			
-			print(aiPosSlct);
-			//It finds that position
-			tempGameObj = GameObject.Find(aiPosSlct);
-			tempGameObj.renderer.material.color = Color.red;
+				print ("Getting the available positions");
+				
+				//Check what is beign held
+				foreach(string items in gameplay.registerIndicator){
+					print("got: " + items);
+				}
+				
+				//AI selects a position
+				//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
+				aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
+				
+				print(aiPosSlct);
+				//It finds that position
+				tempGameObj = GameObject.Find(aiPosSlct);
+				if(tempGameObj != null){
+				
+				
+					StartCoroutine(delay(aiPosSlct));	
+				}else{
+					print ("DID not Found LOCATIon");
+					 
+				}
+				//It activates the script. It  place  a token at that location
+				//tempGameObj.GetComponent<replaceToken>().Start();
+				//tempGameObj.GetComponent<replaceToken>().OnMouseDown();
+				
+				
+				//We calculate for the best position
+				//We add a token at that location.
 			
-			
-			//It activates the script. It  place  a token at that location
-			//tempGameObj.GetComponent<replaceToken>().Start();
-			tempGameObj.GetComponent<replaceToken>().OnMouseDown();
-			
-			
-			//We calculate for the best position
-			//We add a token at that location.
-			
-			
+			//#################
+			///#####    AI     #####
 			
 			
 			
@@ -208,6 +218,34 @@ public class gameManager : MonoBehaviour {
 			theCurrGameState = gameState.none;
 		}
 	}
+	
+	
+	IEnumerator delay(string someName){
+		
+ 		print("GO WITH: " + someName);
+		
+		
+		if(someName != ""){
+			print("I COLOr: " + someName);
+			GameObject.Find(someName).renderer.material.color = Color.red;
+			GameObject.F
+		}else{
+			print ("CANT COLOR IT");
+		}
+		
+		yield return new WaitForSeconds(1.0f);
+		print("OK WE GO WITH: " + someName);
+		
+		if(someName != ""){
+			print("I chose: " + someName);
+			//theTempGameObj.GetComponent<replaceToken>().OnMouseDown();
+			GameObject.Find(someName).GetComponent<replaceToken>().OnMouseDown();
+		}else{
+			print("Did not FIND THE TARGET");
+			//print("I chose: " + theTempGameObj.name);
+		}
+	}
+	
 	
 	
 	IEnumerator loadGameOver(){
