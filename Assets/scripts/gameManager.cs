@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class gameManager : MonoBehaviour {
 	
@@ -29,6 +30,8 @@ public class gameManager : MonoBehaviour {
 	GameObject tempGameObj;
 	
 	
+	public List<string> accumulateName = new List<string>();
+	public List<int> accumulateVal = new List<int>();
 	
 	// Use this for initialization
 	void Start () {
@@ -38,6 +41,23 @@ public class gameManager : MonoBehaviour {
 		
 		theCurrTurn = whoTurns.player;
 	}
+	
+	
+	//used to assign which direction we want to look at
+	enum lookDirection{
+		left,
+		right,
+		up,
+		down,
+		diagUpLeft,
+		diagUpRight,
+		diagDownLeft,
+		diagDownRight
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -185,14 +205,21 @@ public class gameManager : MonoBehaviour {
 				//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
 				aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
 				
+				// We calculate and look for the best position available.
+				calculateBestPosition(gameplay.registerIndicator);
+			
+			
+			
+			
 				print(aiPosSlct);
 				//It finds that position
 				tempGameObj = GameObject.Find(aiPosSlct);
 				if(tempGameObj != null){
 				
+					StartCoroutine(delay(aiPosSlct));
 				
-					StartCoroutine(delay(aiPosSlct));	
 				}else{
+				
 					print ("DID not Found LOCATIon");
 					 
 				}
@@ -218,6 +245,17 @@ public class gameManager : MonoBehaviour {
 			theCurrGameState = gameState.none;
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	IEnumerator delay(string someName){
@@ -248,12 +286,226 @@ public class gameManager : MonoBehaviour {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	IEnumerator loadGameOver(){
 //		print("FROM COROUTINE");
 		yield return new WaitForSeconds(0.5f);
 		Application.LoadLevel("gameOver");
 		theCurrGameState = gameState.none;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	void calculateBestPosition(List<string> theRegisterIndicator){
+		
+		//We check each potential position available. √
+		//From that position, they loop in each direction
+		//They add up a point for each token they can take.
+		//Finally they take the one with the highest value; if 2 of the same value occurs we select randomly
+		
+		foreach(string potentialPos in theRegisterIndicator){
+			
+			print("# POTENTIAL" + potentialPos);
+			
+			checkForBestPos(lookDirection.up, potentialPos);
+			checkForBestPos(lookDirection.left, potentialPos);
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	void checkForBestPos(lookDirection theWantedDirection, string posToRecover){
+		
+		string thePos;
+		
+		// FOR  CALCULATE REVERSE
+		int indexCaseCheckHorizontal = 0;
+		int indexCaseCheckVertical = 0;
+		
+		//lookDirection theWantedDirection = lookDirection.right;
+		
+		switch(theWantedDirection){
+			case lookDirection.right:
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheckHorizontal = +1;
+			break;
+			case lookDirection.left:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = -1;
+			break;
+			case lookDirection.up:
+				//int nextCaseCheck  = theField[theRow,incre + 1];
+				indexCaseCheckVertical = +1;
+			break;
+			case lookDirection.down:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckVertical = -1;
+			break;	
+		}
+		
+		
+		
+		
+		//First We clean the content 
+		thePos = posToRecover.Replace("indicator", "");
+		
+		
+		
+		
+		//Get the number of rows
+		int theNumRows = (createMap.theField.Length/8); 
+		
+		
+		gameplay thegameplay = GetComponent<gameplay>();
+		
+		int addTempVertical =  indexCaseCheckVertical;
+		int addTempHorizontal = indexCaseCheckHorizontal;	
+		int numPotentialToken = 0;
+		
+		
+		//We set the rows
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
+			
+			//We check each entry
+			for(int incre = 0; incre < 8; incre++){
+				
+				
+				if(createMap.theTileNames[theRow,incre] == thePos){
+					
+					print("-------------------------------   " + theWantedDirection + "   -------------------------------------");
+					 
+					print("WE RECOVERED THE Potentilal POSITION: " + createMap.theTileNames[theRow,incre] + "  " + createMap.theField[theRow,incre]);
+					
+					//We start looping until we reach nothing || until we reach a token with the same color as us
+					
+					print("BEFORE ENTERING: " + addTempVertical + "   " + addTempHorizontal + "PlayerColor: " + thegameplay.playerSlctColor);
+					
+					while(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] != 0 /*&& createMap.theField[theRow + addTempVertical,incre + indexCaseCheckHorizontal ] == thegameplay.opponentSlctColor*/){
+						
+						
+						print ("<#> We check a token " +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   " + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
+					
+						
+						
+						
+						
+						numPotentialToken += 1;
+						
+						addTempVertical +=  indexCaseCheckVertical;
+						addTempHorizontal += indexCaseCheckHorizontal;	
+						
+						print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
+						
+						print ("<*> Accumulation: " + numPotentialToken);
+						
+						if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == 0){
+							print("</> We reach the end and dint met a token to make a match so we delete the data");
+							numPotentialToken = 0;
+						}else{
+						 
+						
+							print ("<S> We save: " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + " Pts: " + numPotentialToken);
+							accumulateName.Add(createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal]); 
+							accumulateVal.Add( numPotentialToken ); 
+							
+
+							if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == thegameplay.playerSlctColor){
+								
+								// If its the player token we stop We stop where we are
+								break;
+								
+							} 
+							
+						
+							
+						}
+						
+						
+						
+						
+						//////////////////////////
+						//<!> Safety
+						//////////////////////////
+						//print ();
+						if((incre + addTempHorizontal) > 7 || (incre + addTempHorizontal) < 0){
+							addTempVertical = 0;
+							break;
+						}
+						
+						if((theRow + addTempVertical) > 7 || (theRow + addTempVertical) < 0){
+							addTempVertical = 0;
+							break;
+						}	
+						
+						//////////////////////////
+						//Its a good patch
+						//////////////////////////
+					}
+					
+					print("--------------------------------------------------------------------");
+				}
+				
+				
+			}//end for loop
+			
+			
+		}//End for loop	
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

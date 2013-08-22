@@ -38,10 +38,10 @@ public class calculateTokenNumber : MonoBehaviour {
 				switch(createMap.theField[theRow,incre]){
 					case 1:
 						
-						numWhiteTokens +=1;
+						numWhiteTokens += 1;
 					break;
 					case 2:
-						numBlackTokens +=1;
+						numBlackTokens += 1;
 					break;
 				}
 				
