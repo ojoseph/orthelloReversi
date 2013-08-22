@@ -205,6 +205,7 @@ public class gameManager : MonoBehaviour {
 				foreach(string items in gameplay.registerIndicator){
 					print("got: " + items);
 					accumulateName.Add(items.Replace("indicator", ""));
+				
 					//we have ready on standby
 					accumulateVal.Add (0);
 				}
@@ -342,7 +343,15 @@ public class gameManager : MonoBehaviour {
 			
 			checkForBestPos(lookDirection.up, potentialPos);
 			checkForBestPos(lookDirection.left, potentialPos);
+			checkForBestPos(lookDirection.down, potentialPos);
+			checkForBestPos(lookDirection.right, potentialPos);
 			
+			
+			
+			checkForBestPos(lookDirection.diagDownLeft, potentialPos);
+			checkForBestPos(lookDirection.diagDownRight, potentialPos);
+			checkForBestPos(lookDirection.diagUpLeft, potentialPos);
+			checkForBestPos(lookDirection.diagUpRight, potentialPos);
 			
 		}
 		
@@ -378,7 +387,34 @@ public class gameManager : MonoBehaviour {
 			case lookDirection.down:
 				//int nextCaseCheck  = theField[theRow,incre - 1];
 				indexCaseCheckVertical = -1;
-			break;	
+			break;
+			
+			
+			//Diagonal
+			case lookDirection.diagUpRight:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = +1;
+				indexCaseCheckVertical = +1;
+				
+			break;
+			case lookDirection.diagUpLeft:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = -1;
+				indexCaseCheckVertical = +1;
+				
+			break;
+			case lookDirection.diagDownRight:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = +1;
+				indexCaseCheckVertical = -1;
+			
+			break;
+			case lookDirection.diagDownLeft:
+				//int nextCaseCheck  = theField[theRow,incre - 1];
+				indexCaseCheckHorizontal = -1;
+				indexCaseCheckVertical = -1;
+				
+			break;
 		}
 		
 		
@@ -481,20 +517,24 @@ public class gameManager : MonoBehaviour {
 						
 						if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == 0){
 							print("</> We reach the end and dint met a token to make a match so we delete the data");
-							numPotentialToken = 0;
-							//accumulateName.Add(createMap.theTileNames[theRow,incre]);
-								//RECOVER AND UPDATE
+							
+							
+							print ("<*2> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
+						
+							 
+							//RECOVER AND UPDATE
 							for(int item = 0; item < accumulateName.Count; item++){
 									
-									//print ("% " + accumulateName[item]);
-									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
-										
-										print ("<+-+> Found A little Guy " + accumulateName[item]);
-										//accumulateName.RemoveAt(item);
-										accumulateVal[item] = 0;
-								
-									}
+								//print ("% " + accumulateName[item]);
+								if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+									
+									print ("<+-+> Found A little Guy " + accumulateName[item]);
+									//accumulateName.RemoveAt(item);
+									accumulateVal[item] += 0;
+							
 								}
+							}
+							
 						}else{
 						 
 							//print ("<!*!> Go back:   count: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical - indexCaseCheckVertical ,incre + addTempHorizontal - indexCaseCheckHorizontal] );
@@ -502,19 +542,27 @@ public class gameManager : MonoBehaviour {
 							
 							
 							
-							
+							print ("<*3> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
 							
 							//RECOVER AND UPDATE
 							for(int item = 0; item < accumulateName.Count; item++){
-									
-									//print ("% " + accumulateName[item]);
-									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+								
+									print ("<*4> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
+								
+									 
+									//if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
 										
-										print ("<+-+> Found A little Guy " + accumulateName[item]);
+										print ("<*5> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
+										
 										//accumulateName.RemoveAt(item);
 										accumulateVal[item] = numPotentialToken;
-								
-									}
+										if(accumulateVal[item] < numPotentialToken){
+											accumulateVal[item] = numPotentialToken;
+										}
+										accumulateName[item] += " " + numPotentialToken;
+										print ("<+-+> Found A little Guy " + accumulateName[item]);
+									
+									//}
 								}
 							
 							
