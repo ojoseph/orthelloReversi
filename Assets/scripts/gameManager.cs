@@ -94,6 +94,7 @@ public class gameManager : MonoBehaviour {
 				
 						//We Count the number of tokens
 						calculateTokenNumber.initMe();
+				
 					break;
 				
 				}
@@ -192,6 +193,10 @@ public class gameManager : MonoBehaviour {
 			//#################
 			///#####    AI     #####
 			
+				//Clean before use
+				accumulateName.Clear();
+				accumulateVal.Clear();
+			
 				//We look for available positions
 			
 				print ("Getting the available positions");
@@ -199,12 +204,17 @@ public class gameManager : MonoBehaviour {
 				//Check what is beign held
 				foreach(string items in gameplay.registerIndicator){
 					print("got: " + items);
+					accumulateName.Add(items.Replace("indicator", ""));
+					//we have ready on standby
+					accumulateVal.Add (0);
 				}
 				
 				//AI selects a position
 				//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
 				aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
 				
+				
+			
 				// We calculate and look for the best position available.
 				calculateBestPosition(gameplay.registerIndicator);
 			
@@ -391,6 +401,7 @@ public class gameManager : MonoBehaviour {
 		int numPotentialToken = 0;
 		
 		
+		
 		//We set the rows
 		for(int theRow = 0 ; theRow < theNumRows; theRow++){
 			
@@ -412,8 +423,44 @@ public class gameManager : MonoBehaviour {
 						
 						
 						print ("<#> We check a token " +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   " + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
-					
 						
+						
+						
+						
+						/*if( accumulateName.Count <= 0){
+							
+							accumulateName.Add(createMap.theTileNames[theRow,incre]);
+							
+						}else{
+ 
+							print("##########"  + accumulateName.Count);
+							//int indexWhere = 0;
+							
+							//foreach(string something in accumulateName){
+								for(int item = 0; item < accumulateName.Count -1; item++){
+									
+									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+										
+										print("it already exist so we accumulate " + item);
+										accumulateVal[item] += numPotentialToken;
+										
+									}else{
+										
+										print("it already exist so we accumulate " + item);
+									
+										//It does not exist
+										accumulateName.Add(createMap.theTileNames[theRow, incre]);
+										
+									}
+									
+									//indexWhere += 1;
+								} 
+							//}
+							
+							
+							 
+						} */
+					
 						
 						
 						
@@ -424,21 +471,104 @@ public class gameManager : MonoBehaviour {
 						
 						print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
 						
-						print ("<*> Accumulation: " + numPotentialToken);
+						print ("<*> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
+						
+						/*print ("<S> We save: " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + " Pts: " + numPotentialToken);
+						accumulateName.Add(createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal]); 
+						accumulateVal.Add( numPotentialToken ); */
+						
+						
 						
 						if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == 0){
 							print("</> We reach the end and dint met a token to make a match so we delete the data");
 							numPotentialToken = 0;
+							//accumulateName.Add(createMap.theTileNames[theRow,incre]);
+								//RECOVER AND UPDATE
+							for(int item = 0; item < accumulateName.Count; item++){
+									
+									//print ("% " + accumulateName[item]);
+									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+										
+										print ("<+-+> Found A little Guy " + accumulateName[item]);
+										//accumulateName.RemoveAt(item);
+										accumulateVal[item] = 0;
+								
+									}
+								}
 						}else{
 						 
-						
-							print ("<S> We save: " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + " Pts: " + numPotentialToken);
-							accumulateName.Add(createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal]); 
-							accumulateVal.Add( numPotentialToken ); 
+							//print ("<!*!> Go back:   count: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical - indexCaseCheckVertical ,incre + addTempHorizontal - indexCaseCheckHorizontal] );
 							
-
-							if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == thegameplay.playerSlctColor){
+							
+							
+							
+							
+							
+							//RECOVER AND UPDATE
+							for(int item = 0; item < accumulateName.Count; item++){
+									
+									//print ("% " + accumulateName[item]);
+									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+										
+										print ("<+-+> Found A little Guy " + accumulateName[item]);
+										//accumulateName.RemoveAt(item);
+										accumulateVal[item] = numPotentialToken;
 								
+									}
+								}
+							
+							
+							
+							
+							
+							
+						/*	
+							if( accumulateName.Count <= 0){
+							
+								accumulateName.Add(createMap.theTileNames[theRow,incre]);
+								accumulateVal.Add( numPotentialToken );
+							}else{
+								
+								print ("$$$$" + accumulateName.Count);
+								accumulateName.Add(createMap.theTileNames[theRow,incre]);
+								accumulateVal.Add( numPotentialToken );
+								for(int item = 0; item < accumulateName.Count; item++){
+									
+									print ("% " + accumulateName[item]);
+									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
+										
+										print ("<+-+> ALREADY EXIST " + accumulateName[item]);
+										//accumulateName.RemoveAt(item);
+										accumulateVal[item] = numPotentialToken;
+								
+									}
+								}
+							}
+								
+							
+							*/
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == thegameplay.playerSlctColor){
 								// If its the player token we stop We stop where we are
 								break;
 								
