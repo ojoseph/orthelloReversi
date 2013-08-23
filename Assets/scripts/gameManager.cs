@@ -27,7 +27,7 @@ public class gameManager : MonoBehaviour {
 	
 	//####   AI    ####
 	string aiPosSlct;
-	//holds the name of the final position.
+	//holds the name of the final position. with the most potential
 	string aiPosSlctFinal = "";
 	GameObject tempGameObj;
 	
@@ -217,9 +217,12 @@ public class gameManager : MonoBehaviour {
 				
 				//AI selects a position
 				//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
+			
+				print ("<|#%#|> Check the value of regisTerIndicator: " + gameplay.registerIndicator.Count);
+			
 				aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
 				
-				
+			
 			
 				// We calculate and look for the best position available.
 				calculateBestPosition(gameplay.registerIndicator);
@@ -473,9 +476,38 @@ public class gameManager : MonoBehaviour {
 					
 					//We start looping until we reach nothing || until we reach a token with the same color as us
 					
-					print("BEFORE ENTERING: " + addTempVertical + "   " + addTempHorizontal + "PlayerColor: " + thegameplay.playerSlctColor);
+					print("BEFORE ENTERING: " + addTempVertical + "   " + addTempHorizontal + "  PlayerColor: " + thegameplay.playerSlctColor);
+					print("<Check for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
 					
-					while(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] != 0 /*&& createMap.theField[theRow + addTempVertical,incre + indexCaseCheckHorizontal ] == thegameplay.opponentSlctColor*/){
+					// HERE WE NEED TO PUT A SAFETY FOR INDEX  OUT  RANGE
+					
+					////////////////////////////////////
+					//SAFETY
+					////////////////////////////////////
+					
+					if((theRow + addTempVertical) >= 8 || (theRow + addTempVertical) <= 0) {
+						addTempVertical = 0;
+						print("APPLIYING V PATCH");
+					}
+					
+					if((incre + addTempHorizontal) >= 8 || (incre + addTempHorizontal) <= 0) {
+						addTempHorizontal = 0;
+						print("APPLIYING H PATCH");
+					}
+					
+					
+					////////////////////////////////////
+					//END SAFETY
+					////////////////////////////////////
+					
+					print("<Check After PATCH for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
+					
+					
+					
+					
+					//print(" UU "  +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   "  + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
+						
+					while(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] != 0  /*&& createMap.theField[theRow + addTempVertical,incre + indexCaseCheckHorizontal ] == thegameplay.opponentSlctColor*/){
 						
 						
 						print ("<#> We check a token " +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   " + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
@@ -526,6 +558,39 @@ public class gameManager : MonoBehaviour {
 						addTempHorizontal += indexCaseCheckHorizontal;	
 						
 						print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
+						
+						print("<@@@@> CHECK for OUT INDEX:  V" + (theRow + addTempVertical) + "     H" + (incre + addTempHorizontal));
+						
+						
+						
+						////////////////////////////////////
+						//SAFETY
+						////////////////////////////////////
+						
+						if((theRow + addTempVertical) >= 8 || (theRow + addTempVertical) <= 0) {
+							addTempVertical = 0;
+							print("APPLIYING V PATCH");
+						}
+						
+						if((incre + addTempHorizontal) >= 8 || (incre + addTempHorizontal) <= 0) {
+							addTempHorizontal = 0;
+							print("APPLIYING H PATCH");
+						}
+						
+						
+						////////////////////////////////////
+						//END SAFETY
+						////////////////////////////////////
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						print ("<*> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
 						numPotentialToken += 1;
 						
