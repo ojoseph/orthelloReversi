@@ -447,9 +447,12 @@ public class gameManager : MonoBehaviour {
 				
 				if(createMap.theTileNames[theRow,incre] == thePos){
 					
+					
+					 
+					print("");
 					print("-------------------------------   " + theWantedDirection + "   -------------------------------------");
 					 
-					print("WE RECOVERED THE Potentilal POSITION: " + createMap.theTileNames[theRow,incre] + "  " + createMap.theField[theRow,incre]);
+					print("WE RECOVERED THE Potential POSITION: " + createMap.theTileNames[theRow,incre] + "  " + createMap.theField[theRow,incre]);
 					
 					//We start looping until we reach nothing || until we reach a token with the same color as us
 					
@@ -500,131 +503,70 @@ public class gameManager : MonoBehaviour {
 						
 						
 						
-						numPotentialToken += 1;
+						
 						
 						addTempVertical +=  indexCaseCheckVertical;
 						addTempHorizontal += indexCaseCheckHorizontal;	
 						
 						print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
-						
 						print ("<*> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
+						numPotentialToken += 1;
 						
-						/*print ("<S> We save: " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + " Pts: " + numPotentialToken);
-						accumulateName.Add(createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal]); 
-						accumulateVal.Add( numPotentialToken ); */
-						
-						
-						
-						if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == 0){
-							print("</> We reach the end and dint met a token to make a match so we delete the data");
+						if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == thegameplay.playerSlctColor){
 							
 							
-							print ("<*2> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
-						
-							 
+							print ("<=#=> We stop the chain incrementation: " + numPotentialToken);
+							
 							//RECOVER AND UPDATE
 							for(int item = 0; item < accumulateName.Count; item++){
-									
-								//print ("% " + accumulateName[item]);
+								
 								if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
 									
-									print ("<+-+> Found A little Guy " + accumulateName[item]);
-									//accumulateName.RemoveAt(item);
-									accumulateVal[item] += 0;
-							
+									//We make a visual confirmation
+									print("<R> Will Register " + createMap.theTileNames[theRow,incre] + "   " + numPotentialToken);
+									accumulateVal[item] += numPotentialToken;
+									
 								}
-							}
-							
-						}else{
-						 
-							//print ("<!*!> Go back:   count: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical - indexCaseCheckVertical ,incre + addTempHorizontal - indexCaseCheckHorizontal] );
+								
+							}//End for loop
 							
 							
+							//===============================================
+							//We try to figure out the highest value. in the collected Data
+							//RECOVER HIGHEST VALUE
+							//===============================================
 							
+							int potenTokenPow = 0;
+							int highestPoten = 0;
 							
-							print ("<*3> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
-							
-							//RECOVER AND UPDATE
 							for(int item = 0; item < accumulateName.Count; item++){
 								
-									print ("<*4> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
-								
-									 
-									//if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
-										
-										print ("<*5> Accumulation: " + numPotentialToken + "  " + createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] );
-										
-										//accumulateName.RemoveAt(item);
-										accumulateVal[item] = numPotentialToken;
-										if(accumulateVal[item] < numPotentialToken){
-											accumulateVal[item] = numPotentialToken;
-										}
-										accumulateName[item] += " " + numPotentialToken;
-										print ("<+-+> Found A little Guy " + accumulateName[item]);
+								//if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
 									
-									//}
-								}
-							
-							
-							
-							
-							
-							
-						/*	
-							if( accumulateName.Count <= 0){
-							
-								accumulateName.Add(createMap.theTileNames[theRow,incre]);
-								accumulateVal.Add( numPotentialToken );
-							}else{
-								
-								print ("$$$$" + accumulateName.Count);
-								accumulateName.Add(createMap.theTileNames[theRow,incre]);
-								accumulateVal.Add( numPotentialToken );
-								for(int item = 0; item < accumulateName.Count; item++){
+									potenTokenPow = accumulateVal[item];
 									
-									print ("% " + accumulateName[item]);
-									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
-										
-										print ("<+-+> ALREADY EXIST " + accumulateName[item]);
-										//accumulateName.RemoveAt(item);
-										accumulateVal[item] = numPotentialToken;
-								
+									if(potenTokenPow > highestPoten){
+										highestPoten = potenTokenPow;
+										print("Highest number is" + highestPoten);
 									}
-								}
-							}
+									
+								//}
 								
-							
-							*/
-							
+							}//End for loop
 							
 							
 							
 							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							if(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] == thegameplay.playerSlctColor){
-								// If its the player token we stop We stop where we are
-								break;
-								
-							} 
-							
-						
-							
+							break;
 						}
+						
+						
+						
+						 
+						
+						
+						
+						
 						
 						
 						
@@ -649,6 +591,8 @@ public class gameManager : MonoBehaviour {
 					}
 					
 					print("--------------------------------------------------------------------");
+					print("");
+					 
 				}
 				
 				
