@@ -32,6 +32,9 @@ public class gameManager : MonoBehaviour {
 	
 	public List<string> accumulateName = new List<string>();
 	public List<int> accumulateVal = new List<int>();
+	public List<string> refineName = new List<string>();
+	public List<int> refineVal = new List<int>();
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -542,27 +545,59 @@ public class gameManager : MonoBehaviour {
 							int potenTokenPow = 0;
 							int highestPoten = 0;
 							string highestPotenName = "";
+							
+							
+							
 							for(int item = 0; item < accumulateName.Count; item++){
 								
 								//if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
 									
 									potenTokenPow = accumulateVal[item];
 									
+								
+									//if  its the same we add it in the things we may select
+									if(potenTokenPow == highestPoten){
+										
+									
+										refineName.Add(accumulateName[item]);
+										refineVal.Add(accumulateVal[item]);
+									
+										highestPotenName = accumulateName[item];
+										highestPoten = potenTokenPow;
+										print("Same as Highest number is" + highestPoten + "   " + accumulateName[item]);
+										
+									}
+								
+								
+									//If its bigger we clean the table and add the new value.
 									if(potenTokenPow > highestPoten){
 										
+										//We clear  them as a new highest value will be added.
+										refineName.Clear();
+										refineVal.Clear();
+									
+										//We add the new highest values
+										refineName.Add(accumulateName[item]);
+										refineVal.Add(accumulateVal[item]);
+									
+									
 										highestPotenName = accumulateName[item];
 										highestPoten = potenTokenPow;
 										print("Highest number is" + highestPoten + "   " + accumulateName[item]);
-									
+										//break;
 									}
+								
 									
 								//}
 								
 							}//End for loop
 							
+							/*
+							public List<string> refineName = new List<string>();
+							public List<int> refineVal = new List<int>();
+							*/
 							
-							
-							
+							//StartCoroutine(delay("indicator" + highestPotenName));
 							break;
 						}
 						
