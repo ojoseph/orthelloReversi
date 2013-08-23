@@ -275,11 +275,14 @@ public class gameManager : MonoBehaviour {
 		
 			yield return new WaitForSeconds(0.5f);
 		if(someName != ""){
-			print("I COLOr: " + someName);
+			
+			print("I COLOR: " + someName);
 			GameObject.Find(someName).renderer.material.color = Color.red;
 		 
 		}else{
+			
 			print ("CANT COLOR IT");
+			
 		}
 		
 		yield return new WaitForSeconds(2.0f);
@@ -538,7 +541,7 @@ public class gameManager : MonoBehaviour {
 							
 							int potenTokenPow = 0;
 							int highestPoten = 0;
-							
+							string highestPotenName = "";
 							for(int item = 0; item < accumulateName.Count; item++){
 								
 								//if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
@@ -546,8 +549,11 @@ public class gameManager : MonoBehaviour {
 									potenTokenPow = accumulateVal[item];
 									
 									if(potenTokenPow > highestPoten){
+										
+										highestPotenName = accumulateName[item];
 										highestPoten = potenTokenPow;
-										print("Highest number is" + highestPoten);
+										print("Highest number is" + highestPoten + "   " + accumulateName[item]);
+									
 									}
 									
 								//}
