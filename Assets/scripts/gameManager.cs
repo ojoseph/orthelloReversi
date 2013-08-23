@@ -27,6 +27,8 @@ public class gameManager : MonoBehaviour {
 	
 	//####   AI    ####
 	string aiPosSlct;
+	//holds the name of the final position.
+	string aiPosSlctFinal = "";
 	GameObject tempGameObj;
 	
 	
@@ -230,7 +232,16 @@ public class gameManager : MonoBehaviour {
 				tempGameObj = GameObject.Find(aiPosSlct);
 				if(tempGameObj != null){
 				
-					StartCoroutine(delay(aiPosSlct));
+				
+					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+					
+					//StartCoroutine(delay(aiPosSlct));
+					
+					StartCoroutine(delay(aiPosSlctFinal));
+					
+					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");				
+				
+				
 				
 				}else{
 				
@@ -596,8 +607,15 @@ public class gameManager : MonoBehaviour {
 							public List<string> refineName = new List<string>();
 							public List<int> refineVal = new List<int>();
 							*/
+							int getRandRefine = Random.Range(0, refineName.Count);
+							
+							print( " <?Random?> " + refineName[getRandRefine]  +  "    "  +  refineVal[getRandRefine]);
+							
+							//We update the last pos
+							aiPosSlctFinal = "indicator" + highestPotenName;
 							
 							//StartCoroutine(delay("indicator" + highestPotenName));
+							
 							break;
 						}
 						
