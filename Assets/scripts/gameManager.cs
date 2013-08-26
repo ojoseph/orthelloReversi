@@ -144,8 +144,9 @@ public class gameManager : MonoBehaviour {
 		//print("We are playing the game");
 		//We call the ftc for creating a map and start the mapSetUp process.
 		
+			print ("Could it be?");
 		
-		gameplay thegameplay = GetComponent<gameplay>();
+			gameplay thegameplay = GetComponent<gameplay>();
 		
 			thegameplay.theCurrentStatus = gameplay.currentStatus.notDoneYet;
 		
@@ -217,11 +218,39 @@ public class gameManager : MonoBehaviour {
 				
 				//AI selects a position
 				//print("randomRange" + Random.Range(0,gameplay.registerIndicator.Count));
-			
-				print ("<|#%#|> Check the value of regisTerIndicator: " + gameplay.registerIndicator.Count);
-			
-				aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
 				
+			
+				if( gameplay.registerIndicator.Count == 0 ){
+					
+					print ("// = The Array is Empty  = // ");
+					print ("// = The Player is unable to move,As no potentila positions are avalaible = // ");
+					print ("// = therfore we end the turn  = // ");
+					
+					//We anime the skip
+					GameObject theItem = GameObject.Find("txtSkipTurn");
+					theItem.GetComponent<showSkip>().displaySkip();
+				
+				
+					//[  CHANGE THE  TURN  ]
+					//We Change the turn, we check who is currently playing than we swtich turn based upon this.
+					if(gameManager.theCurrTurn == gameManager.whoTurns.waitingOpponent){
+						gameManager.theCurrTurn = gameManager.whoTurns.player;
+					}else{
+						gameManager.theCurrTurn = gameManager.whoTurns.opponent;
+					
+					}
+				
+				
+				}
+			
+			
+			
+				int randomRange = Random.Range(0,gameplay.registerIndicator.Count);				
+				print ("<|#%#|> Check the value of regisTerIndicator: " + gameplay.registerIndicator.Count + "    " + randomRange);
+				
+
+				//aiPosSlct = gameplay.registerIndicator[Random.Range(0,gameplay.registerIndicator.Count-1)];
+				aiPosSlct = gameplay.registerIndicator[ randomRange ];
 			
 			
 				// We calculate and look for the best position available.
@@ -236,13 +265,13 @@ public class gameManager : MonoBehaviour {
 				if(tempGameObj != null){
 				
 				
-					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+//					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 					
 					//StartCoroutine(delay(aiPosSlct));
 					
 					StartCoroutine(delay(aiPosSlctFinal));
 					
-					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");				
+//					print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");				
 				
 				
 				
@@ -251,6 +280,8 @@ public class gameManager : MonoBehaviour {
 					print ("DID not Found LOCATIon");
 					 
 				}
+			
+			
 				//It activates the script. It  place  a token at that location
 				//tempGameObj.GetComponent<replaceToken>().Start();
 				//tempGameObj.GetComponent<replaceToken>().OnMouseDown();
@@ -469,15 +500,15 @@ public class gameManager : MonoBehaviour {
 					
 					
 					 
-					print("");
-					print("-------------------------------   " + theWantedDirection + "   -------------------------------------");
+					/*print("");
+					print("-------------------------------   " + theWantedDirection + "   -------------------------------------");*/
 					 
-					print("WE RECOVERED THE Potential POSITION: " + createMap.theTileNames[theRow,incre] + "  " + createMap.theField[theRow,incre]);
+//					print("WE RECOVERED THE Potential POSITION: " + createMap.theTileNames[theRow,incre] + "  " + createMap.theField[theRow,incre]);
 					
 					//We start looping until we reach nothing || until we reach a token with the same color as us
 					
-					print("BEFORE ENTERING: " + addTempVertical + "   " + addTempHorizontal + "  PlayerColor: " + thegameplay.playerSlctColor);
-					print("<Check for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
+//					print("BEFORE ENTERING: " + addTempVertical + "   " + addTempHorizontal + "  PlayerColor: " + thegameplay.playerSlctColor);
+//					print("<Check for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
 					
 					// HERE WE NEED TO PUT A SAFETY FOR INDEX  OUT  RANGE
 					
@@ -487,12 +518,12 @@ public class gameManager : MonoBehaviour {
 					
 					if((theRow + addTempVertical) >= 8 || (theRow + addTempVertical) <= 0) {
 						addTempVertical = 0;
-						print("APPLIYING V PATCH");
+//						print("APPLIYING V PATCH");
 					}
 					
 					if((incre + addTempHorizontal) >= 8 || (incre + addTempHorizontal) <= 0) {
 						addTempHorizontal = 0;
-						print("APPLIYING H PATCH");
+//						print("APPLIYING H PATCH");
 					}
 					
 					
@@ -500,7 +531,7 @@ public class gameManager : MonoBehaviour {
 					//END SAFETY
 					////////////////////////////////////
 					
-					print("<Check After PATCH for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
+//					print("<Check After PATCH for outside Range>:  V" + (theRow + addTempVertical) +  "       H"   + (incre + addTempHorizontal) );
 					
 					
 					
@@ -510,44 +541,12 @@ public class gameManager : MonoBehaviour {
 					while(createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal] != 0  /*&& createMap.theField[theRow + addTempVertical,incre + indexCaseCheckHorizontal ] == thegameplay.opponentSlctColor*/){
 						
 						
-						print ("<#> We check a token " +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   " + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
+//						print ("<#> We check a token " +  createMap.theTileNames[theRow + addTempVertical ,incre + addTempHorizontal] + "   " + createMap.theField[theRow + addTempVertical ,incre + addTempHorizontal]);
 						
 						
 						
 						
-						/*if( accumulateName.Count <= 0){
-							
-							accumulateName.Add(createMap.theTileNames[theRow,incre]);
-							
-						}else{
- 
-							print("##########"  + accumulateName.Count);
-							//int indexWhere = 0;
-							
-							//foreach(string something in accumulateName){
-								for(int item = 0; item < accumulateName.Count -1; item++){
-									
-									if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
-										
-										print("it already exist so we accumulate " + item);
-										accumulateVal[item] += numPotentialToken;
-										
-									}else{
-										
-										print("it already exist so we accumulate " + item);
-									
-										//It does not exist
-										accumulateName.Add(createMap.theTileNames[theRow, incre]);
-										
-									}
-									
-									//indexWhere += 1;
-								} 
-							//}
-							
-							
-							 
-						} */
+				 
 					
 						
 						
@@ -557,9 +556,9 @@ public class gameManager : MonoBehaviour {
 						addTempVertical +=  indexCaseCheckVertical;
 						addTempHorizontal += indexCaseCheckHorizontal;	
 						
-						print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
+					//	print("<+++> Increment: " + addTempVertical + "   " + addTempHorizontal);
 						
-						print("<@@@@> CHECK for OUT INDEX:  V" + (theRow + addTempVertical) + "     H" + (incre + addTempHorizontal));
+					//	print("<@@@@> CHECK for OUT INDEX:  V" + (theRow + addTempVertical) + "     H" + (incre + addTempHorizontal));
 						
 						
 						
@@ -605,7 +604,7 @@ public class gameManager : MonoBehaviour {
 								if(accumulateName[item] == createMap.theTileNames[theRow,incre]){
 									
 									//We make a visual confirmation
-									print("<R> Will Register " + createMap.theTileNames[theRow,incre] + "   " + numPotentialToken);
+//									print("<R> Will Register " + createMap.theTileNames[theRow,incre] + "   " + numPotentialToken);
 									accumulateVal[item] += numPotentialToken;
 									
 								}
@@ -674,7 +673,7 @@ public class gameManager : MonoBehaviour {
 							*/
 							int getRandRefine = Random.Range(0, refineName.Count);
 							
-							print( " <?Random?> " + refineName[getRandRefine]  +  "    "  +  refineVal[getRandRefine]);
+						//	print( " <?Random?> " + refineName[getRandRefine]  +  "    "  +  refineVal[getRandRefine]);
 							
 							//We update the last pos
 							aiPosSlctFinal = "indicator" + highestPotenName;
@@ -714,8 +713,8 @@ public class gameManager : MonoBehaviour {
 						//////////////////////////
 					}
 					
-					print("--------------------------------------------------------------------");
-					print("");
+					/*print("--------------------------------------------------------------------");
+					print("");*/
 					 
 				}
 				

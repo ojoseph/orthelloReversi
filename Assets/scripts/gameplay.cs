@@ -59,6 +59,14 @@ public class gameplay : MonoBehaviour {
 	//Will hold the Indicator tokens that we pulled put
 	public static List<string> registerIndicator = new List<string>();
 	
+	//Skipping turns
+	int curentNbToken = 0;
+	
+	int nbCheckedTokens = 0;
+	
+	bool skipTurn = false;
+	
+	
 	//.........................................................................................................................................................................................................................
 	
 	
@@ -107,6 +115,10 @@ public class gameplay : MonoBehaviour {
 	//////////////////////////////////////
 	//  [ STEP 1 ] CHECK FOR  AVAILABLE POSITIONS : checks if there is some available positions, then place token to the available places,
 	public void startCheckingForPosition(){
+		
+		//ResetToken
+		nbCheckedTokens = 0;
+		
 		//print ("CALLED ME player : " + playerSlctColor);
 		//Get the number of rows
 		int theNumRows = (theField.Length/8); 
@@ -157,7 +169,7 @@ public class gameplay : MonoBehaviour {
 	
 	
 	void lookForAvailable(lookDirection theWantedDirection ,int theRow, int incre, int firstTkenLocation){
-		
+			
 			int indexCaseCheckHorizontal = 0;
 			int indexCaseCheckVertical = 0;
 		
@@ -240,11 +252,13 @@ public class gameplay : MonoBehaviour {
 		
 		
 		
-		
+			
 		
 			//OK we found a token first we need to check what is behind this token, with a while loop
 			while( theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0 ){
 				
+//				print("<@> In the loop!!!");
+			
 				if(theField[theRow + posTempVertical ,incre + posTempHorizontal] == playerSlctColor){
 					break;
 				}
@@ -282,7 +296,7 @@ public class gameplay : MonoBehaviour {
 				//////////////////////////
 			
 			
-				//If the spot is  not empty we leav it as it is.			
+				//If the spot is  not empty we leave it as it is.			
 				if(theField[theRow + posTempVertical ,incre + posTempHorizontal] != 0){
 				
 				}else{
@@ -291,7 +305,44 @@ public class gameplay : MonoBehaviour {
 				}
 				
 			
+				
+				
+				/*if( isAllTokenPlaced() == 0){
+					print("</+/+/+/+/> No tokens has been created. Player is unable to move. We should end the turn.");
+				}else{
+					print("<_______> Its ok.");
+				}*/
+			
+				//We check the number of created token if its equal to 0 we know that no token has been created. 
+				print ("# # # # # # # # # # # #:  " + isAllTokenPlaced() + "     "  + nbCheckedTokens);
+			
 			}//End While
+			
+			
+		
+			
+		
+			//*****
+			//We need to add a way to check that the task is complete. Once complete we need to check if there is any token that has been placed. If not, we skip the turn.
+			//*****
+			
+			//We check the number of created token if its equal to 0 we know that no token has been created. 
+//				print ("= = = = = = =:  " + isAllTokenPlaced() + "     "  + nbCheckedTokens);
+			
+				/*if( nbCheckedTokens == isAllTokenPlaced() ){		
+					print("</M/> We Checked all the tokens");
+					
+				}else{
+					
+					if(nbCheckedTokens == 0){
+						print("</+/+/+/+/> No tokens has been created. Player is unable to move. We should end the turn.");
+						//skipTurn = true;
+						
+						GameObject theItem = GameObject.Find("txtSkipTurn");
+						//theItem.GetComponent<showSkip>().displaySkip();
+					}
+				}*/
+		
 		
 	}
 	
@@ -301,6 +352,9 @@ public class gameplay : MonoBehaviour {
 	//Creates the token at a target location
 	void registerToken(string targetLocName){
  
+		
+		//print ("RRRRRRRR:  " + nbCheckedTokens);
+		
 		
 		//before giving it a name we check if there is token with the same name. If so we destroy the duplcation
 		string futureTokenName = "indicator" + targetLocName;
@@ -314,27 +368,39 @@ public class gameplay : MonoBehaviour {
 			
 //			print("does NOT exist");
 			bool locationFound = false;
-			foreach(string tiems in registerIndicator){
-				if(tiems == futureTokenName){
+			foreach(string items in registerIndicator){
+				
+				if(items == futureTokenName){
 					locationFound = true;
+					
+					print("#$#$#$#$#$#$#$#$#$#$#$#$#");
+					nbCheckedTokens += 1;
+					print("#$#$#$#$#$#$#$#$#$#$#$#$#");
+					
 				}
+				
 			}
 			
 			if(locationFound == true){
 				
 			}else{
 				
-			//We get the location of where we want to put our token
-			GameObject targetToken = GameObject.Find(targetLocName);
+				//We get the location of where we want to put our token
+				GameObject targetToken = GameObject.Find(targetLocName);
+				
+				//We create it
+				GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
+				theIndicatorToken.name = futureTokenName;
 			
-			//We create it
-			GameObject theIndicatorToken = Instantiate(Resources.Load("tokens/indicatorToken") ,  new Vector3(targetToken.transform.position.x,tokenHeight,targetToken.transform.position.z), transform.localRotation) as GameObject;
-			theIndicatorToken.name = futureTokenName;
-		
-			//We register the entry
-			registerIndicator.Add(futureTokenName);
+				//We register the entry
+				registerIndicator.Add(futureTokenName);
+					
+				nbCheckedTokens += 1;
+		//		print("+1+1+1+1+1+");
+			
 				
 			}
+			
 		}else{
 			
 //			print("does NOT exist");
@@ -349,8 +415,19 @@ public class gameplay : MonoBehaviour {
 			//We register the entry
 			registerIndicator.Add(futureTokenName);
 //			print ( "  registered: " + registerIndicator.Count);
+			
+			nbCheckedTokens += 1;
+//			print("+1+1+1+1+1+");
 		}
-
+		
+		
+		
+		//If there is no token Creation
+		if(nbCheckedTokens == 0){
+			print("<&%&>  @@@@@@@ @@@@@ @@@@@ @@@@@ @@@@ @@@ @@@ @@@ @@@@@@@ @@@@@@@@@@@ No token has been created.");
+			
+		}
+		
 		
 	}
 	
@@ -391,4 +468,34 @@ public class gameplay : MonoBehaviour {
 	void Update () {
 	
 	}
+	
+	
+	
+	
+	
+	public int isAllTokenPlaced(){
+		//int numTotalToken = 0;
+		curentNbToken = 0;
+		
+		int theNumRows = (theField.Length/8); 
+		
+		for(int theRow = 0 ; theRow < theNumRows; theRow++){
+			
+			for(int incre = 0; incre < 8; incre++){
+			
+				if(theField[theRow,incre] != 0){
+					
+					//We increment the number of tokens.
+					curentNbToken += 1;
+					
+				}
+				
+			}//For
+			
+		}//For
+		
+		return curentNbToken;
+	}
+	
+	
 }
